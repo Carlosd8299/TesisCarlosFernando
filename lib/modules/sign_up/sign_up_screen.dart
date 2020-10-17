@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:itsuit/screens/login/components/fade_animation.dart';
+import 'package:itsuit/modules/login/components/fade_animation.dart';
+
 import 'package:itsuit/widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {

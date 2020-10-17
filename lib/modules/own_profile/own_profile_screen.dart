@@ -3,12 +3,12 @@ import 'package:itsuit/widgets/linear_gradient.dart';
 
 import 'components/profile_image_data.dart';
 
-class ProfileScreen extends StatefulWidget {
+class OwnProfileScreen extends StatefulWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _OwnProfileScreenState createState() => _OwnProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _OwnProfileScreenState extends State<OwnProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
