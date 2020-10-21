@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:meta/meta.dart' show required;
 
 class RequestToken {
   RequestToken({
@@ -10,8 +10,6 @@ class RequestToken {
   final String token;
   final bool isAuto;
   final Usuario usuario;
-
-  Usuario get getUsuario => usuario;
 
   factory RequestToken.fromJson(Map<String, dynamic> json) => RequestToken(
         token: json["token"],
@@ -47,20 +45,7 @@ class Usuario {
   final String telefono;
   final int estado;
 
-  int get getidTipoUsuario => idTipoUsuario;
-
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json["id"],
-        idTipoUsuario: json["id_tipo_usuario"],
-        tipoUsuario: json["tipo_usuario"],
-        email: json["email"],
-        nombre: json["nombre"],
-        dni: json["dni"],
-        telefono: json["telefono"],
-        estado: json["estado"],
-      );
-
-  fromJson2(Map<String, dynamic> json) => Usuario(
         id: json["id"],
         idTipoUsuario: json["id_tipo_usuario"],
         tipoUsuario: json["tipo_usuario"],

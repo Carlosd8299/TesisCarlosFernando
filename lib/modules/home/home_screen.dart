@@ -9,9 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-        builder: (_) => Switcher(HomeProveedor(), HomeEmpresa(), 2
-            // _.getToken.usuario.idTipoUsuario,
-            ));
+        builder: (_) =>
+            Switcher(HomeProveedor(), HomeEmpresa(), _.tipoUsuario));
   }
 }
 

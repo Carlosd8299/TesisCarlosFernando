@@ -23,7 +23,10 @@ class LoginController extends GetxController {
     try {
       final RequestToken token = await _api.validateWithLogin(
           username: _username, password: _password);
-      Get.offNamed(AppRoutes.HOME, arguments: token);
+
+      print("Este es el token ${token.token}");
+      print("Este es el usuario ${token.usuario.idTipoUsuario.toString()}");
+      Get.offNamed(AppRoutes.HOME, arguments: 1);
       /* print(token.usuario);
       if (token.usuario != null) {
         print("Login controller ${token.getUsuario.idTipoUsuario}");
@@ -42,7 +45,7 @@ class LoginController extends GetxController {
         ));
       } */
 
-      /*  Get.dialog(AlertDialog(
+      Get.dialog(AlertDialog(
         title: Text("Token creado"),
         content: Text(token.token),
         actions: [
@@ -52,7 +55,7 @@ class LoginController extends GetxController {
               },
               child: Text("ok"))
         ],
-      )); */
+      ));
     } catch (e) {
       print(e);
       String message = "";

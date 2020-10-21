@@ -16,6 +16,8 @@ class AuthApi {
           "password": password,
         },
       );
+      print(response.data);
+      print(response.data['usuario']);
       return RequestToken.fromJson(response.data);
     } catch (e) {
       printError();

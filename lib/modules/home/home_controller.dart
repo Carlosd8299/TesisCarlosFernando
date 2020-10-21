@@ -2,11 +2,14 @@ import 'package:get/get.dart';
 import 'package:itsuit/data/models/request_token.dart';
 
 class HomeController extends GetxController {
-  RequestToken _requestToken;
-  RequestToken get getToken => _requestToken;
+  int tipoUsuario;
+
   @override
   void onInit() {
     super.onInit();
-    this._requestToken = Get.arguments as RequestToken;
+    this.tipoUsuario = Get.arguments as int;
+    print(Get.arguments);
+    print(Get.toString());
+    print(tipoUsuario);
   }
 }
