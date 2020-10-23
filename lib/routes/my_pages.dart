@@ -1,9 +1,17 @@
 import 'package:get/get.dart';
+import 'package:itsuit/modules/cupones/create_cupon/create_cupon_binding.dart';
+import 'package:itsuit/modules/cupones/create_cupon/create_cupon_screen.dart';
+import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_binding.dart';
+import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_screen.dart';
+import 'package:itsuit/modules/cupones/list_cupon/list_cupon_binding.dart';
+import 'package:itsuit/modules/cupones/list_cupon/list_cupon_screen.dart';
 import 'package:itsuit/modules/home/home_binding.dart';
 import 'package:itsuit/modules/home/home_screen.dart';
 import 'package:itsuit/modules/login/login_binding.dart';
 import 'package:itsuit/modules/on_boarding/on_boarding_binding.dart';
 import 'package:itsuit/modules/own_profile/own_profile_binding.dart';
+import 'package:itsuit/modules/profile/profile_binding.dart';
+import 'package:itsuit/modules/profile/profile_screen.dart';
 import 'package:itsuit/modules/screens.dart';
 import 'package:itsuit/modules/sign_up/sign_up_binding.dart';
 import 'package:itsuit/modules/splash/splash_binding.dart';
@@ -40,6 +48,36 @@ class AppPages {
       name: AppRoutes.OWNPROFILE,
       page: () => OwnProfileScreen(),
       binding: OwnProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.OWNPROFILE,
+      page: () => OwnProfileScreen(),
+      binding: OwnProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.OWNPROFILE,
+      page: () => OwnProfileScreen(),
+      binding: OwnProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.CREATECUPON,
+      page: () => CreateCuponScreen(),
+      binding: CreateCuponBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.LISTCUPON,
+      page: () => ListCuponScreen(),
+      binding: ListCuponBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.DETAILCUPON,
+      page: () => DetailsCuponScreen(),
+      binding: DetailsCuponBinding(),
     ),
   ];
 }

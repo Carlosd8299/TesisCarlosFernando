@@ -7,4 +7,8 @@ class AppRoutes {
   static const LOGIN = "login";
   static const OWNPROFILE = "ownProfile";
   static const HOME = "home";
+  static const PROFILE = "profile";
+  static const CREATECUPON = "createCupon";
+  static const DETAILCUPON = "detailCupon";
+  static const LISTCUPON = "listCupon";
 }
