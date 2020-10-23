@@ -1,15 +1,18 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/request_token.dart';
 
-import 'package:itsuit/data/provider/reomote/auth_api.dart';
+import 'package:itsuit/data/repositories/remote/auth_repository.dart';
 import 'package:itsuit/routes/my_routes.dart';
 
 class LoginController extends GetxController {
   String _username = "", _password = "";
+  RequestToken token2;
 
-  final AuthApi _api = Get.find<AuthApi>();
+  final AuthRepository _authRepository = Get.find<AuthRepository>();
 
   void onUserNamechanged(String text) {
     _username = text;
@@ -19,32 +22,10 @@ class LoginController extends GetxController {
     _password = text;
   }
 
-  Future submit() async {
+  Future<void> submit() async {
     try {
-      final RequestToken token = await _api.validateWithLogin(
+      final RequestToken token = await _authRepository.authWithLogin(
           username: _username, password: _password);
-
-      print("Este es el token ${token.token}");
-      print("Este es el usuario ${token.usuario.idTipoUsuario.toString()}");
-      Get.offNamed(AppRoutes.HOME, arguments: 1);
-      /* print(token.usuario);
-      if (token.usuario != null) {
-        print("Login controller ${token.getUsuario.idTipoUsuario}");
-        Get.offNamed(AppRoutes.HOME, arguments: token);
-      } else {
-        Get.dialog(AlertDialog(
-          title: Text("Error"),
-          content: Text("User vacio"),
-          actions: [
-            FlatButton( 
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("ok"))
-          ],
-        ));
-      } */
-
       Get.dialog(AlertDialog(
         title: Text("Token creado"),
         content: Text(token.token),
@@ -56,6 +37,8 @@ class LoginController extends GetxController {
               child: Text("ok"))
         ],
       ));
+      Get.offNamed(AppRoutes.HOME, arguments: token);
+      return token;
     } catch (e) {
       print(e);
       String message = "";
@@ -68,7 +51,7 @@ class LoginController extends GetxController {
       }
       Get.dialog(AlertDialog(
         title: Text("Error De"),
-        content: Text(e.toString()),
+        content: Text(message.toString()),
         actions: [
           FlatButton(
               onPressed: () {
@@ -77,6 +60,7 @@ class LoginController extends GetxController {
               child: Text("ok"))
         ],
       ));
+      return null;
     }
   }
 }

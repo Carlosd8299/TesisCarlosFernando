@@ -1,189 +1,120 @@
 import 'package:flutter/material.dart';
-import 'package:itsuit/widgets/linear_gradient.dart';
+import 'package:get/get.dart';
+import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
+import 'package:itsuit/modules/own_profile/own_profile_controller.dart';
+import 'package:itsuit/utils/constants.dart';
+import 'package:itsuit/widgets/widgets.dart';
 
-import 'components/profile_image_data.dart';
+import 'components/profileAppBar.dart';
 
-class OwnProfileScreen extends StatefulWidget {
+class OwnProfileScreen extends StatelessWidget {
   @override
-  _OwnProfileScreenState createState() => _OwnProfileScreenState();
+  Widget build(BuildContext context) {
+    return GetBuilder<OwnProfileController>(
+      builder: (controller) =>
+          Switcher(OwnProfileProveedor(), OwnProfileEmpresa(), 1),
+    );
+  }
 }
 
-class _OwnProfileScreenState extends State<OwnProfileScreen> {
+class OwnProfileProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.bluelight,
+      appBar: PreferredSize(
+        child: AppBarProfile(),
+        preferredSize: Size.fromHeight(60.0),
+      ),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
+          children: [
+            //Foto de perfil
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                "https://brandemia.org/sites/default/files/deloitte-despues_2.jpg",
+              ),
+              radius: 80,
+            ),
+            SizedBox(height: 20),
+            //Comienza el contenedor blanco
             Container(
-              padding: EdgeInsets.only(top: 16),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              width: 400,
+              height: 450,
               decoration: BoxDecoration(
-                gradient: bluegradient(),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(32),
-                    bottomLeft: Radius.circular(32)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black38,
+                    blurRadius: 6,
+                    offset: Offset(1, 3),
+                  )
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
               ),
               child: Column(
-                children: <Widget>[
-                  ProfileHero(
-                    id: 101,
-                    nombre: "carlos",
-                    urlImage:
-                        "https://images.pexels.com/photos/3841338/pexels-photo-3841338.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.group_add,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Friends',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //Aqui comienza la informacion social del proveedor
+                  Text("Lista de features"),
+                  //Aqui comienza el menu de botones
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[0],
+                                label: "Mi cuponera",
+                                onTap: () {},
+                                icon: Icons.receipt),
+                            CardButtonProfile(
+                                color: Constants.colorlist[1],
+                                label: "Mis procesos de seleccion",
+                                onTap: () {},
+                                icon: Icons.low_priority)
                           ],
                         ),
-                        Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.group,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Groups',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.videocam,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Videos',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              'Likes',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                        Row(
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[2],
+                                label: "Mi Portafolio",
+                                onTap: () {},
+                                icon: Icons.card_travel),
+                            CardButtonProfile(
+                                color: Constants.colorlist[3],
+                                label: "Historico de ItSuit",
+                                onTap: () {},
+                                icon: Icons.history)
                           ],
                         )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height / 3,
-              padding: EdgeInsets.all(42),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.table_chart,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            'Leaders',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.show_chart,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            'Level up',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.card_giftcard,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            'Leaders',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.code,
-                            color: Colors.grey,
-                          ),
-                          Text('QR code')
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.blur_circular,
-                            color: Colors.grey,
-                          ),
-                          Text('Daily bonus')
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.visibility,
-                            color: Colors.grey,
-                          ),
-                          Text('Visitors')
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),
+      //Boton bottom perfil
+      bottomNavigationBar: ButtomBottomNav(
+          titleButton: "Completar mi perfil",
+          instruction:
+              "Información de la compañía | Rellenar Portafolio | Asignación de categorias",
+          onTap: () => print("Hola"),
+          icon: Icon(Icons.arrow_forward),
+          color: Colors.black),
     );
+  }
+}
+
+class OwnProfileEmpresa extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:itsuit/data/models/request_token.dart';
 
 class Switcher extends StatelessWidget {
-  final int token;
+  final int tipoUsuario;
   final Widget proveedor;
-  final Widget solicitante;
+  final Widget empresa;
 
-  Switcher(this.proveedor, this.solicitante, this.token);
+  Switcher(this.proveedor, this.empresa, this.tipoUsuario);
 
   @override
   Widget build(BuildContext context) {
-    if (this.token == 1) {
+    if (this.tipoUsuario == 1) {
       return proveedor;
-    } else if (this.token == 2) {
-      return solicitante;
+    } else if (this.tipoUsuario == 2) {
+      return empresa;
     } else {
       return Scaffold(
         body: Container(
