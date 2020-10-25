@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class Constants {
+  static const String linkProviderAvatar =
+      "https://brandemia.org/sites/default/files/deloitte-despues_2.jpg";
+  static const String linkEmpresaAvatar =
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Coca-Cola_bottle_cap.svg/1200px-Coca-Cola_bottle_cap.svg.png";
   static const bluelight = const Color(0xFF64B6FF);
   static const bluedark = const Color(0xFF374ABE);
   static const bluehover = const Color(0xFFD8EAFF);

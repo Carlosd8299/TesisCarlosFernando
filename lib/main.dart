@@ -7,6 +7,7 @@ import 'package:itsuit/routes/my_pages.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/utils/dependency_injection.dart';
 import './modules/screens.dart';
+import 'modules/profile/profile_screen.dart';
 
 void main() {
   DependencyInjection.init();
