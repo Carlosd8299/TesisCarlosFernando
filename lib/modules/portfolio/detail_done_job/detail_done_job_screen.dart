@@ -4,20 +4,22 @@ import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_controller.dart
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
-class DetailsCuponScreen extends StatelessWidget {
+import 'detail_done_job_controller.dart';
+
+class DetailsDoneJobScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DetailsCuponController>(
+    return GetBuilder<DetailsDoneJobController>(
       builder: (_) =>
-          Switcher(DetailsCuponProveedor(), DetailsCuponEmpresa(), 1),
+          Switcher(DetailsDoneJobProveedor(), DetailsDoneJobEmpresa(), 1),
     );
   }
 }
 
-class DetailsCuponProveedor extends StatelessWidget {
+class DetailsDoneJobProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DetailsCuponController>(
+    return GetBuilder<DetailsDoneJobController>(
       builder: (controller) => Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -166,10 +168,10 @@ class DetailsCuponProveedor extends StatelessWidget {
   }
 }
 
-class DetailsCuponEmpresa extends StatelessWidget {
+class DetailsDoneJobEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DetailsCuponController>(
+    return GetBuilder<DetailsDoneJobController>(
       builder: (controller) => Scaffold(
         body: CustomScrollView(
           slivers: [

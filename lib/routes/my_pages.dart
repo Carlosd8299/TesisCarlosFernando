@@ -10,6 +10,11 @@ import 'package:itsuit/modules/home/home_screen.dart';
 import 'package:itsuit/modules/login/login_binding.dart';
 import 'package:itsuit/modules/on_boarding/on_boarding_binding.dart';
 import 'package:itsuit/modules/own_profile/own_profile_binding.dart';
+import 'package:itsuit/modules/portfolio/create_done_job/create_done_job_binding.dart';
+import 'package:itsuit/modules/portfolio/create_done_job/create_done_job_screen.dart';
+import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_binding.dart';
+import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_screen.dart';
+import 'package:itsuit/modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
 import 'package:itsuit/modules/profile/profile_binding.dart';
 import 'package:itsuit/modules/profile/profile_screen.dart';
 import 'package:itsuit/modules/screens.dart';
@@ -75,9 +80,24 @@ class AppPages {
       binding: ListCuponBinding(),
     ),
     GetPage(
-      name: AppRoutes.DETAILCUPON,
+      name: AppRoutes.DETAILSCUPON,
       page: () => DetailsCuponScreen(),
       binding: DetailsCuponBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.CREATEDONEJOB,
+      page: () => CreateDoneJobScreen(),
+      binding: CreateDoneJobBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.DETAILSDONEJOB,
+      page: () => DetailsDoneJobScreen(),
+      binding: CreateDoneJobBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.LISTDONEJOB,
+      page: () => ListDoneJobScreen(),
+      binding: DetailsDoneJobBinding(),
     ),
   ];
 }

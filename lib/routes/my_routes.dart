@@ -9,6 +9,9 @@ class AppRoutes {
   static const HOME = "home";
   static const PROFILE = "profile";
   static const CREATECUPON = "createCupon";
-  static const DETAILCUPON = "detailCupon";
+  static const DETAILSCUPON = "detailCupon";
   static const LISTCUPON = "listCupon";
+  static const CREATEDONEJOB = "createDoneJob";
+  static const DETAILSDONEJOB = "detailDoneJob";
+  static const LISTDONEJOB = "listDoneJob";
 }
