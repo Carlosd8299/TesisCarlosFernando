@@ -9,7 +9,7 @@ class ListDoneJobScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListDoneJobController>(
-      builder: (_) => Switcher(ListDoneJobProveedor(), ListDoneJobEmpresa(), 1),
+      builder: (_) => Switcher(ListDoneJobProveedor(), ListDoneJobEmpresa(), 2),
     );
   }
 }
@@ -24,33 +24,24 @@ class ListDoneJobProveedor extends StatelessWidget {
                   //AppBar
                   CustomAppBar(
                     onTap: () => print(""),
-                    title: 'Cupones',
+                    title: 'Mi Portafolio',
                   ),
                   // Lista de copones
                   SliverPadding(
-                    padding: EdgeInsets.all(20),
-                    sliver: SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
+                      padding: EdgeInsets.all(20),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
                           return SingleDoneJob();
-                        },
-                        childCount: 10,
-                      ),
-                    ),
-                  )
+                        }, childCount: 10),
+                      ))
                 ],
               ),
               bottomNavigationBar: ButtomBottomNav(
-                  titleButton: "Crear cupon",
+                  titleButton: "Añadir trabajo realizado",
                   instruction:
-                      "Crea cupones para que tus clientes obtengan descuentos cuando te seleccionen de manera directa como proveedor",
+                      "Añade trabajos realizados por fuera de la plataforma para que las empresas vean tu experiencia",
                   onTap: () => print("Hola"),
-                  icon: Icon(Icons.arrow_forward),
+                  icon: Icon(Icons.add),
                   color: Colors.black),
             ));
   }
@@ -60,7 +51,25 @@ class ListDoneJobEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListDoneJobController>(
-      builder: (controller) => Scaffold(),
+      builder: (controller) => Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            //AppBar
+            CustomAppBar(
+              onTap: () => print(""),
+              title: 'Mi Portafolio',
+            ),
+            // Lista de copones
+            SliverPadding(
+                padding: EdgeInsets.all(20),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return SingleDoneJob();
+                  }, childCount: 10),
+                ))
+          ],
+        ),
+      ),
     );
   }
 }

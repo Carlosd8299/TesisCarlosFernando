@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:itsuit/modules/home/home_screen.dart';
 import 'package:itsuit/modules/login/login_binding.dart';
-import 'package:itsuit/modules/splash/splash_binding.dart';
 import 'package:itsuit/routes/my_pages.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/utils/dependency_injection.dart';
-import './modules/screens.dart';
+
 import 'modules/cupones/create_cupon/create_cupon_screen.dart';
 import 'modules/cupones/detail_cupon/detail_cupon_screen.dart';
-import 'modules/profile/profile_screen.dart';
+import 'modules/portfolio/create_done_job/create_done_job_screen.dart';
+import 'modules/portfolio/detail_done_job/detail_done_job_screen.dart';
 
 void main() {
   DependencyInjection.init();
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DetailsCuponScreen(),
+      home: DetailsDoneJobScreen(),
       initialBinding: LoginBinding(),
       getPages: AppPages.pages,
     );

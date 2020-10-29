@@ -22,135 +22,74 @@ class DetailsDoneJobProveedor extends StatelessWidget {
     return GetBuilder<DetailsDoneJobController>(
       builder: (controller) => Scaffold(
         body: CustomScrollView(
+          shrinkWrap: true,
           slivers: [
             //AppBar
             CustomAppBar(
               onTap: () => print(""),
-              title: 'Nombre del cupon asociado',
+              title: 'Titulo del trabajo realizado',
+            ),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleGradientButton(
+                    icon: Icons.timer,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "12 meses",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(width: 25),
+                  CircleGradientButton(
+                    icon: Icons.room_service,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Nombre del servicio",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
             ),
             SliverToBoxAdapter(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleGradientButton(
-                        icon: Icons.attach_money,
-                      ),
-                      Text(
-                        "20.000.000",
-                        style: TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            fontSize: 17),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        "10.000.000",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
-                      ),
-                    ],
+                  Text(
+                    "Descripción del trabajo realizado",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleGradientButton(
-                        icon: Icons.room_service,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Servicio Asociado",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          Text(
-                            "Nombre del servicio asociado",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      )
-                    ],
+                  Text(
+                    "Descripción del trabajo realizaDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadodo",
+                    style: TextStyle(fontSize: 15),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleGradientButton(
-                        icon: Icons.access_time,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Fecha limite de redencion",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          Text(
-                            "Fecha limite de redencion",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      )
-                    ],
+                  Text(
+                    "Categoria del servicio",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleGradientButton(
-                        icon: Icons.view_quilt,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Categorias asociadas",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          Text(
-                            "Categorias asociadas",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      )
-                    ],
+                  Text(
+                    "Se muestra la categoria de servicio escogida",
+                    style: TextStyle(fontSize: 15),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleGradientButton(
-                        icon: Icons.local_offer,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Porcentaje de descuento",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          Text(
-                            "Porcentaje de descuento",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      )
-                    ],
+                  Text(
+                    "Servicio brindado",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Descripcion del cupon",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
-                      ),
-                      Text(
-                        "Descripcion larga del cupon Descripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cupon",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  )
+                  Text(
+                    "Se muestra la nombre de servicio brindado",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    "Empresa contatante",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Text(
+                    "Se muestra el nombre de la empresa quien contrato el servicio brindado",
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ],
               ),
             ),
