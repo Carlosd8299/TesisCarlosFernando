@@ -10,7 +10,7 @@ class ListCuponScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListCuponController>(
-      builder: (_) => Switcher(ListCuponProveedor(), ListCuponEmpresa(), 1),
+      builder: (_) => Switcher(ListCuponProveedor(), ListCuponEmpresa(), 2),
     );
   }
 }
@@ -61,7 +61,34 @@ class ListCuponEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListCuponController>(
-      builder: (controller) => Scaffold(),
+      builder: (controller) => Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            //AppBar
+            CustomAppBar(
+              onTap: () => print(""),
+              title: 'Cupones',
+            ),
+            // Lista de copones
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return SingleCupon();
+                  },
+                  childCount: 10,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

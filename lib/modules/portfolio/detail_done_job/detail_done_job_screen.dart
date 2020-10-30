@@ -11,7 +11,7 @@ class DetailsDoneJobScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailsDoneJobController>(
       builder: (_) =>
-          Switcher(DetailsDoneJobProveedor(), DetailsDoneJobEmpresa(), 1),
+          Switcher(DetailsDoneJobProveedor(), DetailsDoneJobEmpresa(), 2),
     );
   }
 }

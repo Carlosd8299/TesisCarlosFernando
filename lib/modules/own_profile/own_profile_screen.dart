@@ -11,7 +11,7 @@ class OwnProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
       builder: (controller) =>
-          Switcher(OwnProfileProveedor(), OwnProfileEmpresa(), 2),
+          Switcher(OwnProfileProveedor(), OwnProfileEmpresa(), 1),
     );
   }
 }

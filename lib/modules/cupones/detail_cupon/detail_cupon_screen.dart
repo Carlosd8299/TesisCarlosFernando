@@ -9,7 +9,7 @@ class DetailsCuponScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailsCuponController>(
       builder: (_) =>
-          Switcher(DetailsCuponProveedor(), DetailsCuponEmpresa(), 2),
+          Switcher(DetailsCuponProveedor(), DetailsCuponEmpresa(), 1),
     );
   }
 }
