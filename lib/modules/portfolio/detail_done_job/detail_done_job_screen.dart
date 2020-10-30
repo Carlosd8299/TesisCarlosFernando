@@ -19,6 +19,7 @@ class DetailsDoneJobScreen extends StatelessWidget {
 class DetailsDoneJobProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return GetBuilder<DetailsDoneJobController>(
       builder: (controller) => Scaffold(
         body: CustomScrollView(
@@ -54,51 +55,78 @@ class DetailsDoneJobProveedor extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Descripción del trabajo realizado",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text(
-                    "Descripción del trabajo realizaDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadodo",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Categoria del servicio",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text(
-                    "Se muestra la categoria de servicio escogida",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Servicio brindado",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text(
-                    "Se muestra la nombre de servicio brindado",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    "Empresa contatante",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text(
-                    "Se muestra el nombre de la empresa quien contrato el servicio brindado",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
+              child: Container(
+                margin: EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Descripción del trabajo realizado",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Descripción del trabajo realizaDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadodo",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Categoria del servicio",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Se muestra la categoria de servicio escogida",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Servicio brindado",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Se muestra la nombre de servicio brindado",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Empresa contatante",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Se muestra el nombre de la empresa quien contrato el servicio brindado",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ),
         bottomNavigationBar: ButtomBottomNav(
-            titleButton: "Eliminar cupon",
-            instruction:
-                "Elimina el cupon, las personas que ya lo escogieron no se les eliminara.",
+            titleButton: "Eliminar trabajo realizado",
+            instruction: "Remover del portafolio",
             onTap: () => print("Hola"),
             icon: Icon(Icons.delete),
             color: Colors.black),

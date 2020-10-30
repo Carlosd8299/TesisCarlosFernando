@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DetailsDoneJobScreen(),
+      home: DetailsCuponScreen(),
       initialBinding: LoginBinding(),
       getPages: AppPages.pages,
     );
