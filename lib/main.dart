@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ProfileScreen(),
+      home: ListDoneJobEmpresa(),
       initialBinding: LoginBinding(),
       getPages: AppPages.pages,
     );
