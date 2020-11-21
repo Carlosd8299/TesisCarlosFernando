@@ -35,6 +35,7 @@ dependencies:
   flutter_secure_storage: ^3.3.4
   get: ^3.12.1
   dio:
+  font_awesome_flutter: ^8.10.0
 
 dev_dependencies:
   flutter_test:

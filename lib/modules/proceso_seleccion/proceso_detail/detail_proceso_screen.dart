@@ -4,6 +4,7 @@ import 'package:itsuit/modules/proceso_seleccion/components/single_oferta_provee
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
+import '../../screens.dart';
 import 'detail_proceso_controller.dart';
 
 List lista = [
@@ -38,7 +39,7 @@ class DetailProcesoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (_) => Switcher(
-          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 1),
+          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 2),
     );
   }
 }
@@ -424,10 +425,10 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: ButtomBottomNav(
-            titleButton: "Solicitud directa",
+            titleButton: "Ver ofertas",
             instruction:
-                "Solicitar servicio del proveedor dependiendo de los servicios que ofrece",
-            onTap: () => print("Hola"),
+                "Revisa las ofertas realizadas por los proveedores en este proceso de seleccion",
+            onTap: () => Get.to(ListOfertaScreen()),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

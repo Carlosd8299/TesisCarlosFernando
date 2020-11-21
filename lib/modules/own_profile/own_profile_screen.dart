@@ -5,6 +5,7 @@ import 'package:itsuit/modules/own_profile/components/social_counter.dart';
 import 'package:itsuit/modules/own_profile/own_profile_controller.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
+import '../screens.dart';
 
 class OwnProfileScreen extends StatelessWidget {
   @override
@@ -27,9 +28,11 @@ class OwnProfileProveedor extends StatelessWidget {
           child: Column(
             children: [
               //Foto de perfil
-              CircleAvatar(
-                backgroundImage: NetworkImage(Constants.linkEmpresaAvatar),
-                radius: 80,
+              SafeArea(
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+                  radius: 80,
+                ),
               ),
               SizedBox(height: 20),
               //Comienza el contenedor blanco
@@ -65,7 +68,9 @@ class OwnProfileProveedor extends StatelessWidget {
                               CardButtonProfile(
                                   color: Constants.colorlist[0],
                                   label: "Mi cuponera",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(ListCuponScreen());
+                                  },
                                   icon: Icons.receipt),
                               CardButtonProfile(
                                   color: Constants.colorlist[1],
@@ -79,7 +84,9 @@ class OwnProfileProveedor extends StatelessWidget {
                               CardButtonProfile(
                                   color: Constants.colorlist[2],
                                   label: "Mi Portafolio",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(ListDoneJobScreen());
+                                  },
                                   icon: Icons.card_travel),
                               CardButtonProfile(
                                   color: Constants.colorlist[3],
@@ -120,11 +127,13 @@ class OwnProfileEmpresa extends StatelessWidget {
           child: Column(
             children: [
               //Foto de perfil
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  Constants.linkEmpresaAvatar,
+              SafeArea(
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    Constants.linkEmpresaAvatar,
+                  ),
+                  radius: 80,
                 ),
-                radius: 80,
               ),
               SizedBox(height: 20),
               //Comienza el contenedor blanco

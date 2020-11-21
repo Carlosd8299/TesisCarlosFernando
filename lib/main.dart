@@ -17,6 +17,7 @@ import 'modules/cupones/list_cupon/list_cupon_screen.dart';
 import 'modules/portfolio/create_done_job/create_done_job_screen.dart';
 import 'modules/portfolio/detail_done_job/detail_done_job_screen.dart';
 import 'modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
+import 'modules/proceso_seleccion/ofertas_list/list_oferta_screen.dart';
 import 'modules/proceso_seleccion/proceso_detail/detail_proceso_screen.dart';
 
 void main() {
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CreateProcesoSeleccionScreen(),
+      home: DetailProcesoScreen(),
       initialBinding: LoginBinding(),
       getPages: AppPages.pages,
     );

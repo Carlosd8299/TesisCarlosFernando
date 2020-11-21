@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:itsuit/modules/cupones/list_cupon/list_cupon_controller.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
-
+import '../../screens.dart';
 import 'components/single_cupon.dart';
 
 class ListCuponScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class ListCuponProveedor extends StatelessWidget {
                 slivers: [
                   //AppBar
                   CustomAppBar(
-                    onTap: () => print(""),
+                    onTap: () => Get.to(HomeScreen()),
                     title: 'Cupones',
                   ),
                   // Lista de copones
@@ -66,7 +66,7 @@ class ListCuponEmpresa extends StatelessWidget {
           slivers: [
             //AppBar
             CustomAppBar(
-              onTap: () => print(""),
+              onTap: () => Get.to(HomeScreen()),
               title: 'Cupones',
             ),
             // Lista de copones
