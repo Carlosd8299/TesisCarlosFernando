@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DetailProcesoScreen(),
+      home: LoginScreen(),
       initialBinding: LoginBinding(),
       getPages: AppPages.pages,
     );

@@ -17,7 +17,6 @@ class HomeController extends GetxController {
 
   get getR => r;
   get getIdTipo => idtipo;
-
   @override
   void onInit() {
     // idtipo = Get.arguments as int;

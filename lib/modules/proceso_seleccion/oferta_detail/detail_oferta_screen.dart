@@ -12,6 +12,16 @@ import '../../screens.dart';
 class DetailOfertaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return GetBuilder(
+      builder: (controller) => Switcher(
+          DetailOfertaScreenProveedor(), DetailOfertaScreenEmpresa(), 1),
+    );
+  }
+}
+
+class DetailOfertaScreenEmpresa extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return GetBuilder<DetailOfertaController>(
       builder: (controller) => Scaffold(
         body: CustomScrollView(
@@ -31,15 +41,15 @@ class DetailOfertaScreen extends StatelessWidget {
                   ),
                   RoundedIconButton(
                     function: () => print("Hello"),
-                    color: Constants.yellowflatbutton,
-                    label: 'Contraofertar',
-                    icon: (FontAwesomeIcons.gavel),
-                  ),
-                  RoundedIconButton(
-                    function: () => print("Hello"),
                     color: Constants.redflatbutton,
                     label: 'Rechazar',
                     icon: (FontAwesomeIcons.times),
+                  ),
+                  RoundedIconButton(
+                    function: () => print("Hello"),
+                    color: Constants.yellowflatbutton,
+                    label: 'Contraofertar',
+                    icon: (FontAwesomeIcons.gavel),
                   ),
                 ],
               ),
@@ -125,7 +135,7 @@ class DetailOfertaScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Fecha de ejecución de lo ofertado",
+                  "Enviar mensaje al proveedor sobre la oferta",
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -181,7 +191,186 @@ class DetailOfertaScreen extends StatelessWidget {
           icon: Icon(FontAwesomeIcons.gavel),
           titleButton: 'Ver contraofertas',
           instruction: 'Ver las contraofertas relacionadas a esta oferta',
-          onTap: () => print(""),
+          onTap: () => Get.to(DetailContraOfertaScreen()),
+        ),
+      ),
+    );
+  }
+}
+
+class DetailOfertaScreenProveedor extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<DetailOfertaController>(
+      builder: (controller) => Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            CustomAppBar(
+                title: "Nombre de la oferta",
+                onTap: () => Get.to(ListOfertaScreen())),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RoundedIconButton(
+                    function: () => print("Hello"),
+                    color: Constants.greenflatbutton,
+                    label: 'Aceptar',
+                    icon: (FontAwesomeIcons.check),
+                  ),
+                  RoundedIconButton(
+                    function: () => print("Hello"),
+                    color: Constants.redflatbutton,
+                    label: 'Rechazar',
+                    icon: (FontAwesomeIcons.times),
+                  ),
+                  RoundedIconButton(
+                    function: () => print("Hello"),
+                    color: Constants.yellowflatbutton,
+                    label: 'Contraofertar',
+                    icon: (FontAwesomeIcons.gavel),
+                  ),
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Descripción de la oferta",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Presupuesto ofertado",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Lorem ipsum dolor sit amet.",
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Fecha de ejecución de lo ofertado",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Lorem ipsum dolor sit amet.",
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Enviar mensaje al proveedor sobre la oferta",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
+            SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                sliver: SliverToBoxAdapter(
+                    child: CustomField(
+                        maxlines: 4,
+                        label: 'Escribir comentario sobre la oferta',
+                        hint:
+                            'Déjale un mensaje al proveedor con relacion a la oferta propuesta para este proceso de selección'))),
+            //Boton de enviar mensaje
+            SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: 150),
+                sliver: SliverToBoxAdapter(
+                    child: InkWell(
+                        onTap: () => print(""),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.lightBlue,
+                              borderRadius: BorderRadius.circular(20)),
+                          padding: EdgeInsets.symmetric(horizontal: 6),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                'Enviar',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(width: 1),
+                              Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white),
+                                  child: FaIcon(FontAwesomeIcons.paperPlane)),
+                            ],
+                          ),
+                        )))),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 30,
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: ButtomBottomNav(
+          color: Colors.black,
+          icon: Icon(FontAwesomeIcons.gavel),
+          titleButton: 'Ver contraofertas',
+          instruction: 'Ver las contraofertas relacionadas a esta oferta',
+          onTap: () => Get.to(DetailContraOfertaScreen()),
         ),
       ),
     );

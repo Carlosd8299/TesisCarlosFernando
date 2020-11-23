@@ -23,7 +23,6 @@ class OwnProfileProveedor extends StatelessWidget {
     return GetBuilder<OwnProfileController>(
       builder: (controller) => Scaffold(
         backgroundColor: Constants.bluelight,
-
         body: SingleChildScrollView(
           child: Column(
             children: [

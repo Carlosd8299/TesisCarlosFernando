@@ -39,7 +39,7 @@ class DetailProcesoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (_) => Switcher(
-          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 2),
+          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 1),
     );
   }
 }
@@ -232,6 +232,13 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
             ),
           ),
         ),
+        bottomNavigationBar: ButtomBottomNav(
+            titleButton: "Aplicar",
+            instruction:
+                "Empezar a participar en la puja, ofrecer alternativas, ofrecer un alcance, presupuesto y tiempos distintos",
+            onTap: () => Get.to(CreateOfertaScreen()),
+            icon: Icon(Icons.arrow_forward),
+            color: Colors.black),
       ),
     );
   }
