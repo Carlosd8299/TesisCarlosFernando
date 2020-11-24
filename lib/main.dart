@@ -10,7 +10,6 @@ import 'package:itsuit/modules/screens.dart';
 import 'package:itsuit/routes/my_pages.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/utils/dependency_injection.dart';
-
 import 'modules/cupones/create_cupon/create_cupon_screen.dart';
 import 'modules/cupones/detail_cupon/detail_cupon_screen.dart';
 import 'modules/cupones/list_cupon/list_cupon_screen.dart';
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'IT SUIT',
       theme: ThemeData(
         primaryColor: Constants.bluelight,
         textTheme: TextTheme(

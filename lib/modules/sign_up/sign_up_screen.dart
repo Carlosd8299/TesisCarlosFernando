@@ -25,18 +25,18 @@ class SignUpScreen extends StatelessWidget {
                         width: 600,
                       ),
                     ),
-                    height: 550,
+                    height: 420,
                   ),
                   Positioned(
-                      top: 50,
-                      left: 20,
+                      top: 280,
+                      left: 40,
                       child: FadeAnimation(
-                        2,
-                        Text(
-                          "Registrate \nAhora",
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      )),
+                          2,
+                          Text(
+                            "Registrate \nAhora",
+                            style: TextStyle(
+                                fontSize: 50, fontWeight: FontWeight.bold),
+                          ))),
                 ]),
                 SizedBox(
                   height: 30,
@@ -101,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
                           width: 3,
                         ),
                         InkWell(
-                          onTap: () => print("Registro"),
+                          onTap: () => _.goToLogIn(),
                           child: Text(
                             "Iniciar Sesión",
                             textAlign: TextAlign.left,

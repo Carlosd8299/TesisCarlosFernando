@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/login/login_controller.dart';
+import 'package:itsuit/modules/sign_up/sign_up_screen.dart';
 import 'package:itsuit/widgets/curve_shape.dart';
 import 'package:itsuit/widgets/widgets.dart';
 import 'components/fade_animation.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         CurveShape(
-                          height: 500,
+                          height: 380,
                           child: Stack(
                             children: <Widget>[
                               Positioned(
@@ -98,19 +99,6 @@ class LoginScreen extends StatelessWidget {
                                 height: 30,
                               ),
                               FadeAnimation(
-                                  1.5,
-                                  InkWell(
-                                    onTap: () => print("forget password"),
-                                    child: Text(
-                                      "¿Olvidaste tu contraseña?",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(color: Colors.blue),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              FadeAnimation(
                                   2,
                                   InkWell(
                                     onTap: () => _.submit(),
@@ -130,9 +118,6 @@ class LoginScreen extends StatelessWidget {
                                       ),
                                     ),
                                   )),
-                              SizedBox(
-                                height: 10,
-                              ),
                             ],
                           ),
                         ),
@@ -146,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                                   width: 3,
                                 ),
                                 InkWell(
-                                  onTap: () => print("Registro"),
+                                  onTap: () => Get.to(SignUpScreen()),
                                   child: Text(
                                     "Registrate aqui",
                                     textAlign: TextAlign.left,
