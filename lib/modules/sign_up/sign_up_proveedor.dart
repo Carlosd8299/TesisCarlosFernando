@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
+import 'package:itsuit/data/models/ubicaciones.dart';
 import 'package:itsuit/modules/sign_up/sign_up_controller.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
@@ -33,6 +34,7 @@ class SignUpProveedor extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  //Titulo
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30.0,
@@ -63,10 +65,13 @@ class SignUpProveedor extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        // Textbox Nombre de la empresa
                         Container(
                           width: 170,
                           height: 50,
                           child: TextField(
+                            onChanged: (value) =>
+                                _.onNombreProveedorChanged(value),
                             decoration: const InputDecoration(
                               labelText: "Nombre de la empresa",
                               border: OutlineInputBorder(),
@@ -74,6 +79,7 @@ class SignUpProveedor extends StatelessWidget {
                             keyboardType: TextInputType.name,
                           ),
                         ),
+                        // DropDown de Tipo de documento
                         DropdownButton(
                           autofocus: false,
                           hint: Text("Tipo de documento"),
@@ -91,6 +97,7 @@ class SignUpProveedor extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
+                  // DropDown de RegimenTributario
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -120,6 +127,7 @@ class SignUpProveedor extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
+                  // DropDown de actividad economica
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -148,15 +156,7 @@ class SignUpProveedor extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /* new DropdownButton<String>(
-                    items: _.getRegimenes.map((Regimen value) {
-                      return new DropdownMenuItem<String>(
-                        value: value.nombre,
-                        child: new Text(value.nombre),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                  ), */
+
                   SizedBox(
                     height: 20,
                   ),
@@ -165,10 +165,13 @@ class SignUpProveedor extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        // textbox direccion
                         Container(
                           width: 170,
                           height: 50,
                           child: TextField(
+                            onChanged: (value) =>
+                                _.onDireccionProveedorChanged(value),
                             autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Dirección",
@@ -177,10 +180,13 @@ class SignUpProveedor extends StatelessWidget {
                             keyboardType: TextInputType.streetAddress,
                           ),
                         ),
+                        // textbox Correo electronico
                         Container(
                           height: 50,
                           width: 170,
                           child: TextField(
+                            onChanged: (value) =>
+                                _.onCorreoProveedorChanged(value),
                             autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Correo electronico",
@@ -192,6 +198,7 @@ class SignUpProveedor extends StatelessWidget {
                       ],
                     ),
                   ),
+                  //Numero id text
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
@@ -201,6 +208,8 @@ class SignUpProveedor extends StatelessWidget {
                           width: 170,
                           height: 50,
                           child: TextField(
+                            onChanged: (value) =>
+                                _.onNumeroIdProveedorChanged(value),
                             autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Numero de ID",
@@ -213,6 +222,8 @@ class SignUpProveedor extends StatelessWidget {
                           height: 50,
                           width: 170,
                           child: TextField(
+                            onChanged: (value) =>
+                                _.onYearProveedorChanged(value),
                             autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Año creación compañía",
@@ -224,10 +235,12 @@ class SignUpProveedor extends StatelessWidget {
                       ],
                     ),
                   ),
+                  //num Telefono
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 10),
                     child: TextField(
+                      onChanged: (value) => _.onPhoneProveedorChanged(value),
                       autofocus: false,
                       decoration: InputDecoration(
                         labelText: "Numero de telefono",
@@ -236,20 +249,26 @@ class SignUpProveedor extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                     ),
                   ),
+                  //Tetx contraseña
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10),
                       child: TextField(
+                        onChanged: (value) =>
+                            _.onPasswordProveedorChanged(value),
                         decoration: InputDecoration(
                           labelText: "Contraseña",
                           border: OutlineInputBorder(),
                         ),
                         obscureText: true,
                       )),
+                  //Tetx confrim contraseña
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10),
                       child: TextField(
+                        onChanged: (value) =>
+                            _.onConfirmPasswordProveedorChanged(value),
                         autofocus: false,
                         decoration: InputDecoration(
                           labelText: "Confirmar contraseña",
@@ -260,9 +279,9 @@ class SignUpProveedor extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(
-                        value: false,
-                        onChanged: (value) => print(value.toString()),
-                      ),
+                          value: false,
+                          onChanged: (value) =>
+                              _.onConfirmTYCProveedorChanged(value)),
                       Text("Aceptar Terminos y condiciones"),
                     ],
                   ),

@@ -63,6 +63,7 @@ class SignUpEmpresa extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline1,
                   ),
                 ),
+                //textbox Nombre del cliente
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -70,7 +71,7 @@ class SignUpEmpresa extends StatelessWidget {
                     width: 400,
                     child: TextField(
                       onChanged: (value) {
-                        _.onNombreClieneChanged(value);
+                        _.onNombreClienteChanged(value);
                       },
                       decoration: const InputDecoration(
                         labelText: "Nombre del cliente",
