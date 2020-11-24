@@ -3,24 +3,24 @@ import 'package:meta/meta.dart' show required;
 class RequestToken {
   RequestToken({
     @required this.token,
-    @required this.isAuto,
     @required this.usuario,
+    @required this.fechaExpira,
   });
 
   final String token;
-  final bool isAuto;
   final Usuario usuario;
+  final String fechaExpira;
 
   factory RequestToken.fromJson(Map<String, dynamic> json) => RequestToken(
         token: json["token"],
-        isAuto: json["isAuto"],
         usuario: Usuario.fromJson(json["usuario"]),
+        fechaExpira: json["fechaExpira"],
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
-        "isAuto": isAuto,
         "usuario": usuario.toJson(),
+        "fechaExpira": fechaExpira,
       };
 }
 

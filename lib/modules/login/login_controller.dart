@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/repositories/local/local_auth_repository.dart';
-
 import 'package:itsuit/data/repositories/remote/auth_repository.dart';
 import 'package:itsuit/routes/my_routes.dart';
 
@@ -42,7 +39,7 @@ class LoginController extends GetxController {
         ],
       ));
       await _localAuthRepository.setSession(token);
-      Get.offNamed(AppRoutes.HOME, arguments: token);
+      Get.offNamed(AppRoutes.HOME, arguments: {token});
     } catch (e) {
       print(e);
       String message = "";

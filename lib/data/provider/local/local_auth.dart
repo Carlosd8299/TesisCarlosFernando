@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/request_token.dart';
 
 class LocalAuth {
@@ -16,15 +17,18 @@ class LocalAuth {
     await _storage.delete(key: KEY);
   }
 
-  /*  Future<RequestToken> getSession() async {
+  Future<RequestToken> getSession() async {
     final String data = await _storage.read(key: KEY);
+
     if (data != null) {
       final RequestToken requestToken = RequestToken.fromJson(jsonDecode(data));
-      if (DateTime.now().isBefore(requestToken.expiresAt)) {
+      DateFormat format = new DateFormat("YYYY/MM/DD HH:MM:SS");
+      DateTime fecha = format.parse(requestToken.fechaExpira);
+      if (DateTime.now().isBefore(fecha)) {
         return requestToken;
       }
       return null;
     }
     return null;
-  } */
+  }
 }

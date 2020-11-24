@@ -51,9 +51,22 @@ class AppPages {
       page: () => OnBoarding(),
       binding: OnBoardingBinding(),
     ),
+    // Pagina de Sign up principal
     GetPage(
       name: AppRoutes.SIGNUOP,
       page: () => SignUpScreen(),
+      binding: SignUpBinding(),
+    ),
+    // Sign up empresa
+    GetPage(
+      name: AppRoutes.SIGNUOPEMPRESA,
+      page: () => SignUpEmpresa(),
+      binding: SignUpBinding(),
+    ),
+    //Sign Up proveedor
+    GetPage(
+      name: AppRoutes.SIGNUOPPROVEEDOR,
+      page: () => SignUpProveedor(),
       binding: SignUpBinding(),
     ),
     GetPage(

@@ -5,7 +5,6 @@ import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/provider/reomote/auth_api.dart';
 import 'package:itsuit/data/repositories/local/local_auth_repository.dart';
 import 'package:itsuit/data/repositories/remote/auth_repository.dart';
-import 'package:itsuit/modules/login/login_controller.dart';
 
 class DependencyInjection {
   static void init() {

@@ -19,6 +19,7 @@ import 'modules/portfolio/detail_done_job/detail_done_job_screen.dart';
 import 'modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
 import 'modules/proceso_seleccion/ofertas_list/list_oferta_screen.dart';
 import 'modules/proceso_seleccion/proceso_detail/detail_proceso_screen.dart';
+import 'modules/sign_up/sign_up_binding.dart';
 
 void main() {
   DependencyInjection.init();
@@ -56,8 +57,8 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
-      initialBinding: LoginBinding(),
+      home: SignUpScreen(),
+      initialBinding: SignUpBinding(),
       getPages: AppPages.pages,
     );
   }
