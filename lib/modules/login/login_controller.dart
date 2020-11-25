@@ -40,7 +40,7 @@ class LoginController extends GetxController {
         ],
       ));
       await _localAuthRepository.setSession(token);
-      Get.offNamed(AppRoutes.HOME, arguments: {token});
+      Get.offNamed(AppRoutes.HOME, arguments: token);
     } catch (e) {
       print(e);
       String message = "";
@@ -67,6 +67,6 @@ class LoginController extends GetxController {
   }
 
   goToSignUp() {
-    Get.to(SignUpScreen());
+    Get.offNamed(AppRoutes.SIGNUOP);
   }
 }

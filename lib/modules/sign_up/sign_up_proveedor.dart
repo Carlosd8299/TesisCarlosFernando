@@ -81,7 +81,6 @@ class SignUpProveedor extends StatelessWidget {
                         ),
                         // DropDown de Tipo de documento
                         DropdownButton(
-                          autofocus: false,
                           hint: Text("Tipo de documento"),
                           value: _.getTipoDocumentoProveedor,
                           underline: Container(
@@ -107,7 +106,6 @@ class SignUpProveedor extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5)),
                       alignment: AlignmentDirectional.center,
                       child: DropdownButton(
-                        autofocus: false,
                         hint: Text(" RegimenTributario"),
                         value: _.getRegimenTributario,
                         underline: Container(
@@ -137,7 +135,6 @@ class SignUpProveedor extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5)),
                       alignment: AlignmentDirectional.center,
                       child: DropdownButton(
-                        autofocus: false,
                         hint: Text("Actividad Economica"),
                         value: _.getActEconomicaProveedor,
                         underline: Container(
@@ -172,7 +169,6 @@ class SignUpProveedor extends StatelessWidget {
                           child: TextField(
                             onChanged: (value) =>
                                 _.onDireccionProveedorChanged(value),
-                            autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Dirección",
                               border: OutlineInputBorder(),
@@ -187,7 +183,6 @@ class SignUpProveedor extends StatelessWidget {
                           child: TextField(
                             onChanged: (value) =>
                                 _.onCorreoProveedorChanged(value),
-                            autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Correo electronico",
                               border: OutlineInputBorder(),
@@ -210,26 +205,11 @@ class SignUpProveedor extends StatelessWidget {
                           child: TextField(
                             onChanged: (value) =>
                                 _.onNumeroIdProveedorChanged(value),
-                            autofocus: false,
                             decoration: InputDecoration(
                               labelText: "Numero de ID",
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 170,
-                          child: TextField(
-                            onChanged: (value) =>
-                                _.onYearProveedorChanged(value),
-                            autofocus: false,
-                            decoration: InputDecoration(
-                              labelText: "Año creación compañía",
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.datetime,
                           ),
                         ),
                       ],
@@ -241,12 +221,38 @@ class SignUpProveedor extends StatelessWidget {
                         horizontal: 20.0, vertical: 10),
                     child: TextField(
                       onChanged: (value) => _.onPhoneProveedorChanged(value),
-                      autofocus: false,
                       decoration: InputDecoration(
                         labelText: "Numero de telefono",
                         border: OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.phone,
+                    ),
+                  ),
+                  //num celular
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10),
+                    child: TextField(
+                      onChanged: (value) => _.onCellroveedorChanged(value),
+                      decoration: InputDecoration(
+                        labelText: "Numero de celular",
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ),
+                  //num Telefono
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 10),
+                    child: TextField(
+                      onChanged: (value) =>
+                          _.onExpProveedorChanged(int.parse(value)),
+                      decoration: InputDecoration(
+                        labelText: "Tiempo de experiencia en meses",
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                   //Tetx contraseña
@@ -269,7 +275,6 @@ class SignUpProveedor extends StatelessWidget {
                       child: TextField(
                         onChanged: (value) =>
                             _.onConfirmPasswordProveedorChanged(value),
-                        autofocus: false,
                         decoration: InputDecoration(
                           labelText: "Confirmar contraseña",
                           border: OutlineInputBorder(),
@@ -278,10 +283,13 @@ class SignUpProveedor extends StatelessWidget {
                       )),
                   Row(
                     children: [
-                      Checkbox(
-                          value: false,
-                          onChanged: (value) =>
-                              _.onConfirmTYCProveedorChanged(value)),
+                      GetBuilder(
+                        id: 'tyc',
+                        builder: (controller) => Checkbox(
+                            value: _.getTycProveedor,
+                            onChanged: (value) =>
+                                _.onConfirmTYCProveedorChanged(value)),
+                      ),
                       Text("Aceptar Terminos y condiciones"),
                     ],
                   ),
@@ -290,7 +298,7 @@ class SignUpProveedor extends StatelessWidget {
                       text: "Continuar",
                       width: 200,
                       gradient: bluegradient(),
-                      onTap: () {})
+                      onTap: () => _.onProveedorSubmit())
                 ],
               ),
             ),

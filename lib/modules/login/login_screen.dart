@@ -131,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                                   width: 3,
                                 ),
                                 InkWell(
-                                  onTap: () => Get.to(SignUpScreen()),
+                                  onTap: () => _.goToSignUp(),
                                   child: Text(
                                     "Registrate aqui",
                                     textAlign: TextAlign.left,

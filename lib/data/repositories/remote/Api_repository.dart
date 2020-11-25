@@ -6,7 +6,8 @@ import 'package:itsuit/data/provider/reomote/api.dart';
 
 class ApiRepository {
   final Apis _apis = Get.find<Apis>();
+  Future<Ubicacion> getCiudades() => _apis.getListCiudades();
   Future<RegimenTributario> getRegimenes() => _apis.getListTributario();
   Future<ActividadEconomica> getActEco() => _apis.getListActEco();
-  Future<List<Ciudade>> getCiudades() => _apis.getListCiudades();
+  //Future<List<Ciudade>> getCiudades() => _apis.getListCiudades();
 }

@@ -15,6 +15,14 @@ class Apis {
     } catch (e) {}
   }
 
+  Future<Ubicacion> getListCiudades() async {
+    try {
+      final Response response = await _dio.get('ciudad');
+      print(response.data);
+      return Ubicacion.fromJson(response.data);
+    } catch (e) {}
+  }
+
   Future<ActividadEconomica> getListActEco() async {
     try {
       final Response response = await _dio.get('ActividadEconomica');
@@ -23,7 +31,7 @@ class Apis {
     } catch (e) {}
   }
 
-  Future<List<Ciudade>> getListCiudades() async {
+  /*  Future<List<Ciudade>> getListCiudades() async {
     try {
       final Response response = await _dio.get('ciudad');
       print(response.data);
@@ -33,5 +41,5 @@ class Apis {
     } catch (e) {
       printError();
     }
-  }
+  } */
 }

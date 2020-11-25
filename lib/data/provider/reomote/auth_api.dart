@@ -41,11 +41,12 @@ class AuthApi {
     @required String password,
   }) async {
     try {
+      bool x = false;
       final Response response = await _dio.post("proveedor", data: {
         "id_tipo_documento": idTipoDocumento,
         "id_regimen_tributario": idRegimenTributario,
         "id_actividad_economica": idActividadEconomica,
-        "id_ciudad": idCiudad,
+        "id_ciudad": 3,
         "dni": dni,
         "nombre_tercero": nombreTercero,
         "fecha_registro": fechaRegistro,
@@ -57,7 +58,52 @@ class AuthApi {
         "password": password,
         "estado": 1
       });
-      return true;
+      if (response.statusCode != 200) {
+        x = true;
+      }
+      return x;
+    } catch (e) {
+      printError();
+      return false;
+    }
+  }
+
+  Future<bool> signUpEmpresa({
+    @required int idTipoDocumento,
+    @required int idRegimenTributario,
+    @required int idActividadEconomica,
+    @required String dni,
+    @required String nombreTercero,
+    @required String email,
+    @required String telefono,
+    @required String celular,
+    @required String direccion,
+    @required int tiempoExperiencia,
+    @required String password,
+  }) async {
+    try {
+      bool x = false;
+      final Response response = await _dio.post("proveedor", data: {
+        "id_tipo_tercero": 2,
+        "id_tipo_documento": idTipoDocumento,
+        "id_regimen_tributario": idRegimenTributario,
+        "id_actividad_economica": idActividadEconomica,
+        "id_ciudad": 3,
+        "dni": dni,
+        "nombre_tercero": nombreTercero,
+        "fecha_registro": '2020-10-10',
+        "email": email,
+        "telefono": telefono,
+        "celular": celular,
+        "direccion": direccion,
+        "tiempo_experiencia": tiempoExperiencia,
+        "password": password,
+        "estado": 1
+      });
+      if (response.statusCode != 200) {
+        x = true;
+      }
+      return x;
     } catch (e) {
       printError();
       return false;
