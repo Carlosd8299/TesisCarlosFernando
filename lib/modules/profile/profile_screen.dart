@@ -59,6 +59,9 @@ class ProfileProveedor extends StatelessWidget {
                     //Aqui comienza la informacion social del proveedor
                     SocialCounter(
                       isEmpresa: false,
+                      firstTitle: "",
+                      secondTitle: "",
+                      thirdTitle: "",
                     ),
                     //Aqui comienza el menu de botones
                     Container(
@@ -159,6 +162,9 @@ class ProfileEmpresa extends StatelessWidget {
                       margin: EdgeInsets.only(top: 30),
                       child: SocialCounter(
                         isEmpresa: true,
+                        firstTitle: "",
+                        secondTitle: "",
+                        thirdTitle: "",
                       ),
                     ),
                     //Aqui comienza el menu de botones

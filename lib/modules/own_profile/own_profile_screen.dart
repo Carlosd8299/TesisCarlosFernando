@@ -56,8 +56,10 @@ class OwnProfileProveedor extends StatelessWidget {
                   children: [
                     //Aqui comienza la informacion social del proveedor
                     SocialCounter(
-                      isEmpresa: false,
-                    ),
+                        isEmpresa: false,
+                        firstTitle: "",
+                        secondTitle: "",
+                        thirdTitle: ""),
                     //Aqui comienza el menu de botones
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
@@ -178,13 +180,17 @@ class OwnProfileEmpresa extends StatelessWidget {
                                   color: Constants.colorlist[0],
                                   label: "Mis procesos de seleccion",
                                   onTap: () {
-                                    Get.toNamed(AppRoutes.LISTPROCESO,arguments: _.r);
+                                    Get.toNamed(AppRoutes.LISTPROCESO,
+                                        arguments: _.r);
                                   },
                                   icon: Icons.low_priority),
                               CardButtonProfile(
                                   color: Constants.colorlist[2],
                                   label: "Solicitudes directas",
-                                  onTap: () {Get.toNamed(AppRoutes.LISTOFERTAS,arguments: _.r);},
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.LISTOFERTAS,
+                                        arguments: _.r);
+                                  },
                                   icon: Icons.send),
                             ],
                           )
@@ -202,9 +208,7 @@ class OwnProfileEmpresa extends StatelessWidget {
             titleButton: "Abrir un proceso de seleccion",
             instruction:
                 "Solicitar servicio del proveedor dependiendo de los servicios que ofree",
-            onTap: () => {
-                Get.toNamed(AppRoutes.CREATEPROCESO,arguments: _.r)
-                },
+            onTap: () => {Get.toNamed(AppRoutes.CREATEPROCESO, arguments: _.r)},
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

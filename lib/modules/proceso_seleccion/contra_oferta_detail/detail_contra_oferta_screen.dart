@@ -133,6 +133,7 @@ class DetailContraOfertaScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 sliver: SliverToBoxAdapter(
                     child: CustomField(
+                        function: (value) => {},
                         maxlines: 4,
                         label: 'Escribir comentario sobre la contraoferta',
                         hint:
