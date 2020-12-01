@@ -16,13 +16,14 @@ import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_binding
 import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_screen.dart';
 import 'package:itsuit/modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
 import 'package:itsuit/modules/proceso_seleccion/contra_oferta_create/create_contra_oferta_binding.dart';
-import 'package:itsuit/modules/proceso_seleccion/contra_oferta_create/create_contra_oferta_controller.dart';
 import 'package:itsuit/modules/proceso_seleccion/contra_oferta_detail/detail_contra_oferta_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/oferta_create/create_oferta_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/oferta_detail/detail_oferta_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/ofertas_list/list_oferta_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/proceso_create/create_proceso_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/proceso_detail/detail_proceso_binding.dart';
+import 'package:itsuit/modules/proceso_seleccion/proceso_list/proceso_list_binding.dart';
+import 'package:itsuit/modules/proceso_seleccion/proceso_list/proceso_list_screen.dart';
 import 'package:itsuit/modules/profile/profile_binding.dart';
 import 'package:itsuit/modules/profile/profile_screen.dart';
 import 'package:itsuit/modules/screens.dart';
@@ -162,5 +163,9 @@ class AppPages {
         name: AppRoutes.DETAILPROCESO,
         page: () => DetailProcesoScreen(),
         binding: DetailProcesoBinding()),
+    GetPage(
+        name: AppRoutes.LISTPROCESO,
+        page: () => ProcesoListScreen(),
+        binding: ProcesoListBinding()),
   ];
 }

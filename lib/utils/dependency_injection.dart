@@ -10,6 +10,7 @@ import 'package:itsuit/data/repositories/remote/auth_repository.dart';
 
 class DependencyInjection {
   static void init() {
+
     Get.put(Dio(BaseOptions(baseUrl: "http://23.21.130.107/api/")));
     Get.put<FlutterSecureStorage>(FlutterSecureStorage());
     //Providers

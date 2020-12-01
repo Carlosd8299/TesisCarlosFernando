@@ -2,10 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/request_token.dart';
+import 'package:itsuit/data/provider/local/local_auth.dart';
 
 class AuthApi {
   final Dio _dio = Get.find<Dio>();
+final LocalAuth localAuth = new LocalAuth();
 
+  // ignore: missing_return
   Future<RequestToken> validateWithLogin(
       {@required String username, @required String password}) async {
     try {
@@ -16,8 +19,7 @@ class AuthApi {
           "password": password,
         },
       );
-      print(response.data);
-      print(response.data['usuario']);
+      await localAuth.setSession(RequestToken.fromJson(response.data));
       return RequestToken.fromJson(response.data);
     } catch (e) {
       printError();

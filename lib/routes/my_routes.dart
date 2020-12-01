@@ -27,6 +27,7 @@ class AppRoutes {
   static const DETAILOFERTA = "ofertaDetail";
   static const LISTOFERTAS = "ofertasList";
   static const CREATEPROCESO = "procesoCreate";
+  static const LISTPROCESO = "procesoList";
   static const DETAILPROCESO = "procesoDetail";
   //
   static const SELECCIONDIRECTACREATE = "seleccionDirectaCreate";

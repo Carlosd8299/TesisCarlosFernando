@@ -14,6 +14,7 @@ class AuthRepository {
         username: username,
         password: password,
       );
+  // ignore: missing_return
   Future<bool> signUpProveedor({
     @required int idTipoDocumento,
     @required int idRegimenTributario,

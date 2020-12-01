@@ -4,6 +4,12 @@ import 'package:itsuit/modules/proceso_seleccion/oferta_detail/detail_oferta_scr
 import 'package:itsuit/utils/constants.dart';
 
 class SingleItemOferta extends StatelessWidget {
+final bool isProveedor;
+final String titulo;
+final String estado;
+final int presupuesto;
+
+  const SingleItemOferta({Key key, @required this.isProveedor, @required this.titulo, @required this.estado, @required this.presupuesto}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -28,7 +34,7 @@ class SingleItemOferta extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Text(
-              "Nombre del proveedor",
+              this.titulo,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Row(
@@ -40,7 +46,7 @@ class SingleItemOferta extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  'Contraoferta',
+                  this.estado,
                 ),
               ],
             ),
@@ -53,7 +59,7 @@ class SingleItemOferta extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  '\$10.000.000',
+                  '\$'+this.presupuesto.toString(),
                 ),
               ],
             ),

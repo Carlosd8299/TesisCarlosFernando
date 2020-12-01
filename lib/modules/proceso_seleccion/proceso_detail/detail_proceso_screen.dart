@@ -39,7 +39,7 @@ class DetailProcesoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (_) => Switcher(
-          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 1),
+          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 2),
     );
   }
 }

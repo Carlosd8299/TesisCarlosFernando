@@ -22,11 +22,13 @@ class RequestToken {
         "usuario": usuario.toJson(),
         "fechaExpira": fechaExpira,
       };
+  getToken() => token;
 }
 
 class Usuario {
   Usuario({
     @required this.id,
+    @required this.idTercero,
     @required this.idTipoUsuario,
     @required this.tipoUsuario,
     @required this.email,
@@ -37,6 +39,7 @@ class Usuario {
   });
 
   final int id;
+  final int idTercero;
   final int idTipoUsuario;
   final String tipoUsuario;
   final String email;
@@ -47,6 +50,7 @@ class Usuario {
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
         id: json["id"],
+        idTercero: json["id_tercero"],
         idTipoUsuario: json["id_tipo_usuario"],
         tipoUsuario: json["tipo_usuario"],
         email: json["email"],
@@ -58,6 +62,7 @@ class Usuario {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "id_tercero": idTercero,
         "id_tipo_usuario": idTipoUsuario,
         "tipo_usuario": tipoUsuario,
         "email": email,

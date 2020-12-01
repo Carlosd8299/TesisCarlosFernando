@@ -14,13 +14,17 @@ final List<String> categorias = [
 
 class CardRecomended extends StatelessWidget {
   final bool isProveedor;
+  final String empresa;
+  final String tituloCard;
+  final List arrayCategorias;
+  final String fecha;
 
-  const CardRecomended({Key key, @required this.isProveedor}) : super(key: key);
+  const CardRecomended({Key key, @required this.isProveedor, @required this.empresa, @required this.tituloCard, @required this.arrayCategorias, @required this.fecha}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,10 +34,10 @@ class CardRecomended extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Nombre de la compañia"),
+                Text(this.empresa.trim()),
                 Container(
-                  width: 80,
-                  height: 80,
+                  width: 70,
+                  height: 60,
                   child: Image.network(
                     "https://es.logodownload.org/wp-content/uploads/2018/10/coca-cola-logo-11-1024x335.png",
                     fit: BoxFit.contain,
@@ -43,9 +47,9 @@ class CardRecomended extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 9.0),
             child: Text(
-              "Nombre de la solicitud de servicios",
+              this.tituloCard.trim(),
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
@@ -53,29 +57,48 @@ class CardRecomended extends StatelessWidget {
               ? Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    alignment: Alignment.center,
-                    width: 100,
-                    height: 25,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Constants.greencake,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black38,
-                              blurRadius: 6,
-                              offset: Offset(1, 3))
-                        ]),
-                    child: Text("Categoria"),
-                  ),
+                    height: 60,
+                    width: 340,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: this.arrayCategorias.length,
+                      itemBuilder: (context, index) {
+                        String categoria = this.arrayCategorias[index];
+                        Color color = Constants.colorlist[0];
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: color,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black38,
+                                      blurRadius: 6,
+                                      offset: Offset(1, 3))
+                                ]),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                categoria.trim(),
+                                style: TextStyle(color: Constants.blacktitles),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                 )
               : Container(
-                  height: 50,
+                  height: 55,
                   width: 400,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: categorias.length,
+                    itemCount: this.arrayCategorias.length,
                     itemBuilder: (context, index) {
-                      String categoria = categorias[index];
+                      String categoria = this.arrayCategorias[index];
                       Color color = Constants.colorlist[index];
                       return Container(
                         margin: const EdgeInsets.symmetric(
@@ -91,7 +114,7 @@ class CardRecomended extends StatelessWidget {
                                     offset: Offset(1, 3))
                               ]),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(6.0),
                             child: Text(
                               categoria,
                               style: TextStyle(color: Constants.blacktitles),
@@ -104,7 +127,7 @@ class CardRecomended extends StatelessWidget {
                 ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
-            child: Text("Fecha de publicacion"),
+            child: Text(this.fecha.trim()),
           )
         ],
       ),

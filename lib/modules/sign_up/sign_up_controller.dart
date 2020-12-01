@@ -11,7 +11,8 @@ import 'package:itsuit/routes/my_routes.dart';
 class SignUpController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   final AuthRepository _authRepository = Get.find<AuthRepository>();
-  // campo de textto empresa
+
+  // ignore: non_constant_identifier_names
   String _nombre_empresa,
       _correo_empresa,
       _direccion_empresa,
@@ -226,10 +227,6 @@ class SignUpController extends GetxController {
     _actividades = data.data;
   }
 
-  /* Future<void> loadCiudades() async {
-    final data = await _apirepo.getCiudades();
-    _ciudades = data;
-  } */
 
   void onProveedorSubmit() {
     if (_tyc_proveedor &&
@@ -244,7 +241,6 @@ class SignUpController extends GetxController {
         _password_proveedor != null) {
       if (_confirm_password_proveedor == _password_proveedor) {
         try {
-          print("entre a la llamada");
           _authRepository.signUpProveedor(
               idTipoDocumento: _tipo_documento_proveedor,
               idRegimenTributario: _selected_tributario,
@@ -258,7 +254,6 @@ class SignUpController extends GetxController {
               direccion: _direccion_proveedor,
               tiempoExperiencia: _expProveedor,
               password: _password_proveedor);
-          print("pase la llamada");
           Get.dialog(AlertDialog(
               title: Text("Se ha creado el usuario"),
               content: Text("Ahora puede iniciar sesion"),
@@ -321,7 +316,6 @@ class SignUpController extends GetxController {
         _password_empresa != null) {
       if (_confirm_password_empresa == _password_empresa) {
         try {
-          print("entre a la llamada");
           _authRepository.signUpEmpresa(
               idTipoDocumento: this._tipo_documento_empresa,
               idRegimenTributario: this._selected_tributario_empresa,
@@ -334,7 +328,6 @@ class SignUpController extends GetxController {
               direccion: this._direccion_empresa,
               tiempoExperiencia: 1,
               password: this._password_empresa);
-          print("pase la llamada");
           /* Get.dialog(AlertDialog(
               title: Text("Se ha creado el usuario"),
               content: Text("Ahora puede iniciar sesion"),

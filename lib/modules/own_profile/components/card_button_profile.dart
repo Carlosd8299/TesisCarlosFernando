@@ -18,8 +18,8 @@ class CardButtonProfile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(15),
-        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(8),
+        padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(10),

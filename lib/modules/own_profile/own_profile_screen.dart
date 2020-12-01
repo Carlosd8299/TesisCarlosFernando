@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
 import 'package:itsuit/modules/own_profile/components/social_counter.dart';
 import 'package:itsuit/modules/own_profile/own_profile_controller.dart';
+import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
 import '../screens.dart';
@@ -11,8 +12,8 @@ class OwnProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
-      builder: (controller) =>
-          Switcher(OwnProfileProveedor(), OwnProfileEmpresa(), 1),
+      builder: (_) => Switcher(OwnProfileProveedor(), OwnProfileEmpresa(),
+          _.r.usuario.idTipoUsuario),
     );
   }
 }
@@ -120,7 +121,7 @@ class OwnProfileEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
-      builder: (controller) => Scaffold(
+      builder: (_) => Scaffold(
         backgroundColor: Constants.bluelight,
         body: SingleChildScrollView(
           child: Column(
@@ -138,7 +139,7 @@ class OwnProfileEmpresa extends StatelessWidget {
               //Comienza el contenedor blanco
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
-                width: 400,
+                width: 450,
                 height: 450,
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -154,10 +155,18 @@ class OwnProfileEmpresa extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //Aqui comienza la informacion social del proveedor
-                    SocialCounter(
-                      isEmpresa: true,
-                    ),
+                    GetBuilder<OwnProfileController>(
+                        id: "cabeceraSolcitante",
+                        builder: (_) {
+                          return SocialCounter(
+                              isEmpresa: true,
+                              firstTitle:
+                                  _.getSolicitante.cantidadSeleccion.toString(),
+                              secondTitle:
+                                  _.getSolicitante.cantidadDirectas.toString(),
+                              thirdTitle: _.getSolicitante.cantidadProveedor
+                                  .toString());
+                        }),
                     //Aqui comienza el menu de botones
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
@@ -168,21 +177,14 @@ class OwnProfileEmpresa extends StatelessWidget {
                               CardButtonProfile(
                                   color: Constants.colorlist[0],
                                   label: "Mis procesos de seleccion",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.LISTPROCESO,arguments: _.r);
+                                  },
                                   icon: Icons.low_priority),
-                              CardButtonProfile(
-                                  color: Constants.colorlist[1],
-                                  label: "Mi proveedores favoritos",
-                                  onTap: () {},
-                                  icon: Icons.bookmark)
-                            ],
-                          ),
-                          Row(
-                            children: [
                               CardButtonProfile(
                                   color: Constants.colorlist[2],
                                   label: "Solicitudes directas",
-                                  onTap: () {},
+                                  onTap: () {Get.toNamed(AppRoutes.LISTOFERTAS,arguments: _.r);},
                                   icon: Icons.send),
                             ],
                           )
@@ -200,7 +202,9 @@ class OwnProfileEmpresa extends StatelessWidget {
             titleButton: "Abrir un proceso de seleccion",
             instruction:
                 "Solicitar servicio del proveedor dependiendo de los servicios que ofree",
-            onTap: () => print("Hola"),
+            onTap: () => {
+                Get.toNamed(AppRoutes.CREATEPROCESO,arguments: _.r)
+                },
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

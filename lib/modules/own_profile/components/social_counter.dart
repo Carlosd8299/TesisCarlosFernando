@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class SocialCounter extends StatelessWidget {
   final bool isEmpresa;
+  final String firstTitle;
+  final String secondTitle;
+  final String thirdTitle;
 
-  const SocialCounter({Key key, this.isEmpresa = false}) : super(key: key);
+  const SocialCounter({Key key, this.isEmpresa = false,@required this.firstTitle,@required this.secondTitle, @required this.thirdTitle}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return !isEmpresa
@@ -21,7 +24,7 @@ class SocialCounter extends StatelessWidget {
                           color: Colors.black),
                     ),
                     Text(
-                      "data",
+                      this.firstTitle.trim(),
                       style: TextStyle(fontSize: 20),
                     )
                   ],
@@ -35,7 +38,7 @@ class SocialCounter extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    Text("data", style: TextStyle(fontSize: 20))
+                    Text(this.secondTitle.trim(), style: TextStyle(fontSize: 20))
                   ],
                 ),
                 Column(
@@ -47,7 +50,7 @@ class SocialCounter extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    Text("data", style: TextStyle(fontSize: 20))
+                    Text(this.thirdTitle.trim(), style: TextStyle(fontSize: 20))
                   ],
                 ),
               ],
@@ -66,7 +69,7 @@ class SocialCounter extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    Text("data", style: TextStyle(fontSize: 20))
+                    Text(this.firstTitle.trim(), style: TextStyle(fontSize: 20))
                   ],
                 ),
                 Column(
@@ -78,7 +81,7 @@ class SocialCounter extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    Text("data", style: TextStyle(fontSize: 20))
+                    Text(this.secondTitle.trim(), style: TextStyle(fontSize: 20))
                   ],
                 ),
                 Column(
@@ -90,7 +93,7 @@ class SocialCounter extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
-                    Text("data", style: TextStyle(fontSize: 20))
+                    Text(this.thirdTitle.trim(), style: TextStyle(fontSize: 20))
                   ],
                 ),
               ],

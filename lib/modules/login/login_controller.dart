@@ -28,17 +28,6 @@ class LoginController extends GetxController {
     try {
       final RequestToken token = await _authRepository.authWithLogin(
           username: _username, password: _password);
-      Get.dialog(AlertDialog(
-        title: Text("Token creado"),
-        content: Text(token.token),
-        actions: [
-          FlatButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("ok"))
-        ],
-      ));
       await _localAuthRepository.setSession(token);
       Get.offNamed(AppRoutes.HOME, arguments: token);
     } catch (e) {
