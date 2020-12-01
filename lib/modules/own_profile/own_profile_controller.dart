@@ -7,9 +7,6 @@ import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 class OwnProfileController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
 
-
-
-
   int idtipo;
   RequestToken r;
   Proveedores _proveedores = Proveedores();
@@ -20,16 +17,16 @@ class OwnProfileController extends GetxController {
   get getR => r;
   get getIdTipo => idtipo;
 
-
   Future<void> loadSolicitante() async {
     final data = await _apirepo.getListSolicitante();
     if (data != null) {
       _solicitante = data.data[0];
       update(['cabeceraSolcitante']);
-    }else{
+    } else {
       throw Error();
     }
   }
+
   @override
   void onInit() async {
     r = Get.arguments as RequestToken;

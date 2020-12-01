@@ -19,7 +19,12 @@ class ListOfertaScreen extends StatelessWidget {
                 padding: EdgeInsets.all(20),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
-                    return SingleItemOferta();
+                    return SingleItemOferta(
+                      presupuesto: 0,
+                      estado: "",
+                      isProveedor: false,
+                      titulo: "",
+                    );
                   }, childCount: 10),
                 ))
           ],
