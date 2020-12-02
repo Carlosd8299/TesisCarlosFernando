@@ -364,7 +364,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Fecha de fin de recepción de oferta",
+                          "Fecha de fin de recepción de oferta:",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(proceso.fechaFin.toString()),
