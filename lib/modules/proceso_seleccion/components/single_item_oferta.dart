@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itsuit/data/models/Solicitudes.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/modules/proceso_seleccion/oferta_detail/detail_oferta_screen.dart';
 import 'package:itsuit/utils/constants.dart';
 
@@ -9,7 +9,7 @@ class SingleItemOferta extends StatelessWidget {
   final String titulo;
   final String estado;
   final int presupuesto;
-  final Solicitud solicitud;
+  final ProcesoSeleccion solicitud;
 
   const SingleItemOferta(
       {Key key,
