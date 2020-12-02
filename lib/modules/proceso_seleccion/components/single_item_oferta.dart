@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itsuit/data/models/Solicitudes.dart';
 import 'package:itsuit/modules/proceso_seleccion/oferta_detail/detail_oferta_screen.dart';
 import 'package:itsuit/utils/constants.dart';
 
 class SingleItemOferta extends StatelessWidget {
-final bool isProveedor;
-final String titulo;
-final String estado;
-final int presupuesto;
+  final bool isProveedor;
+  final String titulo;
+  final String estado;
+  final int presupuesto;
+  final Solicitud solicitud;
 
-  const SingleItemOferta({Key key, @required this.isProveedor, @required this.titulo, @required this.estado, @required this.presupuesto}) : super(key: key);
+  const SingleItemOferta(
+      {Key key,
+      @required this.isProveedor,
+      @required this.titulo,
+      @required this.estado,
+      @required this.presupuesto,
+      this.solicitud})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(DetailOfertaScreen()),
+      onTap: () => {Get.to(DetailOfertaScreen(), arguments: this.solicitud)},
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12.0),
         padding: EdgeInsets.symmetric(horizontal: 12.0),
@@ -59,7 +68,7 @@ final int presupuesto;
                 ),
                 SizedBox(width: 10),
                 Text(
-                  '\$'+this.presupuesto.toString(),
+                  '\$' + this.presupuesto.toString(),
                 ),
               ],
             ),

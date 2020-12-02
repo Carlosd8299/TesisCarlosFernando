@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/modules/home/home_controller.dart';
-import 'package:itsuit/modules/own_profile/own_profile_screen.dart';
 import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
@@ -16,7 +15,9 @@ class HomeScreen extends StatelessWidget {
             HomeProveedor(
               usuario: _.r.usuario,
             ),
-            HomeEmpresa(usuario: _.r.usuario,),
+            HomeEmpresa(
+              usuario: _.r.usuario,
+            ),
             _.r.usuario.idTipoUsuario));
   }
 }
@@ -53,9 +54,10 @@ class HomeProveedor extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.portrait, color: Constants.bluedark),
                 title: Text('Ir al perfil',
-                    style:TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
                 onTap: () {
-                  Get.toNamed(AppRoutes.OWNPROFILE,arguments: _.r);
+                  Get.toNamed(AppRoutes.OWNPROFILE, arguments: _.r);
                 },
               ),
               FlatButton(
@@ -113,21 +115,25 @@ class HomeProveedor extends StatelessWidget {
                           return ListView.builder(
                               controller: ScrollController(),
                               scrollDirection: Axis.horizontal,
-                              itemCount: null ==
-                                      _.getListSolicitudesRecomendadas
-                                  ? 0
-                                  : _.getListSolicitudesRecomendadas.length,
+                              itemCount:
+                                  null == _.getListSolicitudesRecomendadas
+                                      ? 0
+                                      : _.getListSolicitudesRecomendadas.length,
                               itemBuilder: (context, index) {
                                 final data =
                                     _.getListSolicitudesRecomendadas[index];
                                 return CardRecomended(
-                                    isProveedor: true,
-                                    empresa: data.nombreTercero,
-                                    tituloCard: data.titulo,
-                                    fecha: "Fecha de la solicitud: "+(new DateFormat("yyyy-MM-dd").format(data.fechaSolicitud)).toString(),
-                                    arrayCategorias: [data.nombreServicio],);
+                                  isProveedor: true,
+                                  empresa: data.nombreTercero,
+                                  tituloCard: data.titulo,
+                                  fecha: "Fecha de la solicitud: " +
+                                      (new DateFormat("yyyy-MM-dd")
+                                              .format(data.fechaSolicitud))
+                                          .toString(),
+                                  arrayCategorias: [data.nombreServicio],
+                                );
                               });
-                          })),
+                        })),
                 SizedBox(
                   height: 20,
                 ),
@@ -182,54 +188,56 @@ class HomeEmpresa extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scafolKey = GlobalKey();
     return GetBuilder<HomeController>(
-        builder: (_) => Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            CircleAvatar(
-              radius: 70,
-              backgroundColor: Colors.black,
-              child: CircleAvatar(
-                radius: 65,
-                backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+      builder: (_) => Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              CircleAvatar(
+                radius: 70,
+                backgroundColor: Colors.black,
+                child: CircleAvatar(
+                  radius: 65,
+                  backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-                child: Text(
-                  this.usuario.nombre,
-                  style: Theme.of(context).textTheme.headline1,
-                )),
-            ListTile(
-              leading: Icon(Icons.portrait, color: Constants.bluedark),
-              title: Text('Ir al perfil',style:TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
-              onTap: () {
-                Get.toNamed(AppRoutes.OWNPROFILE,arguments: _.r);
-              },
-            ),
-            FlatButton(
-              onPressed: () => _.logOut(),
-              child: Text("Cerrar Sesion"),
-              color: Colors.red,
-            )
-          ],
-        ),
-      ),
-      key: _scafolKey,
-      appBar: PreferredSize(
-          child: AppBar(
-            elevation: 0.0,
-            shadowColor: null,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () => _scafolKey.currentState.openDrawer()),
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                  child: Text(
+                this.usuario.nombre,
+                style: Theme.of(context).textTheme.headline1,
+              )),
+              ListTile(
+                leading: Icon(Icons.portrait, color: Constants.bluedark),
+                title: Text('Ir al perfil',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
+                onTap: () {
+                  Get.toNamed(AppRoutes.OWNPROFILE, arguments: _.r);
+                },
+              ),
+              FlatButton(
+                onPressed: () => _.logOut(),
+                child: Text("Cerrar Sesion"),
+                color: Colors.red,
+              )
+            ],
           ),
-          preferredSize: Size.fromHeight(50)),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        ),
+        key: _scafolKey,
+        appBar: PreferredSize(
+            child: AppBar(
+              elevation: 0.0,
+              shadowColor: null,
+              backgroundColor: Colors.transparent,
+              leading: IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () => _scafolKey.currentState.openDrawer()),
+            ),
+            preferredSize: Size.fromHeight(50)),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,36 +264,35 @@ class HomeEmpresa extends StatelessWidget {
                   height: 20,
                 ),
                 Container(
-                  height: 200,
-                  width: 500,
-                  child: GetBuilder<HomeController>(
-                      id: 'recommendedProveedor',
-                      builder: (_) {
-                        return ListView.builder(
-                            controller: ScrollController(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: null ==
-                                _.getListProveedores
-                                ? 0
-                                : _.getListProveedores.length,
-                            itemBuilder: (context, index) {
-                              final data =
-                              _.getListProveedores[index];
+                    height: 200,
+                    width: 500,
+                    child: GetBuilder<HomeController>(
+                        id: 'recommendedProveedor',
+                        builder: (_) {
+                          return ListView.builder(
+                              controller: ScrollController(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: null == _.getListProveedores
+                                  ? 0
+                                  : _.getListProveedores.length,
+                              itemBuilder: (context, index) {
+                                final data = _.getListProveedores[index];
 
-                              return GestureDetector(
-                                child: CardRecomended(
-                                  isProveedor: false,
-                                  empresa: data.nombreProveedor,
-                                  tituloCard: '',
-                                  fecha: "Fecha de registro : "+data.fechaRegistro,
-                                  arrayCategorias: data.categorias,),
-                                onTap: () => Scaffold
-                                    .of(context)
-                                    .showSnackBar(SnackBar(content: Text(data.id.toString()))),
-                              );
-                            });
-                      })
-                ),
+                                return GestureDetector(
+                                  child: CardRecomended(
+                                    isProveedor: false,
+                                    empresa: data.nombreProveedor,
+                                    tituloCard: '',
+                                    fecha: "Fecha de registro : " +
+                                        data.fechaRegistro,
+                                    arrayCategorias: data.categorias,
+                                  ),
+                                  onTap: () => Scaffold.of(context)
+                                      .showSnackBar(SnackBar(
+                                          content: Text(data.id.toString()))),
+                                );
+                              });
+                        })),
                 SizedBox(
                   height: 20,
                 ),
@@ -305,19 +312,16 @@ class HomeEmpresa extends StatelessWidget {
                         return ListView.builder(
                             controller: ScrollController(),
                             scrollDirection: Axis.horizontal,
-                            itemCount: null ==
-                                _.getProveedorCategorias
+                            itemCount: null == _.getProveedorCategorias
                                 ? 0
                                 : _.getProveedorCategorias.length,
                             itemBuilder: (context, index) {
                               return SmallCard(
-                                  title: _
-                                      .getProveedorCategorias[index]
-                                      .categoria,
-                                  subtitle:
-                                  _.getProveedorCategorias[index]
-                                      .cantidad
-                                      .toString() +
+                                  title:
+                                      _.getProveedorCategorias[index].categoria,
+                                  subtitle: _.getProveedorCategorias[index]
+                                          .cantidad
+                                          .toString() +
                                       " proveedores",
                                   color: Constants.colorlist[28]);
                             });

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/login/login_controller.dart';
-import 'package:itsuit/modules/sign_up/sign_up_screen.dart';
 import 'package:itsuit/widgets/curve_shape.dart';
 import 'package:itsuit/widgets/widgets.dart';
 import 'components/fade_animation.dart';

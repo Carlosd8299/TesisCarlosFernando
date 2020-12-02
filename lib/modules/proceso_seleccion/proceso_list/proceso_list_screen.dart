@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
-import 'package:itsuit/modules/proceso_seleccion/components/single_item_oferta.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/single_item_procesoSeleccion.dart';
 import 'package:itsuit/modules/proceso_seleccion/proceso_list/proceso_list_controller.dart';
-import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/widgets/sliverAppBar.dart';
 
 class ProcesoListScreen extends StatelessWidget {

@@ -6,7 +6,9 @@ class FadeAnimation extends StatelessWidget {
   final Widget child;
 
   FadeAnimation(
+    // ignore: invalid_required_positional_param
     @required this.delay,
+    // ignore: invalid_required_positional_param
     @required this.child,
   );
 

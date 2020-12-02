@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
@@ -87,6 +85,7 @@ class Apis {
     }
   }
 
+// ignore: non_constant_identifier_names
   Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero) async {
     try {
       RequestToken rq = await localAuth.getSession();
@@ -171,13 +170,20 @@ class Apis {
   }
 
   Future<bool> crearSolicitud(
+      // ignore: non_constant_identifier_names
       id_servicio,
+      // ignore: non_constant_identifier_names
       id_tercero,
+      // ignore: non_constant_identifier_names
       id_tipo_solicitud,
       titulo,
+      // ignore: non_constant_identifier_names
       fecha_solicitud,
+      // ignore: non_constant_identifier_names
       fecha_fin,
+      // ignore: non_constant_identifier_names
       fecha_seleccion,
+      // ignore: non_constant_identifier_names
       fecha_fin_seleccion,
       presupuesto,
       descripcion,

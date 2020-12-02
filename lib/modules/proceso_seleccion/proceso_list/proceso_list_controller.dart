@@ -24,4 +24,10 @@ class ProcesoListController extends GetxController {
     this.loadSolcitudes();
     super.onInit();
   }
+
+  @override
+  void onClose() {
+    print("onClose");
+    super.onClose();
+  }
 }
