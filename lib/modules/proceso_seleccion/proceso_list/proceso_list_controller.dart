@@ -12,9 +12,9 @@ class ProcesoListController extends GetxController {
   List<Solicitud> get getListSolicitudes => _ListSolcitudes;
 
   void loadSolcitudes() async {
-   final data =  await _apirepo.getSolicitudes(r.usuario.idTercero);
-   _ListSolcitudes = data.data;
-   update(['listaSolicitudes']);
+    final data = await _apirepo.getSolicitudes(r.usuario.idTercero);
+    _ListSolcitudes = data.data;
+    update(['listaSolicitudes']);
   }
 
   @override
@@ -22,5 +22,11 @@ class ProcesoListController extends GetxController {
     r = Get.arguments as RequestToken;
     this.loadSolcitudes();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    print("onClose");
+    super.onClose();
   }
 }

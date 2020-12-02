@@ -47,7 +47,7 @@ class _CreateProcesoSeleccionScreenState
                           function: (value) => {_.onTituloChanged(value)},
                           label: 'Titulo de la oferta',
                           hint:
-                          'Ej: Desarrollo de aplicacion movil a la medida para inventario'))),
+                              'Ej: Desarrollo de aplicacion movil a la medida para inventario'))),
               //Drop para seleccionar la categoria de la oferta
               SliverToBoxAdapter(
                   child: Container(
@@ -58,25 +58,24 @@ class _CreateProcesoSeleccionScreenState
                   border: Border.all(
                       color: Colors.grey, style: BorderStyle.solid, width: 1.0),
                 ),
-                    child: GetBuilder<CreateProcesoController>(
-                        id: 'categorias',
-                        builder: (_) =>
-                            DropdownButton(
-                  underline: Container(
-                    decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide.none),
-                    ),
-                  ),
-                  hint: Text("Seleccione una categoria"),
-                              value: 1,
-                              items: _.getCategorias.map((Categoria value) {
-                                return new DropdownMenuItem(
-                                  value: value.id,
-                                  child: new Text(value.nombre),
-                                );
-                              }).toList(),
-                              onChanged: (value) => _.onCategoriaChanged(value),
-                            )),
+                child: GetBuilder<CreateProcesoController>(
+                    id: 'categorias',
+                    builder: (_) => DropdownButton(
+                          underline: Container(
+                            decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide.none),
+                            ),
+                          ),
+                          hint: Text("Seleccione una categoria"),
+                          value: _.getCategoria,
+                          items: _.getCategorias.map((Categoria value) {
+                            return new DropdownMenuItem(
+                              value: value.id,
+                              child: new Text(value.nombre),
+                            );
+                          }).toList(),
+                          onChanged: (value) => _.onCategoriaChanged(value),
+                        )),
               )),
               //Drop para seleccionar servicio
               SliverToBoxAdapter(
@@ -88,28 +87,24 @@ class _CreateProcesoSeleccionScreenState
                   border: Border.all(
                       color: Colors.grey, style: BorderStyle.solid, width: 1.0),
                 ),
-                    child: GetBuilder<CreateProcesoController>(
-                        id: 'servicios',
-                        builder: (_) =>
-                            DropdownButton(
-                              hint: Text("Selecciones una servicio"),
-                              underline: Container(
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide.none),
-                                ),
-                              ),
-                              value: 1,
-                              items: _.getServicios.map((Servicio value) {
-                                return new DropdownMenuItem(
-                                  value: value.id,
-                                  child: new Text(value.nombre),
-                                );
-                              }).toList(),
-                              onChanged: (value) =>
-                              {
-                                _.onServicioChanged(value)
-                              },
-                            )),
+                child: GetBuilder<CreateProcesoController>(
+                    id: 'servicios',
+                    builder: (_) => DropdownButton(
+                          hint: Text("Selecciones una servicio"),
+                          underline: Container(
+                            decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide.none),
+                            ),
+                          ),
+                          value: _.getServicio,
+                          items: _.getServicios.map((Servicio value) {
+                            return new DropdownMenuItem(
+                              value: value.id,
+                              child: new Text(value.nombre),
+                            );
+                          }).toList(),
+                          onChanged: (value) => {_.onServicioChanged(value)},
+                        )),
               )),
               //DropDown para seleccionar la categoria
               SliverPadding(
@@ -120,7 +115,7 @@ class _CreateProcesoSeleccionScreenState
                           maxlines: 4,
                           label: 'Descripción del servicio',
                           hint:
-                          'Explicacion detallada del servicio o producto requerido'))),
+                              'Explicacion detallada del servicio o producto requerido'))),
               //Texbox TYC
               SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -130,7 +125,7 @@ class _CreateProcesoSeleccionScreenState
                           maxlines: 3,
                           label: 'Condiciones y criterios',
                           hint:
-                          'Ej: Experiencia del proveedor en ejeuciones parecidas, condiciones para el cumplimiento de la solicitud y demas condiciones especificas'))),
+                              'Ej: Experiencia del proveedor en ejeuciones parecidas, condiciones para el cumplimiento de la solicitud y demas condiciones especificas'))),
               //Texbox presupuesto inicial
               SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -139,7 +134,7 @@ class _CreateProcesoSeleccionScreenState
                           function: (value) => _.onPresupuestoChanged(value),
                           label: 'Presupuesto inicial',
                           hint:
-                          'Ej: Desarrollo de aplicacion movil a la medida para inventario'))),
+                              'Ej: Desarrollo de aplicacion movil a la medida para inventario'))),
 
               //Date picker Fecha de inicio de ejecucion:
               SliverToBoxAdapter(
@@ -157,10 +152,8 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.greenflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context, (value) =>
-                          {
-                            _.onFechaSolicitudChanged(value)
-                          });
+                          _selectDate(context,
+                              (value) => {_.onFechaSolicitudChanged(value)});
                         },
                       ),
                     ),
@@ -191,10 +184,8 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.yellowflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context, (value) =>
-                          {
-                            _.onFechaSolicitudChanged(value)
-                          });
+                          _selectDate(context,
+                              (value) => {_.onFechaSolicitudChanged(value)});
                         },
                       ),
                     ),
@@ -227,10 +218,8 @@ class _CreateProcesoSeleccionScreenState
                           color: Colors.blue,
                         ),
                         onPressed: () {
-                          _selectDate(context, (value) =>
-                          {
-                            _.onfechaFinRecepcionChanged(value)
-                          });
+                          _selectDate(context,
+                              (value) => {_.onfechaFinRecepcionChanged(value)});
                         },
                       ),
                     ),
@@ -262,10 +251,8 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.bluedark,
                         ),
                         onPressed: () {
-                          _selectDate(context, (value) =>
-                          {
-                            _.onfechaSeleccionChanged(value)
-                          });
+                          _selectDate(context,
+                              (value) => {_.onfechaSeleccionChanged(value)});
                         },
                       ),
                     ),
@@ -298,10 +285,8 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.redflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context, (value) =>
-                          {
-                            _.onfechafinSeleccionChanged(value)
-                          });
+                          _selectDate(context,
+                              (value) => {_.onfechafinSeleccionChanged(value)});
                         },
                       ),
                     ),
@@ -322,7 +307,8 @@ class _CreateProcesoSeleccionScreenState
           ),
           bottomNavigationBar: ButtomBottomNav(
               titleButton: "Subir proceso de selección",
-              instruction: "Abre el proceso de selección y recibe ofertas, elige un ganador",
+              instruction:
+                  "Abre el proceso de selección y recibe ofertas, elige un ganador",
               onTap: () => _.crearSolicitud(),
               icon: Icon(Icons.arrow_forward),
               color: Colors.black)),

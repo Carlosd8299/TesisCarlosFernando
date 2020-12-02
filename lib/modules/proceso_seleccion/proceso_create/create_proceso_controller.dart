@@ -19,6 +19,8 @@ class CreateProcesoController extends GetxController {
   String criterios;
   int idCategoria;
   int idServicio;
+  int _selectedIndexCategoria = 1;
+  int _selectedIndexServicio = 1;
   double presupuestos;
   List<Categoria> _categorias = [];
   List<Servicio> _servicios = [];
@@ -27,9 +29,9 @@ class CreateProcesoController extends GetxController {
 
   List<Servicio> get getServicios => _servicios;
 
-  Categoria get getCategoria => Categoria();
+  int get getCategoria => this._selectedIndexCategoria;
 
-  Servicio get getServicio => Servicio();
+  int get getServicio => this._selectedIndexServicio;
 
   Future<void> loadCategorias() async {
     final data = await _apirepo.getCategorias();
@@ -52,6 +54,7 @@ class CreateProcesoController extends GetxController {
   Future<void> onCategoriaChanged(int value) async {
     if (value != null) {
       this.idCategoria = value;
+      this._selectedIndexCategoria = value;
       await this.loadServicios();
     }
   }
@@ -59,6 +62,7 @@ class CreateProcesoController extends GetxController {
   void onServicioChanged(int value) {
     if (value != null) {
       this.idServicio = value;
+      this._selectedIndexServicio = value;
     }
   }
 
@@ -125,7 +129,7 @@ class CreateProcesoController extends GetxController {
             FlatButton(
                 onPressed: () {
                   Get.back();
-                  Get.offNamed( AppRoutes.OWNPROFILE, arguments: r);
+                  Get.offNamed(AppRoutes.OWNPROFILE, arguments: r);
                 },
                 child: Text("OK"))
           ]));

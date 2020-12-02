@@ -12,9 +12,9 @@ import '../../screens.dart';
 class DetailOfertaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      builder: (controller) => Switcher(
-          DetailOfertaScreenProveedor(), DetailOfertaScreenEmpresa(), 1),
+    return GetBuilder<DetailOfertaController>(
+      builder: (_) => Switcher(DetailOfertaScreenProveedor(),
+          DetailOfertaScreenEmpresa(), _.r.usuario.idTipoUsuario),
     );
   }
 }

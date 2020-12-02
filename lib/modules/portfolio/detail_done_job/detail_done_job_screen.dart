@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_controller.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
