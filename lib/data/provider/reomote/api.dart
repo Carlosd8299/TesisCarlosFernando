@@ -7,7 +7,7 @@ import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
-import 'package:itsuit/data/models/Solicitudes.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/request_token.dart';
@@ -72,13 +72,13 @@ class Apis {
     }
   }
 
-  Future<Solicitudes> getListSolicitudes() async {
+  Future<ProcesosDeSeleccion> getListSolicitudes() async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
         final Response response = await _dio.get('Solicitud/recomendado');
-        return Solicitudes.fromJson(response.data);
+        return ProcesosDeSeleccion.fromJson(response.data);
       } else {
         return throw Error();
       }
@@ -86,13 +86,15 @@ class Apis {
       return null;
     }
   }
-  Future<Solicitudes> getSolicitudes(int id_tercero) async {
+
+  Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio.get('Solicitud', queryParameters: {"id_tercero": id_tercero});
-        return Solicitudes.fromJson(response.data);
+        final Response response = await _dio
+            .get('Solicitud', queryParameters: {"id_tercero": id_tercero});
+        return ProcesosDeSeleccion.fromJson(response.data);
       } else {
         return throw Error();
       }
@@ -100,6 +102,7 @@ class Apis {
       return null;
     }
   }
+
   Future<Proveedores> getListProveedores([bool idUser]) async {
     try {
       RequestToken rq = await localAuth.getSession();
@@ -138,12 +141,11 @@ class Apis {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio.get(
-            'Servicio', queryParameters: {"idCategoria": idCategoria});
+        final Response response = await _dio
+            .get('Servicio', queryParameters: {"idCategoria": idCategoria});
         final Servicios p = Servicios.fromJson(response.data);
         return p;
-      }
-      else {
+      } else {
         return throw Error();
       }
     } catch (e) {
@@ -160,8 +162,7 @@ class Apis {
             queryParameters: {"idUsuario": (idUser != null) ? idUser : false});
         final Solicitante p = Solicitante.fromJson(response.data);
         return p;
-      }
-      else {
+      } else {
         return throw Error();
       }
     } catch (e) {
@@ -169,9 +170,18 @@ class Apis {
     }
   }
 
-  Future<bool> crearSolicitud(id_servicio, id_tercero, id_tipo_solicitud,
-      titulo, fecha_solicitud, fecha_fin, fecha_seleccion, fecha_fin_seleccion,
-      presupuesto, descripcion, criterio) async {
+  Future<bool> crearSolicitud(
+      id_servicio,
+      id_tercero,
+      id_tipo_solicitud,
+      titulo,
+      fecha_solicitud,
+      fecha_fin,
+      fecha_seleccion,
+      fecha_fin_seleccion,
+      presupuesto,
+      descripcion,
+      criterio) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -179,12 +189,12 @@ class Apis {
         final Response response = await _dio.post('Solicitud', data: {
           "id_servicio": id_servicio,
           "id_tercero": id_tercero,
-          "id_tipo_solicitud":id_tipo_solicitud,
+          "id_tipo_solicitud": id_tipo_solicitud,
           "titulo": titulo,
           "fecha_solicitud": fecha_solicitud,
           "fecha_fin": fecha_fin,
           "fecha_seleccion": fecha_seleccion,
-          "fecha_fin_seleccion":fecha_fin_seleccion,
+          "fecha_fin_seleccion": fecha_fin_seleccion,
           "presupuesto": presupuesto,
           "descripcion": descripcion,
           "criterio": criterio
@@ -194,8 +204,7 @@ class Apis {
         } else {
           return true;
         }
-      }
-      else {
+      } else {
         throw Error();
       }
     } catch (e) {

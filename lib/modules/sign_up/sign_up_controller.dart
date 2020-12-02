@@ -56,9 +56,9 @@ class SignUpController extends GetxController {
   List<ActividadEco> _actividades = [];
   List<Ciudade> _ciudades = [];
 
-  List<Regimen> get getRegimenes => _regimenes;
-  List<ActividadEco> get getActividades => _actividades;
-  List<Ciudade> get getCiudades => _ciudades;
+  List<Regimen> get getRegimenes => this._regimenes;
+  List<ActividadEco> get getActividades => this._actividades;
+  List<Ciudade> get getCiudades => this._ciudades;
 
   int get getRegimenTributario => this._selected_tributario;
   int get getTipoDocumentoProveedor => this._tipo_documento_proveedor;
@@ -226,7 +226,6 @@ class SignUpController extends GetxController {
     final data = await _apirepo.getActEco();
     _actividades = data.data;
   }
-
 
   void onProveedorSubmit() {
     if (_tyc_proveedor &&

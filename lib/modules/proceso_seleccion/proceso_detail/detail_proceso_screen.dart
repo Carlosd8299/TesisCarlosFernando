@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/single_oferta_proveedor.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
@@ -39,21 +40,41 @@ class DetailProcesoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (_) => Switcher(
-          DetailProcesoScreenProveedor(), DetailProcesoScreenEmpresa(), 2),
+          DetailProcesoScreenProveedor(
+            proceso: _.getProceso,
+          ),
+          DetailProcesoScreenEmpresa(
+            proceso: _.getProceso,
+          ),
+          _.getTipoUsuario),
     );
   }
 }
 
 class DetailProcesoScreenProveedor extends StatelessWidget {
+  final ProcesoSeleccion proceso;
+
+  const DetailProcesoScreenProveedor({Key key, @required this.proceso})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (controller) => Scaffold(
+        appBar: PreferredSize(
+            child: AppBar(
+              elevation: 0.0,
+              shadowColor: null,
+              backgroundColor: Colors.transparent,
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () => Get.back()),
+            ),
+            preferredSize: Size.fromHeight(50)),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //Foto del perfil del proveedor
                 SafeArea(
@@ -66,19 +87,19 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                     ),
                   ),
                 ),
+                //
+                SizedBox(height: 10),
                 //Titulo e introudccion de la oferta
                 Column(
                   children: [
                     Text(
-                      " Montaje de red en recursos humanos",
+                      proceso.titulo,
                       style: Theme.of(context).textTheme.headline1,
                       textAlign: TextAlign.center,
                     ),
+                    Text(proceso.nombreTercero),
                     Text(
-                      "Nombre de la empresa",
-                    ),
-                    Text(
-                      "Inicia" + "Fecha en la que inicia",
+                      proceso.fechaSolicitud.toLocal().toString(),
                     ),
                   ],
                 ),
@@ -91,7 +112,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                  proceso.descripcion,
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -102,7 +123,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                  proceso.criterio,
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -113,7 +134,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+                  proceso.presupuesto.toString(),
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -135,7 +156,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
+                          proceso.fechaSolicitud.toString(),
                         ),
                       ],
                     ),
@@ -147,9 +168,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                           "Fecha de fin de recepción de oferta",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          "10-10-2020",
-                        ),
+                        Text(proceso.fechaFin.toString()),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -161,7 +180,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
+                          proceso.fechaSeleccion.toString(),
                         ),
                       ],
                     ),
@@ -174,20 +193,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dias maximos para recibir contraoferta:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "3",
+                          proceso.fechaFinSeleccion.toString(),
                         ),
                       ],
                     ),
@@ -245,15 +251,29 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
 }
 
 class DetailProcesoScreenEmpresa extends StatelessWidget {
+  final ProcesoSeleccion proceso;
+
+  const DetailProcesoScreenEmpresa({Key key, @required this.proceso})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
       builder: (controller) => Scaffold(
+        appBar: PreferredSize(
+            child: AppBar(
+              elevation: 0.0,
+              shadowColor: null,
+              backgroundColor: Colors.transparent,
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () => Get.back()),
+            ),
+            preferredSize: Size.fromHeight(50)),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //Foto del perfil del proveedor
                 SafeArea(
@@ -266,22 +286,23 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                     ),
                   ),
                 ),
+                //
+                SizedBox(height: 10),
                 //Titulo e introudccion de la oferta
                 Column(
                   children: [
                     Text(
-                      " Montaje de red en recursos humanos",
+                      proceso.titulo,
                       style: Theme.of(context).textTheme.headline1,
                       textAlign: TextAlign.center,
                     ),
+                    Text(proceso.nombreTercero),
                     Text(
-                      "Nombre de la empresa",
-                    ),
-                    Text(
-                      "Inicia" + "Fecha en la que inicia",
+                      proceso.fechaSolicitud.toLocal().toString(),
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20),
                 //Descripcion de la oferta
                 Text(
@@ -290,7 +311,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                  proceso.descripcion,
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -301,7 +322,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                  proceso.criterio,
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -312,7 +333,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+                  proceso.presupuesto.toString(),
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 20),
@@ -334,7 +355,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
+                          proceso.fechaSolicitud.toString(),
                         ),
                       ],
                     ),
@@ -346,9 +367,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                           "Fecha de fin de recepción de oferta",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          "10-10-2020",
-                        ),
+                        Text(proceso.fechaFin.toString()),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -360,7 +379,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
+                          proceso.fechaSeleccion.toString(),
                         ),
                       ],
                     ),
@@ -373,20 +392,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "10-10-2020",
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dias maximos para recibir contraoferta:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "3",
+                          proceso.fechaFinSeleccion.toString(),
                         ),
                       ],
                     ),

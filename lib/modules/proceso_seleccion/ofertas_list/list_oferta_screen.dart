@@ -12,9 +12,9 @@ class ListOfertaScreen extends StatelessWidget {
       builder: (controller) => Scaffold(
         body: CustomScrollView(
           slivers: [
-            CustomAppBar(
+            /*  CustomAppBar(
                 title: 'Ofertas + Nombre dle proceso de seleccion',
-                onTap: () => Get.to(DetailProcesoScreenEmpresa())),
+                onTap: () => Get.to(DetailProcesoScreenEmpresa())), */
             SliverPadding(
                 padding: EdgeInsets.all(20),
                 sliver: SliverList(

@@ -4,7 +4,7 @@ import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
-import 'package:itsuit/data/models/Solicitudes.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/ubicaciones.dart';
@@ -19,7 +19,8 @@ class ApiRepository {
   Future<SolicitudCategorias> getListCantSolicitudesCategoria() =>
       _apis.getListCantSolicitudesCategoria();
 
-  Future<Solicitudes> getListSolicitudes() => _apis.getListSolicitudes();
+  Future<ProcesosDeSeleccion> getListSolicitudes() =>
+      _apis.getListSolicitudes();
 
   Future<Proveedores> getListProveedores([bool idUser]) =>
       _apis.getListProveedores(idUser);
@@ -60,5 +61,6 @@ class ApiRepository {
           descripcion,
           criterio);
 
-  Future<Solicitudes> getSolicitudes(int id_tercero) => _apis.getSolicitudes(id_tercero);
+  Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero) =>
+      _apis.getSolicitudes(id_tercero);
 }

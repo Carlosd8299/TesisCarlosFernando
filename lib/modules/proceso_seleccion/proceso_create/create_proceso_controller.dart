@@ -23,9 +23,9 @@ class CreateProcesoController extends GetxController {
   List<Categoria> _categorias = [];
   List<Servicio> _servicios = [];
 
-  List<Categoria> get getCategorias => _categorias;
+  List<Categoria> get getCategorias => this._categorias;
 
-  List<Servicio> get getServicios => _servicios;
+  List<Servicio> get getServicios => this._servicios;
 
   Categoria get getCategoria => Categoria();
 
@@ -125,7 +125,7 @@ class CreateProcesoController extends GetxController {
             FlatButton(
                 onPressed: () {
                   Get.back();
-                  Get.offNamed( AppRoutes.OWNPROFILE, arguments: r);
+                  Get.offNamed(AppRoutes.OWNPROFILE, arguments: r);
                 },
                 child: Text("OK"))
           ]));
