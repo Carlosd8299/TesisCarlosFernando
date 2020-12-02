@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
@@ -216,5 +217,38 @@ class Apis {
     } catch (e) {
       return false;
     }
+  }
+
+  Future<bool> createCupon(
+    @required int idTercero,
+    @required int idServicio,
+    @required String fechaInicio,
+    @required String fechaFin,
+    @required String titulo,
+    @required String descripcion,
+    @required int precioNormal,
+    @required int precioDescuento,
+    @required int porcentajeDescuento,
+    @required int estado,
+  ) async {
+    try {
+      final Response response = await _dio.post('cupon', data: {
+        "id_tercero": idTercero,
+        "id_servicio": idServicio,
+        "fecha_inicio": fechaInicio,
+        "fecha_fin": fechaFin,
+        "titulo": titulo,
+        "descripcion": descripcion,
+        "precio_normal": precioNormal,
+        "precio_descuento": precioDescuento,
+        "porcentaje_descuento": porcentajeDescuento,
+        "estado": estado
+      });
+      if (response.statusCode != 200) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {}
   }
 }

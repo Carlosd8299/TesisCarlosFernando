@@ -9,6 +9,7 @@ import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/ubicaciones.dart';
 import 'package:itsuit/data/provider/reomote/api.dart';
+import 'package:flutter/material.dart';
 
 class ApiRepository {
   final Apis _apis = Get.find<Apis>();
@@ -70,4 +71,17 @@ class ApiRepository {
 
   Future<ProcesosDeSeleccion> getSolicitudes(int idTercero) =>
       _apis.getSolicitudes(idTercero);
+  Future<bool> createCupon(
+    @required int idTercero,
+    @required int idServicio,
+    @required String fechaInicio,
+    @required String fechaFin,
+    @required String titulo,
+    @required String descripcion,
+    @required int precioNormal,
+    @required int precioDescuento,
+    @required int porcentajeDescuento,
+  ) =>
+      _apis.createCupon(idTercero, idServicio, fechaInicio, fechaFin, titulo,
+          descripcion, precioNormal, precioDescuento, porcentajeDescuento, 1);
 }
