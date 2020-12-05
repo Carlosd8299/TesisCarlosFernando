@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
@@ -8,8 +9,10 @@ import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
+import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/request_token.dart';
+import 'package:itsuit/data/models/trabajo_realizado.dart';
 import 'package:itsuit/data/models/ubicaciones.dart';
 import 'package:itsuit/data/provider/local/local_auth.dart';
 
@@ -219,8 +222,52 @@ class Apis {
     }
   }
 
+  //QueryParameters
+  Future<List<Cupon>> consultarTodosCuponesProveedor(
+    @required int idProveedor,
+  ) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/cupon',
+            queryParameters: {"id_tercero": idProveedor.toString()});
+        return (response.data['data'] as List)
+            .map((e) => Cupon.fromJson(e))
+            .toList();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+//queryParameters
+  Future<Cupon> consultarCuponesEspecifico(
+    @required int idProveedor,
+    @required int idCupon,
+  ) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/cupon',
+            queryParameters: {
+              "id_tercero": idProveedor.toString(),
+              "id": idCupon
+            });
+        return Cupon.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<bool> createCupon(
-    @required int idTercero,
+    @required int idProveedor,
     @required int idServicio,
     @required String fechaInicio,
     @required String fechaFin,
@@ -232,8 +279,8 @@ class Apis {
     @required int estado,
   ) async {
     try {
-      final Response response = await _dio.post('cupon', data: {
-        "id_tercero": idTercero,
+      final Response response = await _dio.post('proveedor/cupon', data: {
+        "id_proveedor": idProveedor,
         "id_servicio": idServicio,
         "fecha_inicio": fechaInicio,
         "fecha_fin": fechaFin,
@@ -249,6 +296,181 @@ class Apis {
       } else {
         return true;
       }
-    } catch (e) {}
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> updateDesactivarCupon(@required int idCupon) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.put(
+            'proveedor/cupon/estado/' + idCupon.toString(),
+            data: {"estado": 0});
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      printError();
+      return false;
+    }
+  }
+
+  Future<bool> updatActivarCupon(@required int idCupon) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.put(
+            'proveedor/cupon/estado/' + idCupon.toString(),
+            data: {"estado": 1});
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      printError();
+      return false;
+    }
+  }
+
+  //
+  Future<bool> updateCupon(
+      @required int idCupon,
+      @required int idProveedor,
+      @required int idServicio,
+      @required String fechaInicio,
+      @required String fechaFin,
+      @required String titulo,
+      @required String descripcion,
+      @required int precioNormal,
+      @required int precioDescuento,
+      @required int porcentajeDescuento,
+      @required int estado) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response =
+            await _dio.post('proveedor/cupon/' + idCupon.toString(), data: {
+          "id_proveedor": idProveedor,
+          "id_servicio": idServicio,
+          "fecha_inicio": fechaInicio,
+          "fecha_fin": fechaFin,
+          "titulo": titulo,
+          "descripcion": descripcion,
+          "precio_normal": precioNormal,
+          "porcentaje_descuento": porcentajeDescuento,
+          "estado": estado
+        });
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        throw Error();
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> createTrabajoRealizado(
+      @required int idProveedor,
+      @required int id,
+      @required int idCategoria,
+      @required String descripcion,
+      @required String nombreTrabajo,
+      @required String fechaInicio,
+      @required String fechaFin,
+      @required int estado) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio
+            .put('proveedor/portafolio/' + idProveedor.toString(), data: {
+          "portafolio": {
+            "id": id,
+            "id_categoria": idCategoria,
+            "descripcion": descripcion,
+            "nombre_trabajo": nombreTrabajo,
+            "fecha_inicio": fechaInicio,
+            "fecha_fin": fechaFin,
+            "estado": estado
+          }
+        });
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<List<TrabajoRealizado>> consultarPortafolio(
+      @required int idProveedor) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/protafolio',
+            queryParameters: {'id': idProveedor.toString()});
+        return (response.data['data'] as List)
+            .map((e) => TrabajoRealizado.fromJson(e))
+            .toList();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<List<Categoria>> consultarCategoriasProveedor(
+      @required int idProveedor) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/categorias',
+            queryParameters: {'id': idProveedor.toString()});
+        return (response.data['data'] as List)
+            .map((e) => Categoria.fromJson(e))
+            .toList();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<bool> addCategoriasProveedor(@required int idProveedor) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/categorias',
+            queryParameters: {'id': idProveedor.toString()});
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      printError();
+      return false;
+    }
   }
 }

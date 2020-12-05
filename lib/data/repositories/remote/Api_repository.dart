@@ -71,6 +71,7 @@ class ApiRepository {
 
   Future<ProcesosDeSeleccion> getSolicitudes(int idTercero) =>
       _apis.getSolicitudes(idTercero);
+
   Future<bool> createCupon(
     @required int idTercero,
     @required int idServicio,
@@ -84,4 +85,16 @@ class ApiRepository {
   ) =>
       _apis.createCupon(idTercero, idServicio, fechaInicio, fechaFin, titulo,
           descripcion, precioNormal, precioDescuento, porcentajeDescuento, 1);
+
+  Future<bool> createTrabajoRealizado(
+    @required int idProveedor,
+    @required int idPortafolio,
+    @required int idCategoria,
+    @required String descripcion,
+    @required String nombreTrabajo,
+    @required String fechaInicio,
+    @required String fechaFin,
+  ) =>
+      _apis.createTrabajoRealizado(idPortafolio, idProveedor, idCategoria,
+          descripcion, nombreTrabajo, fechaInicio, fechaFin, 1);
 }

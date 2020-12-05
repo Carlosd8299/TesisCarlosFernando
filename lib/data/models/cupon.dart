@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class Cupon {
   Cupon({
-    @required this.idTercero,
+    @required this.idCategoria,
+    @required this.nombreCategoria,
     @required this.idServicio,
+    @required this.nombreServicio,
+    @required this.titulo,
     @required this.fechaInicio,
     @required this.fechaFin,
-    @required this.titulo,
     @required this.descripcion,
     @required this.precioNormal,
     @required this.precioDescuento,
@@ -14,11 +16,13 @@ class Cupon {
     @required this.estado,
   });
 
-  final int idTercero;
+  final int idCategoria;
+  final String nombreCategoria;
   final int idServicio;
-  final String fechaInicio;
-  final String fechaFin;
+  final String nombreServicio;
   final String titulo;
+  final DateTime fechaInicio;
+  final DateTime fechaFin;
   final String descripcion;
   final int precioNormal;
   final int precioDescuento;
@@ -26,11 +30,13 @@ class Cupon {
   final int estado;
 
   factory Cupon.fromJson(Map<String, dynamic> json) => Cupon(
-        idTercero: json["id_tercero"],
+        idCategoria: json["id_categoria"],
+        nombreCategoria: json["nombre_categoria"],
         idServicio: json["id_servicio"],
-        fechaInicio: json["fecha_inicio"],
-        fechaFin: json["fecha_fin"],
+        nombreServicio: json["nombre_servicio"],
         titulo: json["titulo"],
+        fechaInicio: DateTime.parse(json["fecha_inicio"]),
+        fechaFin: DateTime.parse(json["fecha_fin"]),
         descripcion: json["descripcion"],
         precioNormal: json["precio_normal"],
         precioDescuento: json["precio_descuento"],
@@ -39,11 +45,13 @@ class Cupon {
       );
 
   Map<String, dynamic> toJson() => {
-        "id_tercero": idTercero,
+        "id_categoria": idCategoria,
+        "nombre_categoria": nombreCategoria,
         "id_servicio": idServicio,
-        "fecha_inicio": fechaInicio,
-        "fecha_fin": fechaFin,
+        "nombre_servicio": nombreServicio,
         "titulo": titulo,
+        "fecha_inicio": fechaInicio.toIso8601String(),
+        "fecha_fin": fechaFin.toIso8601String(),
         "descripcion": descripcion,
         "precio_normal": precioNormal,
         "precio_descuento": precioDescuento,
