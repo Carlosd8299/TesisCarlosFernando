@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:meta/meta_meta.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
@@ -309,7 +309,11 @@ class Apis {
         final Response response = await _dio.put(
             'proveedor/cupon/estado/' + idCupon.toString(),
             data: {"estado": 0});
-        return true;
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
       } else {
         return false;
       }
@@ -327,7 +331,11 @@ class Apis {
         final Response response = await _dio.put(
             'proveedor/cupon/estado/' + idCupon.toString(),
             data: {"estado": 1});
-        return true;
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
       } else {
         return false;
       }
@@ -453,13 +461,83 @@ class Apis {
     }
   }
 
-  Future<bool> addCategoriasProveedor(@required int idProveedor) async {
+  Future<bool> addCategoriasProveedor(@required int idProveedor,
+      @required int idcategoria, @required int estado) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio.get('proveedor/categorias',
-            queryParameters: {'id': idProveedor.toString()});
+        final Response response = await _dio
+            .put('proveedor/categorias' + idProveedor.toString(), data: {
+          "categorias": {"id_categoria": idcategoria, "estado": estado}
+        });
+
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      printError();
+      return false;
+    }
+  }
+
+  Future<Proveedor> getProveedor(@required idProveedor) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor',
+            queryParameters: {"idUsuario": true, "id": idProveedor});
+        final Proveedor p = Proveedor.fromJson(response.data);
+        return p;
+      } else {
+        return throw Error();
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<bool> updateProveedor(
+    @required int idProveedor,
+    @required int idTipoDocumento,
+    @required int idRegimenTributario,
+    @required int idCiudad,
+    @required String dni,
+    @required String digito,
+    @required String nombreProveedor,
+    @required String fechaRegistro,
+    @required String email,
+    @required String telefono,
+    @required String celular,
+    @required String direccion,
+    @required int tiempoExperiencia,
+  ) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio
+            .put('proveedor/proveedor' + idProveedor.toString(), data: {
+          "id_tipo_documento": idTipoDocumento,
+          "id_regimen_tributario": idRegimenTributario,
+          "id_ciudad": idCiudad,
+          "dni": dni,
+          "nombre_tercero": nombreProveedor,
+          "fecha_registro": fechaRegistro.toString(),
+          "email": email,
+          "telefono": telefono,
+          "celular": celular,
+          "direccion": direccion,
+          "tiempo_experiencia": tiempoExperiencia,
+          "estado": 1
+        });
+
         if (response.statusCode != 200) {
           return false;
         } else {
