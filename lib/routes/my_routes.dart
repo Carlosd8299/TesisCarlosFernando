@@ -1,5 +1,3 @@
-import 'package:itsuit/modules/on_boarding/on_boarding_screen.dart';
-
 class AppRoutes {
   static const SPLASH = "splash";
   //

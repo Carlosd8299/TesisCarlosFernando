@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
@@ -30,7 +32,8 @@ class OwnProfileProveedor extends StatelessWidget {
               //Foto de perfil
               SafeArea(
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+                  backgroundImage: MemoryImage(
+                      base64Decode(controller.r.usuario.profileImage)),
                   radius: 80,
                 ),
               ),
@@ -131,9 +134,8 @@ class OwnProfileEmpresa extends StatelessWidget {
               //Foto de perfil
               SafeArea(
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    Constants.linkEmpresaAvatar,
-                  ),
+                  backgroundImage:
+                      MemoryImage(base64Decode(_.r.usuario.profileImage)),
                   radius: 80,
                 ),
               ),

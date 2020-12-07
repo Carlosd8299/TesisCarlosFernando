@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/single_oferta_proveedor.dart';
+import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
@@ -80,9 +83,8 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                 SafeArea(
                   child: Center(
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        Constants.linkProviderAvatar,
-                      ),
+                      backgroundImage:
+                          MemoryImage(base64Decode(proceso.profileImage)),
                       radius: 80,
                     ),
                   ),
@@ -279,9 +281,8 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                 SafeArea(
                   child: Center(
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        Constants.linkProviderAvatar,
-                      ),
+                      backgroundImage:
+                          MemoryImage(base64Decode(proceso.profileImage)),
                       radius: 80,
                     ),
                   ),
@@ -398,41 +399,6 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                //Inicio de los proveedores que han aplicado
-                Text(
-                  "Proveedores que han Aplicado",
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                  ],
-                )
               ],
             ),
           ),
@@ -441,7 +407,7 @@ class DetailProcesoScreenEmpresa extends StatelessWidget {
             titleButton: "Ver ofertas",
             instruction:
                 "Revisa las ofertas realizadas por los proveedores en este proceso de seleccion",
-            onTap: () => Get.to(ListOfertaScreen()),
+            onTap: () => Get.toNamed(AppRoutes.LISTOFERTAS, arguments: proceso),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

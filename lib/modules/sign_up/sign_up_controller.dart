@@ -14,13 +14,21 @@ class SignUpController extends GetxController {
 
   // ignore: non_constant_identifier_names
   String _nombre_empresa,
+      // ignore: non_constant_identifier_names
       _correo_empresa,
+      // ignore: non_constant_identifier_names
       _direccion_empresa,
+      // ignore: non_constant_identifier_names
       _password_empresa,
+      // ignore: non_constant_identifier_names
       _confirm_password_empresa,
+      // ignore: non_constant_identifier_names
       _phone_empresa,
+      // ignore: non_constant_identifier_names
       _id_empresa,
+      // ignore: non_constant_identifier_names
       _year_registro_empresa,
+      // ignore: non_constant_identifier_names
       _cell_empresa;
   //TYC
   bool _tyc_empresa = true;

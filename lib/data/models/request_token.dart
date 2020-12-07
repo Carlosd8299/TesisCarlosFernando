@@ -36,6 +36,7 @@ class Usuario {
     @required this.dni,
     @required this.telefono,
     @required this.estado,
+    @required this.profileImage,
   });
 
   final int id;
@@ -47,18 +48,19 @@ class Usuario {
   final String dni;
   final String telefono;
   final int estado;
+  final String profileImage;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json["id"],
-        idTercero: json["id_tercero"],
-        idTipoUsuario: json["id_tipo_usuario"],
-        tipoUsuario: json["tipo_usuario"],
-        email: json["email"],
-        nombre: json["nombre"],
-        dni: json["dni"],
-        telefono: json["telefono"],
-        estado: json["estado"],
-      );
+      id: json["id"],
+      idTercero: json["id_tercero"],
+      idTipoUsuario: json["id_tipo_usuario"],
+      tipoUsuario: json["tipo_usuario"],
+      email: json["email"],
+      nombre: json["nombre"],
+      dni: json["dni"],
+      telefono: json["telefono"],
+      estado: json["estado"],
+      profileImage: json["profileImage"].trim());
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -70,5 +72,6 @@ class Usuario {
         "dni": dni,
         "telefono": telefono,
         "estado": estado,
+        "profileImage": profileImage
       };
 }

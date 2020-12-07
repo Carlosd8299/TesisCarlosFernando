@@ -1,28 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itsuit/data/models/Proceso_Seleccion.dart';
-import 'package:itsuit/modules/proceso_seleccion/oferta_detail/detail_oferta_screen.dart';
+import 'package:itsuit/data/models/Ofertas.dart';
+import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 
 class SingleItemOferta extends StatelessWidget {
   final bool isProveedor;
-  final String titulo;
-  final String estado;
-  final int presupuesto;
-  final ProcesoSeleccion solicitud;
+  final Oferta oferta;
 
   const SingleItemOferta(
-      {Key key,
-      @required this.isProveedor,
-      @required this.titulo,
-      @required this.estado,
-      @required this.presupuesto,
-      this.solicitud})
+      {Key key, @required this.isProveedor, @required this.oferta})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {Get.to(DetailOfertaScreen(), arguments: this.solicitud)},
+      onTap: () => {
+        Get.toNamed(AppRoutes.DETAILOFERTA,
+            arguments: [this.oferta, (this.isProveedor) ? 1 : 2])
+      },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12.0),
         padding: EdgeInsets.symmetric(horizontal: 12.0),
@@ -36,14 +33,14 @@ class SingleItemOferta extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              Constants.linkProviderAvatar,
+            Image.memory(
+              base64Decode(oferta.profileImage.trim()),
               height: 100,
               width: 200,
               fit: BoxFit.cover,
             ),
             Text(
-              this.titulo,
+              this.oferta.titulo,
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Row(
@@ -55,7 +52,7 @@ class SingleItemOferta extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  this.estado,
+                  this.oferta.nombreEstado,
                 ),
               ],
             ),
@@ -68,7 +65,7 @@ class SingleItemOferta extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  '\$' + this.presupuesto.toString(),
+                  '\$' + this.oferta.valor.toString(),
                 ),
               ],
             ),

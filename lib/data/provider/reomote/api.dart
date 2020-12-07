@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
+import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
@@ -23,6 +23,16 @@ class Apis {
       final Response response = await _dio.get('RegimenTributario');
       return RegimenTributario.fromJson(response.data);
     } catch (e) {}
+  }
+
+  Future<bool> cambioEstadoOferta(int idOferta, int estado) async {
+    try {
+      await _dio.put(
+          'Solicitud/respuesta/estado/${idOferta.toString()}/${estado.toString()}');
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   // ignore: missing_return
@@ -170,6 +180,23 @@ class Apis {
     }
   }
 
+  Future<Ofertas> getListOfertas(int idSolicitud) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('Solicitud/respuesta',
+            queryParameters: {"id_solicitud": idSolicitud});
+        final Ofertas p = Ofertas.fromJson(response.data);
+        return p;
+      } else {
+        return throw Error();
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<bool> crearSolicitud(
       // ignore: non_constant_identifier_names
       id_servicio,
@@ -220,16 +247,16 @@ class Apis {
   }
 
   Future<bool> createCupon(
-    @required int idTercero,
-    @required int idServicio,
-    @required String fechaInicio,
-    @required String fechaFin,
-    @required String titulo,
-    @required String descripcion,
-    @required int precioNormal,
-    @required int precioDescuento,
-    @required int porcentajeDescuento,
-    @required int estado,
+    int idTercero,
+    int idServicio,
+    String fechaInicio,
+    String fechaFin,
+    String titulo,
+    String descripcion,
+    int precioNormal,
+    int precioDescuento,
+    int porcentajeDescuento,
+    int estado,
   ) async {
     try {
       final Response response = await _dio.post('cupon', data: {
@@ -249,6 +276,29 @@ class Apis {
       } else {
         return true;
       }
-    } catch (e) {}
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> createContraOferta(
+      int idOferta, String fecha, int plazo, String descripcion) async {
+    try {
+      final Response response =
+          await _dio.post('solicitud/contraoferta', data: {
+        "id_respuesta": idOferta,
+        "fecha": fecha,
+        "plazo": plazo,
+        "descripcion": descripcion,
+        "estado": 1
+      });
+      if (response.statusCode != 200) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
+      return false;
+    }
   }
 }

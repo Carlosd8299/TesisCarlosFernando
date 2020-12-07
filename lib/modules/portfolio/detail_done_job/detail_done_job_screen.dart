@@ -18,6 +18,7 @@ class DetailsDoneJobScreen extends StatelessWidget {
 class DetailsDoneJobProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     double height = MediaQuery.of(context).size.height;
     return GetBuilder<DetailsDoneJobController>(
       builder: (controller) => Scaffold(

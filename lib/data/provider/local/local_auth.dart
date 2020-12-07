@@ -18,21 +18,26 @@ class LocalAuth {
   }
 
   Future<RequestToken> getSession() async {
-    final String data = await _storage.read(key: KEY);
-    if (data != null) {
-      final RequestToken requestToken = RequestToken.fromJson(jsonDecode(data));
-      final String token = requestToken.token;
-      final parts = token.split('.');
-      final payload =
-          json.decode(ascii.decode(base64.decode(base64.normalize(parts[1]))));
-      if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
-          .isAfter(DateTime.now())) {
-        return requestToken;
-      } else {
-        Get.offNamed(AppRoutes.LOGIN);
-        return null;
+    try {
+      final String data = await _storage.read(key: KEY);
+      if (data != null) {
+        final RequestToken requestToken =
+            RequestToken.fromJson(jsonDecode(data));
+        final String token = requestToken.token;
+        final parts = token.split('.');
+        final payload = json
+            .decode(ascii.decode(base64.decode(base64.normalize(parts[1]))));
+        if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
+            .isAfter(DateTime.now())) {
+          return requestToken;
+        } else {
+          Get.offNamed(AppRoutes.LOGIN);
+          return null;
+        }
       }
+      return null;
+    } catch (err) {
+      return null;
     }
-    return null;
   }
 }

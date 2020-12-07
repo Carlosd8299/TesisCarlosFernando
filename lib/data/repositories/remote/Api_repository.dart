@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
+import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
@@ -9,7 +10,6 @@ import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/ubicaciones.dart';
 import 'package:itsuit/data/provider/reomote/api.dart';
-import 'package:flutter/material.dart';
 
 class ApiRepository {
   final Apis _apis = Get.find<Apis>();
@@ -36,6 +36,11 @@ class ApiRepository {
 
   Future<Servicios> getServicios(int idCategoria) =>
       _apis.getServicios(idCategoria);
+
+  Future<Ofertas> getListOfertas(int idSolicitud) =>
+      _apis.getListOfertas(idSolicitud);
+  Future<bool> cambioEstadoOferta(int idOferta, int estado) =>
+      _apis.cambioEstadoOferta(idOferta, estado);
 
   Future<bool> crearSolicitud(
           // ignore: non_constant_identifier_names
@@ -71,17 +76,26 @@ class ApiRepository {
 
   Future<ProcesosDeSeleccion> getSolicitudes(int idTercero) =>
       _apis.getSolicitudes(idTercero);
+
   Future<bool> createCupon(
-    @required int idTercero,
-    @required int idServicio,
-    @required String fechaInicio,
-    @required String fechaFin,
-    @required String titulo,
-    @required String descripcion,
-    @required int precioNormal,
-    @required int precioDescuento,
-    @required int porcentajeDescuento,
+    int idTercero,
+    int idServicio,
+    String fechaInicio,
+    String fechaFin,
+    String titulo,
+    String descripcion,
+    int precioNormal,
+    int precioDescuento,
+    int porcentajeDescuento,
   ) =>
       _apis.createCupon(idTercero, idServicio, fechaInicio, fechaFin, titulo,
           descripcion, precioNormal, precioDescuento, porcentajeDescuento, 1);
+
+  Future<bool> createContraOferta(
+    int idOferta,
+    String fecha,
+    int plazo,
+    String descripcion,
+  ) =>
+      _apis.createContraOferta(idOferta, fecha, plazo, descripcion);
 }
