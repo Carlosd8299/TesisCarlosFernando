@@ -6,7 +6,7 @@ import 'package:itsuit/data/provider/local/local_auth.dart';
 
 class AuthApi {
   final Dio _dio = Get.find<Dio>();
-final LocalAuth localAuth = new LocalAuth();
+  final LocalAuth localAuth = new LocalAuth();
 
   // ignore: missing_return
   Future<RequestToken> validateWithLogin(
@@ -19,7 +19,6 @@ final LocalAuth localAuth = new LocalAuth();
           "password": password,
         },
       );
-      await localAuth.setSession(RequestToken.fromJson(response.data));
       return RequestToken.fromJson(response.data);
     } catch (e) {
       printError();

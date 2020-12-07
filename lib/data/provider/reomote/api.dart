@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta_meta.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
+import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
@@ -26,6 +27,16 @@ class Apis {
       final Response response = await _dio.get('RegimenTributario');
       return RegimenTributario.fromJson(response.data);
     } catch (e) {}
+  }
+
+  Future<bool> cambioEstadoOferta(int idOferta, int estado) async {
+    try {
+      await _dio.put(
+          'Solicitud/respuesta/estado/${idOferta.toString()}/${estado.toString()}');
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   // ignore: missing_return
@@ -164,6 +175,23 @@ class Apis {
         final Response response = await _dio.get('empresasolicitante',
             queryParameters: {"idUsuario": (idUser != null) ? idUser : false});
         final Solicitante p = Solicitante.fromJson(response.data);
+        return p;
+      } else {
+        return throw Error();
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<Ofertas> getListOfertas(int idSolicitud) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('Solicitud/respuesta',
+            queryParameters: {"id_solicitud": idSolicitud});
+        final Ofertas p = Ofertas.fromJson(response.data);
         return p;
       } else {
         return throw Error();
@@ -548,6 +576,27 @@ class Apis {
       }
     } catch (e) {
       printError();
+      return false;
+    }
+  }
+
+  Future<bool> createContraOferta(
+      int idOferta, String fecha, int plazo, String descripcion) async {
+    try {
+      final Response response =
+          await _dio.post('solicitud/contraoferta', data: {
+        "id_respuesta": idOferta,
+        "fecha": fecha,
+        "plazo": plazo,
+        "descripcion": descripcion,
+        "estado": 1
+      });
+      if (response.statusCode != 200) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
       return false;
     }
   }

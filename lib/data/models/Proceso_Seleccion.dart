@@ -45,6 +45,7 @@ class ProcesoSeleccion {
     this.criterio,
     this.nombreEstado,
     this.estado,
+    this.profileImage,
   });
 
   int id;
@@ -66,6 +67,7 @@ class ProcesoSeleccion {
   int estado;
   String criterio;
   String nombreEstado;
+  String profileImage;
 
   factory ProcesoSeleccion.fromJson(Map<String, dynamic> json) =>
       ProcesoSeleccion(
@@ -88,6 +90,7 @@ class ProcesoSeleccion {
         criterio: json["criterio"],
         estado: json["estado"],
         nombreEstado: json["nombre_estado"],
+        profileImage: json['profileImage'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -114,5 +117,6 @@ class ProcesoSeleccion {
         "criterio": criterio,
         "nombre_estado": nombreEstado,
         "estado": estado,
+        "profileImage": profileImage
       };
 }

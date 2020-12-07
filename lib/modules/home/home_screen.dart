@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -40,7 +42,8 @@ class HomeProveedor extends StatelessWidget {
                 backgroundColor: Colors.black,
                 child: CircleAvatar(
                   radius: 65,
-                  backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+                  backgroundImage: MemoryImage(
+                      base64Decode(this.usuario.profileImage.trim())),
                 ),
               ),
               SizedBox(
@@ -197,7 +200,8 @@ class HomeEmpresa extends StatelessWidget {
                 backgroundColor: Colors.black,
                 child: CircleAvatar(
                   radius: 65,
-                  backgroundImage: NetworkImage(Constants.linkProviderAvatar),
+                  backgroundImage: MemoryImage(
+                      base64Decode(this.usuario.profileImage.trim())),
                 ),
               ),
               SizedBox(
