@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itsuit/data/models/Categorias.dart';
+import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/modules/cupones/create_cupon/create_cupon_controller.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/button_navigator.dart';
@@ -33,6 +37,7 @@ class CreateCuponScreen extends StatelessWidget {
                               ),
                               hintText: 'Titulo del cupon',
                             ),
+                            onChanged: (value) => _.onTituloCuponChanged(value),
                           ),
                         )),
                     // Dropdown para Servicio asociado
@@ -54,9 +59,15 @@ class CreateCuponScreen extends StatelessWidget {
                             border: Border(bottom: BorderSide.none),
                           ),
                         ),
-                        items: null,
-                        onChanged: null,
+                        items: _.getServicios.map((Servicio value) {
+                          return new DropdownMenuItem(
+                            value: value.id,
+                            child: new Text(value.nombre),
+                          );
+                        }).toList(),
+                        onChanged: (value) => _.onServicioChanged(value),
                         hint: Text("Servicio asociado"),
+                        value: _.getSelectedServicio,
                       ),
                     )),
                     // Dropdown para Categoria de servicio
@@ -78,8 +89,14 @@ class CreateCuponScreen extends StatelessWidget {
                             border: Border(bottom: BorderSide.none),
                           ),
                         ),
-                        items: null,
-                        onChanged: null,
+                        items: _.getCategorias.map((Categoria value) {
+                          return new DropdownMenuItem(
+                            value: value.id,
+                            child: new Text(value.nombre),
+                          );
+                        }).toList(),
+                        value: _.getSelectedCategoria,
+                        onChanged: (value) => _.onCategoriaChanged(value),
                         hint: Text("Categoria de servicio"),
                       ),
                     )),
@@ -102,6 +119,8 @@ class CreateCuponScreen extends StatelessWidget {
                               ),
                               hintText: 'Descripción del cupón',
                             ),
+                            onChanged: (value) =>
+                                _.onDescripCuponChanged(value),
                           ),
                         )),
                     // Campo de texto para Precio original
@@ -126,6 +145,7 @@ class CreateCuponScreen extends StatelessWidget {
                               ),
                               hintText: 'Precio original',
                             ),
+                            onChanged: (value) => _.onPrecioCuponChanged(value),
                           ),
                         )),
                     // Campo de texto para Porcentaje descuento
@@ -150,6 +170,8 @@ class CreateCuponScreen extends StatelessWidget {
                               ),
                               hintText: 'Porcentaje descuento',
                             ),
+                            onChanged: (value) =>
+                                _.onPorcentajeCuponChanged(value),
                           ),
                         )),
                     // Campo de texto para Fecha límite de redención
@@ -174,6 +196,8 @@ class CreateCuponScreen extends StatelessWidget {
                               ),
                               hintText: 'Fecha límite de redención',
                             ),
+                            onChanged: (value) =>
+                                _.onFechaLimiteCuponChanged(value),
                           ),
                         )),
                   ],
