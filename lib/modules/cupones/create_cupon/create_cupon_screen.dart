@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
@@ -18,7 +16,7 @@ class CreateCuponScreen extends StatelessWidget {
               child: Scaffold(
                 body: CustomScrollView(
                   slivers: [
-                    CustomAppBar(title: "Crear cupon", onTap: () {}),
+                    CustomAppBar(title: "Crear cupon", onTap: () => Get.back()),
                     // Campo de texto para el titulo del cupon
                     SliverPadding(
                         padding:

@@ -135,18 +135,17 @@ class ApiRepository {
       _apis.consultarCuponesEspecifico(idProveedor, idCupon);
 // Crear cupon
   Future<bool> createCupon(
-    int idTercero,
+    int idProveedor,
     int idServicio,
     String fechaInicio,
     String fechaFin,
     String titulo,
     String descripcion,
-    int precioNormal,
-    int precioDescuento,
+    double precioNormal,
     int porcentajeDescuento,
   ) =>
-      _apis.createCupon(idTercero, idServicio, fechaInicio, fechaFin, titulo,
-          descripcion, precioNormal, precioDescuento, porcentajeDescuento, 1);
+      _apis.createCupon(idProveedor, idServicio, fechaInicio, fechaFin, titulo,
+          descripcion, precioNormal, porcentajeDescuento, 1);
 
   // Actualizar cupon
   Future<bool> actualizarCupon(

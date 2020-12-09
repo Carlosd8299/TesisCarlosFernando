@@ -24,7 +24,7 @@ class OwnProfileProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
-      builder: (controller) => Scaffold(
+      builder: (_) => Scaffold(
         backgroundColor: Constants.bluelight,
         body: SingleChildScrollView(
           child: Column(
@@ -32,8 +32,8 @@ class OwnProfileProveedor extends StatelessWidget {
               //Foto de perfil
               SafeArea(
                 child: CircleAvatar(
-                  backgroundImage: MemoryImage(
-                      base64Decode(controller.r.usuario.profileImage)),
+                  backgroundImage:
+                      MemoryImage(base64Decode(_.r.usuario.profileImage)),
                   radius: 80,
                 ),
               ),
@@ -74,13 +74,17 @@ class OwnProfileProveedor extends StatelessWidget {
                                   color: Constants.colorlist[0],
                                   label: "Mi cuponera",
                                   onTap: () {
-                                    Get.to(ListCuponScreen());
+                                    Get.toNamed(AppRoutes.LISTCUPON,
+                                        arguments: _.r);
                                   },
                                   icon: Icons.receipt),
                               CardButtonProfile(
                                   color: Constants.colorlist[1],
                                   label: "Mis procesos de seleccion",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.LISTPROCESO,
+                                        arguments: _.r);
+                                  },
                                   icon: Icons.low_priority)
                             ],
                           ),
@@ -90,7 +94,8 @@ class OwnProfileProveedor extends StatelessWidget {
                                   color: Constants.colorlist[2],
                                   label: "Mi Portafolio",
                                   onTap: () {
-                                    Get.to(ListDoneJobScreen());
+                                    Get.toNamed(AppRoutes.LISTDONEJOB,
+                                        arguments: _.r);
                                   },
                                   icon: Icons.card_travel),
                               CardButtonProfile(

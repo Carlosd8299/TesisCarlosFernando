@@ -301,8 +301,7 @@ class Apis {
     @required String fechaFin,
     @required String titulo,
     @required String descripcion,
-    @required int precioNormal,
-    @required int precioDescuento,
+    @required double precioNormal,
     @required int porcentajeDescuento,
     @required int estado,
   ) async {
@@ -315,7 +314,6 @@ class Apis {
         "titulo": titulo,
         "descripcion": descripcion,
         "precio_normal": precioNormal,
-        "precio_descuento": precioDescuento,
         "porcentaje_descuento": porcentajeDescuento,
         "estado": estado
       });

@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Servicios.dart';
+import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
+import 'package:flutter/material.dart';
 
 class CreateCuponController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
-
+  RequestToken _r;
   String _tituloCupon, _descripCupon, _fechaLimite;
   int _porcentajeCupon, _selectedIndexCategoria = 1, _selectedIndexServicio = 1;
   double _precioCupon;
@@ -73,8 +75,64 @@ class CreateCuponController extends GetxController {
     _fechaLimite = value;
   }
 
+  void onCreateCupon() async {
+    if (this._r.usuario.idTercero != null &&
+        this.idServicio != null &&
+        this._fechaLimite != null &&
+        this._tituloCupon != null &&
+        this._descripCupon != null &&
+        this._precioCupon != null &&
+        this._porcentajeCupon != null) {
+      bool res = await _apirepo.createCupon(
+          this._r.usuario.idTercero,
+          idServicio,
+          DateTime.now().toString(),
+          _fechaLimite,
+          _tituloCupon,
+          _descripCupon,
+          _precioCupon,
+          _porcentajeCupon);
+      if (res) {
+        Get.dialog(AlertDialog(
+            title: Text("Se ha creado el cupon"),
+            content: Text(
+                "El cupón ${this._tituloCupon} ahora esta desde ahora disponible hasta ${this._fechaLimite}"),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("ok"))
+            ]));
+      }
+      Get.dialog(AlertDialog(
+          title: Text("No ha sido posible creaar el cupón"),
+          content: Text("No fue posible crear al cupón ${this._tituloCupon}"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("ok"))
+          ]));
+    } else {
+      Get.dialog(AlertDialog(
+          title:
+              Text("No ha sido posible creaar el cupón ${this._tituloCupon}"),
+          content: Text("Por favor rellene todos los campos"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("ok"))
+          ]));
+    }
+  }
+
   @override
   void onInit() {
+    this._r = Get.arguments as RequestToken;
     this.loadCategorias();
     super.onInit();
   }

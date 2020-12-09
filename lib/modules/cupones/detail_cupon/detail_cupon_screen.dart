@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_controller.dart';
+import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
@@ -8,13 +10,17 @@ class DetailsCuponScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailsCuponController>(
-      builder: (_) =>
-          Switcher(DetailsCuponProveedor(), DetailsCuponEmpresa(), 1),
+      builder: (_) => Switcher(DetailsCuponProveedor(cupon: _.getCupon),
+          DetailsCuponEmpresa(cupon: _.getCupon), _.geTipoUser),
     );
   }
 }
 
 class DetailsCuponProveedor extends StatelessWidget {
+  final Cupon cupon;
+
+  const DetailsCuponProveedor({Key key, @required this.cupon})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailsCuponController>(
@@ -23,15 +29,15 @@ class DetailsCuponProveedor extends StatelessWidget {
           slivers: [
             //AppBar
             CustomAppBar(
-              onTap: () => print(""),
-              title: 'Nombre del cupon asociado',
+              onTap: () => Get.back(),
+              title: cupon.titulo,
             ),
             SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -41,14 +47,14 @@ class DetailsCuponProveedor extends StatelessWidget {
                         ),
                         SizedBox(width: 10),
                         Text(
-                          "20.000.000",
+                          cupon.precioNormal.toString(),
                           style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               fontSize: 17),
                         ),
                         SizedBox(width: 5),
                         Text(
-                          "10.000.000",
+                          cupon.precioDescuento.toString(),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17),
                         ),
@@ -71,7 +77,7 @@ class DetailsCuponProveedor extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Nombre del servicio asociado",
+                              cupon.nombreServicio,
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -95,7 +101,7 @@ class DetailsCuponProveedor extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Fecha limite de redencion",
+                              cupon.fechaFin.toString(),
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -114,12 +120,12 @@ class DetailsCuponProveedor extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Categorias asociadas",
+                              "Categoria asociada",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Categorias asociadas",
+                              cupon.nombreCategoria,
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -143,7 +149,7 @@ class DetailsCuponProveedor extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Porcentaje de descuento",
+                              cupon.porcentajeDescuento.toString() + "%",
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -151,18 +157,27 @@ class DetailsCuponProveedor extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          "Descripcion del cupon",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                        CircleGradientButton(
+                          icon: Icons.message,
                         ),
-                        Text(
-                          "Descripcion larga del cupon Descripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cupon",
-                          style: TextStyle(fontSize: 12),
-                          textAlign: TextAlign.justify,
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Descripcion del cupon",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            ),
+                            Text(
+                              cupon.descripcion,
+                              style: TextStyle(fontSize: 12),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
                         ),
                       ],
                     )
@@ -176,7 +191,7 @@ class DetailsCuponProveedor extends StatelessWidget {
             titleButton: "Eliminar cupon",
             instruction:
                 "Elimina el cupon, las personas que ya lo escogieron no se les eliminara.",
-            onTap: () => print("Hola"),
+            onTap: () => {},
             icon: Icon(Icons.delete),
             color: Colors.black),
       ),
@@ -185,6 +200,9 @@ class DetailsCuponProveedor extends StatelessWidget {
 }
 
 class DetailsCuponEmpresa extends StatelessWidget {
+  final Cupon cupon;
+
+  const DetailsCuponEmpresa({Key key, this.cupon}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailsCuponController>(
@@ -193,15 +211,15 @@ class DetailsCuponEmpresa extends StatelessWidget {
           slivers: [
             //AppBar
             CustomAppBar(
-              onTap: () => print(""),
-              title: 'Nombre del cupon asociado',
+              onTap: () => Get.back(),
+              title: cupon.titulo,
             ),
             SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -211,14 +229,14 @@ class DetailsCuponEmpresa extends StatelessWidget {
                         ),
                         SizedBox(width: 10),
                         Text(
-                          "20.000.000",
+                          cupon.precioNormal.toString(),
                           style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               fontSize: 17),
                         ),
                         SizedBox(width: 5),
                         Text(
-                          "10.000.000",
+                          cupon.precioDescuento.toString(),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 17),
                         ),
@@ -241,7 +259,7 @@ class DetailsCuponEmpresa extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Nombre del servicio asociado",
+                              cupon.nombreServicio,
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -265,7 +283,7 @@ class DetailsCuponEmpresa extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Fecha limite de redencion",
+                              cupon.fechaFin.toString(),
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -284,12 +302,12 @@ class DetailsCuponEmpresa extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Categorias asociadas",
+                              "Categoria asociada",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Categorias asociadas",
+                              cupon.nombreCategoria,
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -313,7 +331,7 @@ class DetailsCuponEmpresa extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(
-                              "Porcentaje de descuento",
+                              cupon.porcentajeDescuento.toString() + "%",
                               style: TextStyle(fontSize: 12),
                             ),
                           ],
@@ -321,18 +339,27 @@ class DetailsCuponEmpresa extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          "Descripcion del cupon",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 17),
+                        CircleGradientButton(
+                          icon: Icons.message,
                         ),
-                        Text(
-                          "Descripcion larga del cupon Descripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cuponDescripcion larga del cupon",
-                          style: TextStyle(fontSize: 12),
-                          textAlign: TextAlign.justify,
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Descripcion del cupon",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            ),
+                            Text(
+                              cupon.descripcion,
+                              style: TextStyle(fontSize: 12),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
                         ),
                       ],
                     )
