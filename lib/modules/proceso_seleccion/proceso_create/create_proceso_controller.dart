@@ -10,10 +10,12 @@ class CreateProcesoController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   RequestToken r;
   // variables del proceso
-  String fechaSolicitud;
-  String fechaFinRecepcion;
-  String fechaSeleccion;
-  String fechafinSeleccion;
+  String _fechaIncioEjecucion;
+  String _fechaFinEjecucion;
+  String _fechaIncioRecepcion;
+  String _fechaFinRecepcion;
+  String _fechaInicioSeleccion;
+  String _fechaFinSeleccion;
   String titulo;
   String descripcion;
   String criterios;
@@ -24,6 +26,13 @@ class CreateProcesoController extends GetxController {
   double presupuestos;
   List<Categoria> _categorias = [];
   List<Servicio> _servicios = [];
+
+  String get getFechaInicioEjecucion => _fechaIncioEjecucion;
+  String get getFechaFinEjecucion => _fechaFinEjecucion;
+  String get getFechaInicioRecepcion => _fechaIncioRecepcion;
+  String get getFechaFinRecepcion => _fechaFinRecepcion;
+  String get getFechaInicioSeleccion => _fechaInicioSeleccion;
+  String get getFechaFinSeleccion => _fechaFinSeleccion;
 
   List<Categoria> get getCategorias => this._categorias;
 
@@ -84,43 +93,44 @@ class CreateProcesoController extends GetxController {
     }
   }
 
-  void onFechaSolicitudChanged(value) {
+  void onFechaInicioEjecucionChanged(value) {
     if (value != null) {
-      this.fechaSolicitud = value.toString();
+      this._fechaIncioEjecucion = value.toString();
+    }
+  }
+
+  void onFechaFinEjecucionChanged(value) {
+    if (value != null) {
+      this._fechaFinEjecucion = value.toString();
+    }
+  }
+
+  void onfechaInicioRecepcionChanged(value) {
+    if (value != null) {
+      this._fechaIncioRecepcion = value.toString();
     }
   }
 
   void onfechaFinRecepcionChanged(value) {
     if (value != null) {
-      this.fechaFinRecepcion = value.toString();
+      this._fechaFinRecepcion = value.toString();
     }
   }
 
-  void onfechaSeleccionChanged(value) {
+  void onfechaInicioSeleccionChanged(value) {
     if (value != null) {
-      this.fechaSeleccion = value.toString();
+      this._fechaInicioSeleccion = value.toString();
     }
   }
 
-  void onfechafinSeleccionChanged(value) {
+  void onfechaFinSeleccionChanged(value) {
     if (value != null) {
-      this.fechafinSeleccion = value.toString();
+      this._fechaFinSeleccion = value.toString();
     }
   }
 
   void crearSolicitud() async {
-    bool res = await _apirepo.crearSolicitud(
-        this.idServicio,
-        r.usuario.idTercero,
-        1,
-        this.titulo,
-        this.fechaSolicitud,
-        this.fechaFinRecepcion,
-        this.fechaSeleccion,
-        this.fechafinSeleccion,
-        this.presupuestos,
-        this.descripcion,
-        this.criterios);
+    bool res;
     if (res) {
       Get.dialog(AlertDialog(
           title: Text("¡Proceso exitoso!"),

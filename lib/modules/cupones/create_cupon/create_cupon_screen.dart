@@ -23,6 +23,7 @@ class CreateCuponScreen extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         sliver: SliverToBoxAdapter(
                           child: TextField(
+                            autofocus: true,
                             keyboardType: TextInputType.name,
                             decoration: new InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -51,21 +52,24 @@ class CreateCuponScreen extends StatelessWidget {
                             style: BorderStyle.solid,
                             width: 1.0),
                       ),
-                      child: DropdownButton(
-                        underline: Container(
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide.none),
+                      child: GetBuilder<CreateCuponController>(
+                        id: 'servicios',
+                        builder: (controller) => DropdownButton(
+                          underline: Container(
+                            decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide.none),
+                            ),
                           ),
+                          items: _.getServicios.map((Servicio value) {
+                            return new DropdownMenuItem(
+                              value: value.id,
+                              child: new Text(value.nombre),
+                            );
+                          }).toList(),
+                          onChanged: (value) => _.onServicioChanged(value),
+                          hint: Text("Servicio asociado"),
+                          value: _.getSelectedServicio,
                         ),
-                        items: _.getServicios.map((Servicio value) {
-                          return new DropdownMenuItem(
-                            value: value.id,
-                            child: new Text(value.nombre),
-                          );
-                        }).toList(),
-                        onChanged: (value) => _.onServicioChanged(value),
-                        hint: Text("Servicio asociado"),
-                        value: _.getSelectedServicio,
                       ),
                     )),
                     // Dropdown para Categoria de servicio
@@ -81,21 +85,24 @@ class CreateCuponScreen extends StatelessWidget {
                             style: BorderStyle.solid,
                             width: 1.0),
                       ),
-                      child: DropdownButton(
-                        underline: Container(
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide.none),
+                      child: GetBuilder<CreateCuponController>(
+                        id: 'categorias',
+                        builder: (controller) => DropdownButton(
+                          underline: Container(
+                            decoration: BoxDecoration(
+                              border: Border(bottom: BorderSide.none),
+                            ),
                           ),
+                          items: _.getCategorias.map((Categoria value) {
+                            return new DropdownMenuItem(
+                              value: value.id,
+                              child: new Text(value.nombre),
+                            );
+                          }).toList(),
+                          value: _.getSelectedCategoria,
+                          onChanged: (value) => _.onCategoriaChanged(value),
+                          hint: Text("Categoria de servicio"),
                         ),
-                        items: _.getCategorias.map((Categoria value) {
-                          return new DropdownMenuItem(
-                            value: value.id,
-                            child: new Text(value.nombre),
-                          );
-                        }).toList(),
-                        value: _.getSelectedCategoria,
-                        onChanged: (value) => _.onCategoriaChanged(value),
-                        hint: Text("Categoria de servicio"),
                       ),
                     )),
                     // Campo de texto para la descripcion del cupon
@@ -104,6 +111,7 @@ class CreateCuponScreen extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         sliver: SliverToBoxAdapter(
                           child: TextField(
+                            autofocus: true,
                             maxLines: 4,
                             keyboardType: TextInputType.text,
                             decoration: new InputDecoration(
@@ -204,7 +212,7 @@ class CreateCuponScreen extends StatelessWidget {
                     titleButton: "Crear cupón ",
                     instruction:
                         "Crea cupónes para que tus clientes obtengan descuentos cuando te seleccionen de manera directa como proveedor",
-                    onTap: () => print("Hola"),
+                    onTap: () => _.onCreateCupon(),
                     icon: Icon(Icons.add),
                     color: Colors.black),
               ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/request_token.dart';
@@ -10,13 +12,15 @@ class ListCuponController extends GetxController {
   int _longitudLista;
 
   Future<void> getListCupones() async {
-    final data = await _apirepo
-        .consultarCuponesProveedor(_r.usuario.idTercero)
-        .then((value) {
-      _longitudLista = value.length;
-      _cupones = value;
-    });
-    update(['listacupones']);
+    try {
+      final data =
+          await _apirepo.consultarCuponesProveedor(_r.usuario.idTercero);
+      _cupones = data;
+      _longitudLista = data.length;
+      update(['listacupones']);
+    } on HttpException catch (e) {
+      printError();
+    }
   }
 
   RequestToken get getToken => _r;

@@ -16,19 +16,94 @@ class CreateProcesoSeleccionScreen extends StatefulWidget {
 
 class _CreateProcesoSeleccionScreenState
     extends State<CreateProcesoSeleccionScreen> {
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedFechaIncioEjecucion = DateTime.now();
+  DateTime selectedFechaFinEjecucion = DateTime.now();
+  DateTime selectedFechaIncioRecepcion = DateTime.now();
+  DateTime selectedFechaFinRecepcion = DateTime.now();
+  DateTime selectedFechaInicioSeleccion = DateTime.now();
+  DateTime selectedFechaFinSeleccion = DateTime.now();
 
-  _selectDate(BuildContext context, function) async {
+  _selectedFechaIncioEjecucion(BuildContext context, function) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Refer step 1
+      initialDate: selectedFechaIncioEjecucion, // Refer step 1
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedFechaIncioEjecucion)
       setState(() {
-        selectedDate = picked;
-        function(selectedDate);
+        selectedFechaIncioEjecucion = picked;
+        function(selectedFechaIncioEjecucion);
+      });
+  }
+
+  _selectedFechaFinEjecucion(BuildContext context, function) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFechaFinEjecucion, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFechaFinEjecucion)
+      setState(() {
+        selectedFechaFinEjecucion = picked;
+        function(selectedFechaFinEjecucion);
+      });
+  }
+
+  _selectedFechaIncioRecepcion(BuildContext context, function) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFechaIncioRecepcion, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFechaIncioRecepcion)
+      setState(() {
+        selectedFechaIncioRecepcion = picked;
+        function(selectedFechaIncioRecepcion);
+      });
+  }
+
+  _selectedFechaFinRecepcion(BuildContext context, function) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFechaFinRecepcion, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFechaFinRecepcion)
+      setState(() {
+        selectedFechaFinRecepcion = picked;
+        function(selectedFechaFinRecepcion);
+      });
+  }
+
+  _selectedFechaInicioSeleccion(BuildContext context, function) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFechaInicioSeleccion, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFechaInicioSeleccion)
+      setState(() {
+        selectedFechaInicioSeleccion = picked;
+        function(selectedFechaInicioSeleccion);
+      });
+  }
+
+  _selectedFechaFinSeleccion(BuildContext context, function) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedFechaFinSeleccion, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedFechaFinSeleccion)
+      setState(() {
+        selectedFechaFinSeleccion = picked;
+        function(selectedFechaFinSeleccion);
       });
   }
 
@@ -152,15 +227,50 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.greenflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context,
-                              (value) => {_.onFechaSolicitudChanged(value)});
+                          _selectedFechaIncioEjecucion(
+                              context,
+                              (value) =>
+                                  {_.onFechaInicioEjecucionChanged(value)});
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        "${selectedDate.toLocal()}".split(' ')[0],
+                        "${selectedFechaIncioEjecucion.toLocal()}"
+                            .split(' ')[0],
+                        style: TextStyle(
+                            color: Constants.greenflatbutton, fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //Date picker Fecha de fin de ejecucion:
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      leading: Text(
+                        "Fecha de fin de ejecucion:",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.calendar_today,
+                          color: Constants.greenflatbutton,
+                        ),
+                        onPressed: () {
+                          _selectedFechaFinEjecucion(context,
+                              (value) => {_.onFechaFinEjecucionChanged(value)});
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        "${selectedFechaFinEjecucion.toLocal()}".split(' ')[0],
                         style: TextStyle(
                             color: Constants.greenflatbutton, fontSize: 18),
                       ),
@@ -184,17 +294,20 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.yellowflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context,
-                              (value) => {_.onFechaSolicitudChanged(value)});
+                          _selectedFechaIncioRecepcion(
+                              context,
+                              (value) =>
+                                  {_.onfechaInicioRecepcionChanged(value)});
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        (_.fechaSolicitud != null)
-                            ? _.fechaSolicitud
-                            : "${selectedDate.toLocal()}".split(' ')[0],
+                        (_.getFechaFinRecepcion != null)
+                            ? _.getFechaFinRecepcion
+                            : "${selectedFechaIncioRecepcion.toLocal()}"
+                                .split(' ')[0],
                         style: TextStyle(
                             color: Constants.yellowflatbutton, fontSize: 18),
                       ),
@@ -218,7 +331,7 @@ class _CreateProcesoSeleccionScreenState
                           color: Colors.blue,
                         ),
                         onPressed: () {
-                          _selectDate(context,
+                          _selectedFechaFinRecepcion(context,
                               (value) => {_.onfechaFinRecepcionChanged(value)});
                         },
                       ),
@@ -226,9 +339,10 @@ class _CreateProcesoSeleccionScreenState
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        (_.fechaFinRecepcion != null)
-                            ? _.fechaFinRecepcion
-                            : "${selectedDate.toLocal()}".split(' ')[0],
+                        (_.getFechaFinRecepcion != null)
+                            ? _.getFechaFinRecepcion
+                            : "${selectedFechaFinRecepcion.toLocal()}"
+                                .split(' ')[0],
                         style: TextStyle(color: Colors.blue, fontSize: 18),
                       ),
                     ),
@@ -251,17 +365,20 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.bluedark,
                         ),
                         onPressed: () {
-                          _selectDate(context,
-                              (value) => {_.onfechaSeleccionChanged(value)});
+                          _selectedFechaInicioSeleccion(
+                              context,
+                              (value) =>
+                                  {_.onfechaInicioSeleccionChanged(value)});
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        (_.fechaSeleccion != null)
-                            ? _.fechaSeleccion
-                            : "${selectedDate.toLocal()}".split(' ')[0],
+                        (_.getFechaInicioSeleccion != null)
+                            ? _.getFechaInicioSeleccion
+                            : "${selectedFechaInicioSeleccion.toLocal()}"
+                                .split(' ')[0],
                         style:
                             TextStyle(color: Constants.bluedark, fontSize: 18),
                       ),
@@ -285,17 +402,18 @@ class _CreateProcesoSeleccionScreenState
                           color: Constants.redflatbutton,
                         ),
                         onPressed: () {
-                          _selectDate(context,
-                              (value) => {_.onfechafinSeleccionChanged(value)});
+                          _selectedFechaFinSeleccion(context,
+                              (value) => {_.onfechaFinSeleccionChanged(value)});
                         },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        (_.fechafinSeleccion != null)
-                            ? _.fechafinSeleccion
-                            : "${selectedDate.toLocal()}".split(' ')[0],
+                        (_.getFechaFinSeleccion != null)
+                            ? _.getFechaFinSeleccion
+                            : "${selectedFechaFinSeleccion.toLocal()}"
+                                .split(' ')[0],
                         style: TextStyle(
                             color: Constants.redflatbutton, fontSize: 18),
                       ),

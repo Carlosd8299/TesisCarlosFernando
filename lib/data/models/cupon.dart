@@ -1,7 +1,13 @@
-import 'package:flutter/material.dart';
+// To parse this JSON data, do
+//
+//     final proveedor = proveedorFromJson(jsonString);
+
+import 'package:meta/meta.dart';
+import 'dart:convert';
 
 class Cupon {
   Cupon({
+    @required this.id,
     @required this.idCategoria,
     @required this.nombreCategoria,
     @required this.idServicio,
@@ -16,6 +22,7 @@ class Cupon {
     @required this.estado,
   });
 
+  final int id;
   final int idCategoria;
   final String nombreCategoria;
   final int idServicio;
@@ -30,6 +37,7 @@ class Cupon {
   final int estado;
 
   factory Cupon.fromJson(Map<String, dynamic> json) => Cupon(
+        id: json["id"],
         idCategoria: json["id_categoria"],
         nombreCategoria: json["nombre_categoria"],
         idServicio: json["id_servicio"],
@@ -45,6 +53,7 @@ class Cupon {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "id_categoria": idCategoria,
         "nombre_categoria": nombreCategoria,
         "id_servicio": idServicio,

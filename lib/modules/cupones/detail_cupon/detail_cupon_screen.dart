@@ -191,7 +191,7 @@ class DetailsCuponProveedor extends StatelessWidget {
             titleButton: "Eliminar cupon",
             instruction:
                 "Elimina el cupon, las personas que ya lo escogieron no se les eliminara.",
-            onTap: () => {},
+            onTap: () => controller.eliminarCupon(cupon.id),
             icon: Icon(Icons.delete),
             color: Colors.black),
       ),
@@ -369,6 +369,13 @@ class DetailsCuponEmpresa extends StatelessWidget {
             ),
           ],
         ),
+        bottomNavigationBar: ButtomBottomNav(
+            titleButton: "Eliminar cupon",
+            instruction:
+                "Elimina el cupon, las personas que ya lo escogieron no se les eliminara.",
+            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE),
+            icon: Icon(Icons.delete),
+            color: Colors.black),
       ),
     );
   }
