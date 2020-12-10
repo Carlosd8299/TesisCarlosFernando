@@ -5,6 +5,8 @@ import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_binding.dart';
 import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_screen.dart';
 import 'package:itsuit/modules/cupones/list_cupon/list_cupon_binding.dart';
 import 'package:itsuit/modules/cupones/list_cupon/list_cupon_screen.dart';
+import 'package:itsuit/modules/historico/list_historico/list_historico_binding.dart';
+import 'package:itsuit/modules/historico/list_historico/list_historico_screen.dart';
 import 'package:itsuit/modules/home/home_binding.dart';
 import 'package:itsuit/modules/home/home_screen.dart';
 import 'package:itsuit/modules/login/login_binding.dart';
@@ -14,6 +16,7 @@ import 'package:itsuit/modules/portfolio/create_done_job/create_done_job_binding
 import 'package:itsuit/modules/portfolio/create_done_job/create_done_job_screen.dart';
 import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_binding.dart';
 import 'package:itsuit/modules/portfolio/detail_done_job/detail_done_job_screen.dart';
+import 'package:itsuit/modules/portfolio/list_done_jobs/list_done_jobs_binding.dart';
 import 'package:itsuit/modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
 import 'package:itsuit/modules/proceso_seleccion/contra_oferta_create/create_contra_oferta_binding.dart';
 import 'package:itsuit/modules/proceso_seleccion/contra_oferta_detail/detail_contra_oferta_binding.dart';
@@ -115,14 +118,18 @@ class AppPages {
     GetPage(
       name: AppRoutes.DETAILSDONEJOB,
       page: () => DetailsDoneJobScreen(),
-      binding: CreateDoneJobBinding(),
+      binding: DetailsDoneJobBinding(),
     ),
     GetPage(
       name: AppRoutes.LISTDONEJOB,
       page: () => ListDoneJobScreen(),
-      binding: DetailsDoneJobBinding(),
+      binding: ListDoneJobBinding(),
     ),
-
+    GetPage(
+      name: AppRoutes.LISTHISTORICO,
+      page: () => ListHistoricoScreen(),
+      binding: ListHistoricoBinding(),
+    ),
     //Seleccion Directa - 2 rutas
     //
     GetPage(

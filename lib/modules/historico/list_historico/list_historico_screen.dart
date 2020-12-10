@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/trabajo_realizado.dart';
-import 'package:itsuit/modules/portfolio/list_done_jobs/list_done_jobs_controller.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
 import 'components/single_job.dart';
+import 'list_historico_controller.dart';
 
-class ListDoneJobScreen extends StatelessWidget {
+class ListHistoricoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ListDoneJobController>(
+    return GetBuilder<ListHistoricoController>(
         builder: (_) =>
             Switcher(ListDoneJobProveedor(), ListDoneJobEmpresa(), 2));
   }
@@ -18,7 +18,7 @@ class ListDoneJobScreen extends StatelessWidget {
 class ListDoneJobProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ListDoneJobController>(
+    return GetBuilder<ListHistoricoController>(
         builder: (controller) => Scaffold(
               body: CustomScrollView(
                 slivers: [
@@ -51,20 +51,20 @@ class ListDoneJobProveedor extends StatelessWidget {
 class ListDoneJobEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ListDoneJobController>(
+    return GetBuilder<ListHistoricoController>(
       builder: (_) => Scaffold(
         body: CustomScrollView(
           slivers: [
             //AppBar
             CustomAppBar(
               onTap: () => Get.back(),
-              title: 'Portafolio',
+              title: 'Historial',
             ),
             // Lista de copones
             SliverPadding(
                 padding: EdgeInsets.all(20),
-                sliver: GetBuilder<ListDoneJobController>(
-                    id: 'listPortafolioA',
+                sliver: GetBuilder<ListHistoricoController>(
+                    id: 'listPortafolio',
                     builder: (_) {
                       return SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {

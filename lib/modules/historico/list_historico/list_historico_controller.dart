@@ -5,7 +5,7 @@ import 'package:itsuit/data/models/trabajo_realizado.dart';
 import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 
-class ListDoneJobController extends GetxController {
+class ListHistoricoController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   Proveedor _proveedor;
   RequestToken r;
@@ -14,8 +14,8 @@ class ListDoneJobController extends GetxController {
   List<TrabajoRealizado> get getPortafolio => _listTrabajos;
 
   Future<void> loadListTrabajoRealizado() async {
-    _listTrabajos = await _apirepo.consultarPortafolio(_proveedor.id);
-    update(['listPortafolioA']);
+    _listTrabajos = await _apirepo.consultarHistorico(_proveedor.id);
+    update(['listPortafolio']);
   }
 
   @override
