@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:itsuit/modules/home/home_controller.dart';
-import 'package:itsuit/modules/home/home_screen.dart';
-import 'package:itsuit/modules/login/login_binding.dart';
-import 'package:itsuit/modules/login/login_screen.dart';
-import 'package:itsuit/modules/proceso_seleccion/proceso_create/create_proceso_screen.dart';
-import 'package:itsuit/modules/profile/profile_screen.dart';
 import 'package:itsuit/modules/screens.dart';
 import 'package:itsuit/routes/my_pages.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/utils/dependency_injection.dart';
-import 'modules/cupones/create_cupon/create_cupon_screen.dart';
-import 'modules/cupones/detail_cupon/detail_cupon_screen.dart';
-import 'modules/cupones/list_cupon/list_cupon_screen.dart';
-import 'modules/portfolio/create_done_job/create_done_job_screen.dart';
-import 'modules/portfolio/detail_done_job/detail_done_job_screen.dart';
-import 'modules/portfolio/list_done_jobs/list_done_jobs_screen.dart';
-import 'modules/proceso_seleccion/ofertas_list/list_oferta_screen.dart';
-import 'modules/proceso_seleccion/proceso_detail/detail_proceso_screen.dart';
 import 'modules/sign_up/sign_up_binding.dart';
 
 void main() {

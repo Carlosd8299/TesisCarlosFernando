@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
+import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/modules/home/home_controller.dart';
 import 'package:itsuit/routes/my_routes.dart';
@@ -123,17 +125,23 @@ class HomeProveedor extends StatelessWidget {
                                       ? 0
                                       : _.getListSolicitudesRecomendadas.length,
                               itemBuilder: (context, index) {
-                                final data =
+                                final ProcesoSeleccion data =
                                     _.getListSolicitudesRecomendadas[index];
-                                return CardRecomended(
-                                  isProveedor: true,
-                                  empresa: data.nombreTercero,
-                                  tituloCard: data.titulo,
-                                  fecha: "Fecha de la solicitud: " +
-                                      (new DateFormat("yyyy-MM-dd")
-                                              .format(data.fechaSolicitud))
-                                          .toString(),
-                                  arrayCategorias: [data.nombreServicio],
+                                return GestureDetector(
+                                  child: CardRecomended(
+                                    isProveedor: true,
+                                    empresa: data.nombreTercero,
+                                    tituloCard: data.titulo,
+                                    fecha: "Fecha de la solicitud: " +
+                                        (new DateFormat("yyyy-MM-dd")
+                                                .format(data.fechaSolicitud))
+                                            .toString(),
+                                    arrayCategorias: [data.nombreServicio],
+                                    profileImage: data.profileImage,
+                                  ),
+                                  onTap: () => Get.toNamed(
+                                      AppRoutes.DETAILPROCESO,
+                                      arguments: [data, _.getIdTipo]),
                                 );
                               });
                         })),
@@ -280,7 +288,8 @@ class HomeEmpresa extends StatelessWidget {
                                   ? 0
                                   : _.getListProveedores.length,
                               itemBuilder: (context, index) {
-                                final data = _.getListProveedores[index];
+                                final Proveedor data =
+                                    _.getListProveedores[index];
 
                                 return GestureDetector(
                                   child: CardRecomended(
@@ -290,10 +299,10 @@ class HomeEmpresa extends StatelessWidget {
                                     fecha: "Fecha de registro : " +
                                         data.fechaRegistro,
                                     arrayCategorias: data.categorias,
+                                    profileImage: data.profileImage,
                                   ),
-                                  onTap: () => Scaffold.of(context)
-                                      .showSnackBar(SnackBar(
-                                          content: Text(data.id.toString()))),
+                                  onTap: () => Get.toNamed(AppRoutes.PROFILE,
+                                      arguments: [data, _.getIdTipo]),
                                 );
                               });
                         })),

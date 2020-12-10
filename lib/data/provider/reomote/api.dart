@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta_meta.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
@@ -451,13 +450,30 @@ class Apis {
     }
   }
 
-  Future<List<TrabajoRealizado>> consultarPortafolio(
-      @required int idProveedor) async {
+  Future<List<TrabajoRealizado>> consultarPortafolio(int idProveedor) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
         final Response response = await _dio.get('proveedor/protafolio',
+            queryParameters: {'id': idProveedor.toString()});
+        return (response.data['data'] as List)
+            .map((e) => TrabajoRealizado.fromJson(e))
+            .toList();
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<List<TrabajoRealizado>> consultarHistorico(int idProveedor) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.get('proveedor/historial',
             queryParameters: {'id': idProveedor.toString()});
         return (response.data['data'] as List)
             .map((e) => TrabajoRealizado.fromJson(e))

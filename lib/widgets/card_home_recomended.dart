@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:itsuit/utils/constants.dart';
 
@@ -18,8 +20,17 @@ class CardRecomended extends StatelessWidget {
   final String tituloCard;
   final List arrayCategorias;
   final String fecha;
+  final String profileImage;
 
-  const CardRecomended({Key key, @required this.isProveedor, @required this.empresa, @required this.tituloCard, @required this.arrayCategorias, @required this.fecha}) : super(key: key);
+  const CardRecomended(
+      {Key key,
+      @required this.isProveedor,
+      @required this.empresa,
+      @required this.tituloCard,
+      @required this.arrayCategorias,
+      @required this.fecha,
+      @required this.profileImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +49,12 @@ class CardRecomended extends StatelessWidget {
                 Container(
                   width: 70,
                   height: 60,
-                  child: Image.network(
-                    "https://es.logodownload.org/wp-content/uploads/2018/10/coca-cola-logo-11-1024x335.png",
-                    fit: BoxFit.contain,
-                  ),
+                  child: (profileImage == null)
+                      ? Image.network(
+                          "https://es.logodownload.org/wp-content/uploads/2018/10/coca-cola-logo-11-1024x335.png",
+                          fit: BoxFit.contain,
+                        )
+                      : Image.memory(base64Decode(profileImage)),
                 )
               ],
             ),
@@ -89,8 +102,7 @@ class CardRecomended extends StatelessWidget {
                         );
                       },
                     ),
-                  )
-                )
+                  ))
               : Container(
                   height: 55,
                   width: 400,

@@ -30,4 +30,7 @@ class AppRoutes {
   //
   static const SELECCIONDIRECTACREATE = "seleccionDirectaCreate";
   static const SELECCIONDIRECTADETAIL = "seleccionDirectaDetail";
+
+  //
+  static const LISTHISTORICO = "listHistorico";
 }
