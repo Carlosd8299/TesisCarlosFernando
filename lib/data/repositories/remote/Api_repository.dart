@@ -201,6 +201,9 @@ class ApiRepository {
   Future<List<TrabajoRealizado>> consultarPortafolio(
           @required int idProveedor) =>
       _apis.consultarPortafolio(idProveedor);
+  //Consultar portafolio del proveedor
+  Future<List<TrabajoRealizado>> consultarHistorico(int idProveedor) =>
+      _apis.consultarHistorico(idProveedor);
 
 //------------------------
 // Seccion de categorias del proveedor

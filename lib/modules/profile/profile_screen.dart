@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
 import 'package:itsuit/modules/own_profile/components/social_counter.dart';
 import 'package:itsuit/modules/profile/profile_controller.dart';
+import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import '../../widgets/widgets.dart';
@@ -12,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
       builder: (controller) =>
-          Switcher(ProfileProveedor(), ProfileEmpresa(), 2),
+          Switcher(ProfileEmpresa(), ProfileProveedor(), 2),
     );
   }
 }
@@ -21,7 +24,7 @@ class ProfileProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
-      builder: (controller) => Scaffold(
+      builder: (_) => Scaffold(
         backgroundColor: Constants.bluelight,
 
         body: SingleChildScrollView(
@@ -30,9 +33,8 @@ class ProfileProveedor extends StatelessWidget {
               //Foto de perfil
               SafeArea(
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    Constants.linkProviderAvatar,
-                  ),
+                  backgroundImage:
+                      MemoryImage(base64Decode(_.getProveedor.profileImage)),
                   radius: 80,
                 ),
               ),
@@ -59,9 +61,9 @@ class ProfileProveedor extends StatelessWidget {
                     //Aqui comienza la informacion social del proveedor
                     SocialCounter(
                       isEmpresa: false,
-                      firstTitle: "",
-                      secondTitle: "",
-                      thirdTitle: "",
+                      firstTitle: _.getProveedor.cantidadParticipa.toString(),
+                      secondTitle: _.getProveedor.cantidadAprobada.toString(),
+                      thirdTitle: _.getProveedor.cantidadDirecta.toString(),
                     ),
                     //Aqui comienza el menu de botones
                     Container(
@@ -76,23 +78,24 @@ class ProfileProveedor extends StatelessWidget {
                                   onTap: () {},
                                   icon: Icons.receipt),
                               CardButtonProfile(
-                                  color: Constants.colorlist[1],
-                                  label: "Servicios",
-                                  onTap: () {},
-                                  icon: Icons.room_service)
+                                  color: Constants.colorlist[2],
+                                  label: "Portafolio",
+                                  onTap: () {
+                                    Get.offNamed(AppRoutes.LISTDONEJOB,
+                                        arguments: _.getProveedor);
+                                  },
+                                  icon: Icons.card_travel),
                             ],
                           ),
                           Row(
                             children: [
                               CardButtonProfile(
-                                  color: Constants.colorlist[2],
-                                  label: "Portafolio",
-                                  onTap: () {},
-                                  icon: Icons.card_travel),
-                              CardButtonProfile(
                                   color: Constants.colorlist[3],
                                   label: "Historico de ItSuit",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.offNamed(AppRoutes.LISTHISTORICO,
+                                        arguments: _.getProveedor);
+                                  },
                                   icon: Icons.history)
                             ],
                           )
