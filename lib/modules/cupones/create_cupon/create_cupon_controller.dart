@@ -39,6 +39,7 @@ class CreateCuponController extends GetxController {
       this.idCategoria = value;
       this._selectedIndexCategoria = value;
       await this.loadServicios();
+      update(['categorias']);
     }
   }
 
@@ -46,6 +47,7 @@ class CreateCuponController extends GetxController {
     if (value != null) {
       this.idServicio = value;
       this._selectedIndexServicio = value;
+      update(['servicios']);
     }
   }
 

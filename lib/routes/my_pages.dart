@@ -148,7 +148,7 @@ class AppPages {
         binding: CreateContraOfertaBinding()),
     GetPage(
         name: AppRoutes.DETAILCONTRAOFERTA,
-        page: () => DetailContraOfertaScreen(),
+        page: () => DetailContraOferta(),
         binding: DetailContraOfertaBinding()),
     GetPage(
         name: AppRoutes.CREATEOFERTA,
