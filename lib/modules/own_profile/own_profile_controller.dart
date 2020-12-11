@@ -9,9 +9,9 @@ class OwnProfileController extends GetxController {
 
   int idtipo;
   RequestToken r;
-  Proveedores _proveedores = Proveedores();
+  Proveedor _proveedores = Proveedor();
   Empresa _solicitante = Empresa();
-  Proveedores get getProveedor => _proveedores;
+  Proveedor get getProveedor => _proveedores;
   Empresa get getSolicitante => _solicitante;
 
   get getR => r;
@@ -27,6 +27,17 @@ class OwnProfileController extends GetxController {
     }
   }
 
+  Future<void> loadProveedor() async {
+    final data = await _apirepo.getListProveedores(true);
+
+    if (data != null) {
+      _proveedores = data.data[0];
+      update(['cabeceraProveedor']);
+    } else {
+      throw Error();
+    }
+  }
+
   @override
   void onInit() async {
     r = Get.arguments as RequestToken;
@@ -34,6 +45,8 @@ class OwnProfileController extends GetxController {
 
     if (this.idtipo == 2) {
       await this.loadSolicitante();
+    } else {
+      await this.loadProveedor();
     }
     super.onInit();
   }

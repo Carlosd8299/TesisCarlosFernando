@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
+import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
@@ -19,6 +20,16 @@ import 'package:itsuit/data/provider/local/local_auth.dart';
 class Apis {
   final Dio _dio = Get.find<Dio>();
   final LocalAuth localAuth = new LocalAuth();
+
+  Future<ProveedorAplicoOferta> consultarProveedorSolicitud(int id) async {
+    try {
+      final Response response =
+          await _dio.get('Solicitud/proveedor', queryParameters: {"id": id});
+      return ProveedorAplicoOferta.fromJson(response.data);
+    } catch (e) {
+      return null;
+    }
+  }
 
   // ignore: missing_return
   Future<RegimenTributario> getListTributario() async {

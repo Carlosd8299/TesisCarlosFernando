@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_controller.dart';
@@ -370,11 +371,10 @@ class DetailsCuponEmpresa extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: ButtomBottomNav(
-            titleButton: "Eliminar cupon",
-            instruction:
-                "Elimina el cupon, las personas que ya lo escogieron no se les eliminara.",
+            titleButton: "Aplicar cupon",
+            instruction: "Crear una solicitud directa para aplicar este cupon",
             onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE),
-            icon: Icon(Icons.delete),
+            icon: Icon(FontAwesomeIcons.shoePrints),
             color: Colors.black),
       ),
     );

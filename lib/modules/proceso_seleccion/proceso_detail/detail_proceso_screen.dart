@@ -3,40 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
+import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/single_oferta_proveedor.dart';
 import 'package:itsuit/routes/my_routes.dart';
-import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
 import '../../screens.dart';
 import 'detail_proceso_controller.dart';
-
-List lista = [
-  SingleOferta(
-    fechaSubidaOferta: "10-10-2020",
-    nombreProveedor: 'Indra',
-    srcImageProveedor:
-        "https://pcs.usal.es/wp-content/uploads/2014/12/indralogo.png",
-  ),
-  SingleOferta(
-    fechaSubidaOferta: "10-10-2020",
-    nombreProveedor: 'Indra',
-    srcImageProveedor:
-        "https://pcs.usal.es/wp-content/uploads/2014/12/indralogo.png",
-  ),
-  SingleOferta(
-    fechaSubidaOferta: "10-10-2020",
-    nombreProveedor: 'Indra',
-    srcImageProveedor:
-        "https://pcs.usal.es/wp-content/uploads/2014/12/indralogo.png",
-  ),
-  SingleOferta(
-    fechaSubidaOferta: "10-10-2020",
-    nombreProveedor: 'Indra',
-    srcImageProveedor:
-        "https://pcs.usal.es/wp-content/uploads/2014/12/indralogo.png",
-  ),
-];
 
 class DetailProcesoScreen extends StatelessWidget {
   @override
@@ -62,7 +35,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailProcesoController>(
-      builder: (controller) => Scaffold(
+      builder: (_) => Scaffold(
         appBar: PreferredSize(
             child: AppBar(
               elevation: 0.0,
@@ -207,35 +180,23 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
                   "Proveedores que han Aplicado",
                   style: Theme.of(context).textTheme.headline1,
                 ),
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                    SingleOferta(
-                      fechaSubidaOferta: "10-10-2020",
-                      nombreProveedor: 'Indra',
-                      srcImageProveedor:
-                          "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    ),
-                  ],
-                )
+                GetBuilder<DetailProcesoController>(
+                    id: 'listProveedorAplica',
+                    builder: (_) => ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: null == _.getListProveedores
+                              ? 0
+                              : _.getListProveedores.length,
+                          itemBuilder: (context, index) {
+                            final ProveedorOferta data =
+                                _.getListProveedores[index];
+                            return SingleOferta(
+                              fechaSubidaOferta: data.fecha.toString(),
+                              nombreProveedor: data.nombreProveedor.trim(),
+                              srcImageProveedor: data.profileImage.trim(),
+                            );
+                          },
+                        ))
               ],
             ),
           ),

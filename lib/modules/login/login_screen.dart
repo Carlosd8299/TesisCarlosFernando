@@ -69,6 +69,8 @@ class LoginScreen extends StatelessWidget {
                                                       color:
                                                           Colors.grey[100]))),
                                           child: TextField(
+                                            keyboardType:
+                                                TextInputType.emailAddress,
                                             onChanged: (value) =>
                                                 _.onUserNamechanged(value),
                                             decoration: InputDecoration(

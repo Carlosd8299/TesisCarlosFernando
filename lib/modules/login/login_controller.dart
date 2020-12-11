@@ -27,23 +27,16 @@ class LoginController extends GetxController {
     try {
       final RequestToken token = await _authRepository.authWithLogin(
           username: _username, password: _password);
-
+      if (token == null) {
+        throw Error();
+      }
       await _localAuthRepository.setSession(token);
 
       Get.offNamed(AppRoutes.HOME, arguments: token);
     } catch (e) {
-      print(e);
-      String message = "";
-      if (e is DioError) {
-        if (e.response != null) {
-          message = e.response.statusMessage;
-        } else {
-          message = e.message;
-        }
-      }
       Get.dialog(AlertDialog(
-        title: Text("Error De"),
-        content: Text(message.toString()),
+        title: Text("Autenticación"),
+        content: Text("Usuario o Contraseña errada"),
         actions: [
           FlatButton(
               onPressed: () {

@@ -75,14 +75,17 @@ class ProfileProveedor extends StatelessWidget {
                               CardButtonProfile(
                                   color: Constants.colorlist[0],
                                   label: "Cupones",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.LISTCUPON,
+                                        arguments: [_.r, _.getProveedor]);
+                                  },
                                   icon: Icons.receipt),
                               CardButtonProfile(
                                   color: Constants.colorlist[2],
                                   label: "Portafolio",
                                   onTap: () {
                                     Get.offNamed(AppRoutes.LISTDONEJOB,
-                                        arguments: _.getProveedor);
+                                        arguments: [_.getProveedor, 2]);
                                   },
                                   icon: Icons.card_travel),
                             ],
@@ -113,7 +116,7 @@ class ProfileProveedor extends StatelessWidget {
             titleButton: "Solicitud directa",
             instruction:
                 "Solicitar servicio del proveedor dependiendo de los servicios que ofrece",
-            onTap: () => print("Hola"),
+            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),
