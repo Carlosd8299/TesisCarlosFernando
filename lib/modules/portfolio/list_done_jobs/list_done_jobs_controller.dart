@@ -9,19 +9,26 @@ class ListDoneJobController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   Proveedor _proveedor;
   RequestToken r;
+  int _tipoUsuario;
 
+  int get getTipoUsuario => _tipoUsuario;
   List<TrabajoRealizado> _listTrabajos = [];
   List<TrabajoRealizado> get getPortafolio => _listTrabajos;
 
   Future<void> loadListTrabajoRealizado() async {
     _listTrabajos = await _apirepo.consultarPortafolio(_proveedor.id);
-    update(['listPortafolioA']);
+
+    if (_tipoUsuario == 1) {
+      update(['listPortafolio']);
+    } else {
+      update(['listPortafolioA']);
+    }
   }
 
   @override
   void onInit() async {
-    _proveedor = Get.arguments as Proveedor;
-    r = await LocalAuth().getSession();
+    _proveedor = Get.arguments[0] as Proveedor;
+    _tipoUsuario = Get.arguments[1] as int;
     await loadListTrabajoRealizado();
     super.onInit();
   }

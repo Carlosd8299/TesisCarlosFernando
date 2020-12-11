@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class SingleOferta extends StatelessWidget {
@@ -17,9 +19,9 @@ class SingleOferta extends StatelessWidget {
       margin: EdgeInsets.all(12.0),
       child: Row(
         children: [
-          Image.network(
-            srcImageProveedor,
-            width: 150,
+          Image.memory(
+            base64Decode(srcImageProveedor),
+            width: 50,
             height: 50,
           ),
           SizedBox(

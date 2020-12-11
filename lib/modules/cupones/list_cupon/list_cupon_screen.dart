@@ -26,8 +26,7 @@ class ListCuponProveedor extends StatelessWidget {
               body: CustomScrollView(slivers: [
                 //AppBar
                 CustomAppBar(
-                  onTap: () =>
-                      Get.toNamed(AppRoutes.HOME, arguments: _.getToken),
+                  onTap: () => Get.back(),
                   title: 'Cupones',
                 ),
                 // Lista de copones
@@ -46,7 +45,7 @@ class ListCuponProveedor extends StatelessWidget {
                         return SingleCupon(
                             cupon: _.getListaCupones[index],
                             tipoUser: _.getToken.usuario.idTipoUsuario);
-                      }, childCount: _.getLenght),
+                      }, childCount: _.getListaCupones.length),
                     ),
                   ),
                 ),
@@ -70,7 +69,7 @@ class ListCuponEmpresa extends StatelessWidget {
         body: CustomScrollView(slivers: [
           //AppBar
           CustomAppBar(
-            onTap: () => Get.toNamed(AppRoutes.HOME, arguments: _.getToken),
+            onTap: () => Get.back(),
             title: 'Cupones',
           ),
           // Lista de copones
@@ -87,9 +86,9 @@ class ListCuponEmpresa extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return SingleCupon(
-                      cupon: controller.getListaCupones[index],
-                      tipoUser: controller.getToken.usuario.idTipoUsuario);
-                }, childCount: controller.getLenght),
+                      cupon: _.getListaCupones[index],
+                      tipoUser: _.getToken.usuario.idTipoUsuario);
+                }, childCount: _.getListaCupones.length),
               ),
             ),
           ),

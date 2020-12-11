@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
+import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
@@ -19,6 +20,10 @@ class ApiRepository {
   Future<Ubicacion> getCiudades() => _apis.getListCiudades();
   Future<RegimenTributario> getRegimenes() => _apis.getListTributario();
   Future<ActividadEconomica> getActEco() => _apis.getListActEco();
+
+  //Consultar proveedores que han aplicado a una solicitud
+  Future<ProveedorAplicoOferta> consultarProveedorSolicitud(int idSolicitud) =>
+      _apis.consultarProveedorSolicitud(idSolicitud);
 
   Future<SolicitudCategorias> getListCantSolicitudesCategoria() =>
       _apis.getListCantSolicitudesCategoria();

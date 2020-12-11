@@ -9,7 +9,6 @@ import 'package:itsuit/modules/own_profile/own_profile_controller.dart';
 import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
-import '../screens.dart';
 
 class OwnProfileScreen extends StatelessWidget {
   @override
@@ -59,11 +58,18 @@ class OwnProfileProveedor extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //Aqui comienza la informacion social del proveedor
-                    SocialCounter(
-                        isEmpresa: false,
-                        firstTitle: "",
-                        secondTitle: "",
-                        thirdTitle: ""),
+                    GetBuilder<OwnProfileController>(
+                        id: "cabeceraProveedor",
+                        builder: (_) {
+                          return SocialCounter(
+                              isEmpresa: false,
+                              firstTitle:
+                                  _.getProveedor.cantidadParticipa.toString(),
+                              secondTitle:
+                                  _.getProveedor.cantidadAprobada.toString(),
+                              thirdTitle:
+                                  _.getProveedor.cantidadDirecta.toString());
+                        }),
                     //Aqui comienza el menu de botones
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
@@ -76,7 +82,7 @@ class OwnProfileProveedor extends StatelessWidget {
                                   label: "Mi cuponera",
                                   onTap: () {
                                     Get.toNamed(AppRoutes.LISTCUPON,
-                                        arguments: _.r);
+                                        arguments: [_.r, _.getProveedor]);
                                   },
                                   icon: Icons.receipt),
                               CardButtonProfile(
@@ -96,13 +102,16 @@ class OwnProfileProveedor extends StatelessWidget {
                                   label: "Mi Portafolio",
                                   onTap: () {
                                     Get.toNamed(AppRoutes.LISTDONEJOB,
-                                        arguments: _.r);
+                                        arguments: [_.getProveedor, 1]);
                                   },
                                   icon: Icons.card_travel),
                               CardButtonProfile(
                                   color: Constants.colorlist[3],
                                   label: "Historico de ItSuit",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.LISTHISTORICO,
+                                        arguments: _.getProveedor);
+                                  },
                                   icon: Icons.history)
                             ],
                           )

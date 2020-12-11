@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/request_token.dart';
+import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -105,20 +106,9 @@ class CreateCuponController extends GetxController {
                   child: Text("ok"))
             ]));
       }
-      Get.dialog(AlertDialog(
-          title: Text("No ha sido posible creaar el cupón"),
-          content: Text("No fue posible crear al cupón ${this._tituloCupon}"),
-          actions: [
-            FlatButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("ok"))
-          ]));
     } else {
       Get.dialog(AlertDialog(
-          title:
-              Text("No ha sido posible creaar el cupón ${this._tituloCupon}"),
+          title: Text("No ha sido posible crear el cupón ${this._tituloCupon}"),
           content: Text("Por favor rellene todos los campos"),
           actions: [
             FlatButton(
@@ -131,8 +121,8 @@ class CreateCuponController extends GetxController {
   }
 
   @override
-  void onInit() {
-    this._r = Get.arguments as RequestToken;
+  void onInit() async {
+    this._r = await LocalAuth().getSession();
     this.loadCategorias();
     super.onInit();
   }
