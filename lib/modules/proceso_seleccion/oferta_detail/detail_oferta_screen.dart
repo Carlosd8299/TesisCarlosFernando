@@ -153,12 +153,11 @@ class DetailOfertaScreenEmpresa extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: ButtomBottomNav(
-          color: Colors.black,
-          icon: Icon(FontAwesomeIcons.gavel),
-          titleButton: 'Ver contraofertas',
-          instruction: 'Ver las contraofertas relacionadas a esta oferta',
-          onTap: () => Get.to(DetailContraOfertaScreen()),
-        ),
+            color: Colors.black,
+            icon: Icon(FontAwesomeIcons.gavel),
+            titleButton: 'Ver contraofertas',
+            instruction: 'Ver las contraofertas relacionadas a esta oferta',
+            onTap: () => Get.toNamed(AppRoutes.DETAILCONTRAOFERTA)),
       ),
     );
   }
@@ -337,7 +336,7 @@ class DetailOfertaScreenProveedor extends StatelessWidget {
           icon: Icon(FontAwesomeIcons.gavel),
           titleButton: 'Ver contraofertas',
           instruction: 'Ver las contraofertas relacionadas a esta oferta',
-          onTap: () => Get.to(DetailContraOfertaScreen()),
+          onTap: () => Get.toNamed(AppRoutes.DETAILCONTRAOFERTA),
         ),
       ),
     );

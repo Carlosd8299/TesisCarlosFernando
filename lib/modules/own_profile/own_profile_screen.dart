@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
 import 'package:itsuit/modules/own_profile/components/social_counter.dart';
@@ -176,6 +177,7 @@ class OwnProfileEmpresa extends StatelessWidget {
                               thirdTitle: _.getSolicitante.cantidadProveedor
                                   .toString());
                         }),
+                    FaIcon(FontAwesomeIcons.gamepad),
                     //Aqui comienza el menu de botones
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
