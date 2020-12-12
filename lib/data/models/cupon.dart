@@ -1,13 +1,9 @@
-// To parse this JSON data, do
-//
-//     final proveedor = proveedorFromJson(jsonString);
-
 import 'package:meta/meta.dart';
-import 'dart:convert';
 
 class Cupon {
   Cupon({
     @required this.id,
+    @required this.idProveedor,
     @required this.idCategoria,
     @required this.nombreCategoria,
     @required this.idServicio,
@@ -24,6 +20,7 @@ class Cupon {
 
   final int id;
   final int idCategoria;
+  final int idProveedor;
   final String nombreCategoria;
   final int idServicio;
   final String nombreServicio;
@@ -39,6 +36,7 @@ class Cupon {
   factory Cupon.fromJson(Map<String, dynamic> json) => Cupon(
         id: json["id"],
         idCategoria: json["id_categoria"],
+        idProveedor: json["id_proveedor"],
         nombreCategoria: json["nombre_categoria"],
         idServicio: json["id_servicio"],
         nombreServicio: json["nombre_servicio"],
@@ -54,6 +52,7 @@ class Cupon {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "id_proveedor": idProveedor,
         "id_categoria": idCategoria,
         "nombre_categoria": nombreCategoria,
         "id_servicio": idServicio,

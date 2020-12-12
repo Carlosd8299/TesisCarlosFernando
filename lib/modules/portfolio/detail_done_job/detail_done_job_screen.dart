@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/trabajo_realizado.dart';
-import 'package:itsuit/widgets/double_button_navigator.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
@@ -41,7 +40,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
           slivers: [
             //AppBar
             CustomAppBar(
-              onTap: () => print(""),
+              onTap: () => Get.back(),
               title: 'Titulo del trabajo realizado',
             ),
             SliverToBoxAdapter(
@@ -53,7 +52,11 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    "12 meses",
+                    (trabajo.fechaInicio.year == trabajo.fechaFin.year)
+                        ? 1
+                        : (trabajo.fechaFin.year - trabajo.fechaInicio.year)
+                                .toString() +
+                            " año(s)",
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(width: 25),
@@ -62,7 +65,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    "Nombre del servicio",
+                    trabajo.nombreServicio.trim(),
                     style: TextStyle(fontSize: 15),
                   ),
                 ],
@@ -84,7 +87,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Descripción del trabajo realizaDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadoDescripción del trabajo realizadodo",
+                      trabajo.descripcion.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -99,7 +102,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Se muestra la categoria de servicio escogida",
+                      trabajo.nombreCategoria.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -114,7 +117,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Se muestra la nombre de servicio brindado",
+                      trabajo.nombreServicio.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -129,7 +132,7 @@ class DetailsDoneJobProveedor extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Se muestra el nombre de la empresa quien contrato el servicio brindado",
+                      trabajo.empresa.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                   ],
@@ -174,7 +177,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                   SizedBox(width: 5),
                   Text(
                     (trabajo.fechaInicio.year == trabajo.fechaFin.year)
-                        ? 1
+                        ? "1"
                         : (trabajo.fechaFin.year - trabajo.fechaInicio.year)
                                 .toString() +
                             " año(s)",
@@ -186,7 +189,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    "Nombre del servicio",
+                    trabajo.nombreServicio.trim(),
                     style: TextStyle(fontSize: 15),
                   ),
                 ],
@@ -208,7 +211,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      trabajo.descripcion,
+                      trabajo.descripcion.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -223,7 +226,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      trabajo.nombreCategoria,
+                      trabajo.nombreCategoria.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -238,7 +241,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Se muestra la nombre de servicio brindado",
+                      trabajo.nombreServicio.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(
@@ -253,7 +256,7 @@ class DetailsDoneJobEmpresa extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      trabajo.empresa,
+                      trabajo.empresa.trim(),
                       style: TextStyle(fontSize: 15),
                     ),
                   ],

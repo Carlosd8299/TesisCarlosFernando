@@ -66,6 +66,10 @@ class ApiRepository {
           fecha_seleccion,
           // ignore: non_constant_identifier_names
           fecha_fin_seleccion,
+          // ignore: non_constant_identifier_names
+          fecha_ejecucion,
+          // ignore: non_constant_identifier_names
+          fecha_fin_ejecucion,
           presupuesto,
           descripcion,
           criterio) =>
@@ -78,9 +82,44 @@ class ApiRepository {
           fecha_fin,
           fecha_seleccion,
           fecha_fin_seleccion,
+          fecha_ejecucion,
+          fecha_fin_ejecucion,
           presupuesto,
           descripcion,
           criterio);
+  Future<bool> crearSolicitudDirecta(
+          // ignore: non_constant_identifier_names
+          id_servicio,
+          // ignore: non_constant_identifier_names
+          id_cupon,
+          // ignore: non_constant_identifier_names
+          id_tercero,
+          // ignore: non_constant_identifier_names
+          id_proveedor,
+          titulo,
+          // ignore: non_constant_identifier_names
+          fecha_solicitud,
+          // ignore: non_constant_identifier_names
+          fecha_fin,
+          presupuesto,
+          descripcion,
+          criterios) =>
+      _apis.crearSolicitudDirecta(
+          // ignore: non_constant_identifier_names
+          id_servicio,
+          // ignore: non_constant_identifier_names
+          id_cupon,
+          // ignore: non_constant_identifier_names
+          id_tercero,
+          id_proveedor,
+          titulo,
+          // ignore: non_constant_identifier_names
+          fecha_solicitud,
+          // ignore: non_constant_identifier_names
+          fecha_fin,
+          presupuesto,
+          descripcion,
+          criterios);
 
   Future<ProcesosDeSeleccion> getSolicitudes(int idTercero) =>
       _apis.getSolicitudes(idTercero);
@@ -191,20 +230,19 @@ class ApiRepository {
 
 // Agregar un trbajo realizado
   Future<bool> createTrabajoRealizado(
-    @required int idProveedor,
-    @required int idPortafolio,
-    @required int idCategoria,
-    @required String descripcion,
-    @required String nombreTrabajo,
-    @required String fechaInicio,
-    @required String fechaFin,
-  ) =>
-      _apis.createTrabajoRealizado(idPortafolio, idProveedor, idCategoria,
-          descripcion, nombreTrabajo, fechaInicio, fechaFin, 1);
+          int idProveedor,
+          int idCategoria,
+          String descripcion,
+          String nombreTrabajo,
+          String fechaInicio,
+          String fechaFin,
+          String empresa,
+          [int idPortafolio]) =>
+      _apis.createTrabajoRealizado(idProveedor, idPortafolio, idCategoria,
+          descripcion, nombreTrabajo, fechaInicio, fechaFin, empresa, 1);
 
   //Consultar portafolio del proveedor
-  Future<List<TrabajoRealizado>> consultarPortafolio(
-          @required int idProveedor) =>
+  Future<List<TrabajoRealizado>> consultarPortafolio(int idProveedor) =>
       _apis.consultarPortafolio(idProveedor);
   //Consultar portafolio del proveedor
   Future<List<TrabajoRealizado>> consultarHistorico(int idProveedor) =>

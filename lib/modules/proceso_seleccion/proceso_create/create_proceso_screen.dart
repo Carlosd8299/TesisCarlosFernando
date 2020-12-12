@@ -149,7 +149,11 @@ class _CreateProcesoSeleccionScreenState
                               child: new Text(value.nombre),
                             );
                           }).toList(),
-                          onChanged: (value) => _.onCategoriaChanged(value),
+                          onChanged: (value) => {
+                            setState(() {
+                              _.onCategoriaChanged(value);
+                            })
+                          },
                         )),
               )),
               //Drop para seleccionar servicio
@@ -178,7 +182,11 @@ class _CreateProcesoSeleccionScreenState
                               child: new Text(value.nombre),
                             );
                           }).toList(),
-                          onChanged: (value) => {_.onServicioChanged(value)},
+                          onChanged: (value) => {
+                            setState(() {
+                              _.onServicioChanged(value);
+                            })
+                          },
                         )),
               )),
               //DropDown para seleccionar la categoria
@@ -304,8 +312,8 @@ class _CreateProcesoSeleccionScreenState
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        (_.getFechaFinRecepcion != null)
-                            ? _.getFechaFinRecepcion
+                        (_.getFechaInicioRecepcion != null)
+                            ? _.getFechaInicioRecepcion
                             : "${selectedFechaIncioRecepcion.toLocal()}"
                                 .split(' ')[0],
                         style: TextStyle(

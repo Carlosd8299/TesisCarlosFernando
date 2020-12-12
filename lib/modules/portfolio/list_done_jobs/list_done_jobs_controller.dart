@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/models/trabajo_realizado.dart';
-import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 
 class ListDoneJobController extends GetxController {
@@ -17,6 +16,9 @@ class ListDoneJobController extends GetxController {
 
   Future<void> loadListTrabajoRealizado() async {
     _listTrabajos = await _apirepo.consultarPortafolio(_proveedor.id);
+    if (_listTrabajos == null) {
+      _listTrabajos = [];
+    }
 
     if (_tipoUsuario == 1) {
       update(['listPortafolio']);

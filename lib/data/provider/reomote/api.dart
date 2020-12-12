@@ -165,8 +165,8 @@ class Apis {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio
-            .get('Servicio', queryParameters: {"idCategoria": idCategoria});
+        final Response response = await _dio.get('Servicio',
+            queryParameters: {"id": null, "idCategoria": idCategoria});
         final Servicios p = Servicios.fromJson(response.data);
         return p;
       } else {
@@ -227,6 +227,10 @@ class Apis {
       fecha_seleccion,
       // ignore: non_constant_identifier_names
       fecha_fin_seleccion,
+      // ignore: non_constant_identifier_names
+      fecha_ejecucion,
+      // ignore: non_constant_identifier_names
+      fecha_fin_ejecucion,
       presupuesto,
       descripcion,
       criterio) async {
@@ -243,6 +247,61 @@ class Apis {
           "fecha_fin": fecha_fin,
           "fecha_seleccion": fecha_seleccion,
           "fecha_fin_seleccion": fecha_fin_seleccion,
+          "fecha_ejecucion": fecha_ejecucion,
+          "fecha_fin_ejecucion": fecha_fin_ejecucion,
+          "presupuesto": presupuesto,
+          "descripcion": descripcion,
+          "criterio": criterio
+        });
+        if (response.statusCode != 200) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        throw Error();
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> crearSolicitudDirecta(
+      // ignore: non_constant_identifier_names
+      id_servicio,
+      // ignore: non_constant_identifier_names
+      id_cupon,
+      // ignore: non_constant_identifier_names
+      id_tercero,
+      // ignore: non_constant_identifier_names
+      id_proveedor,
+      titulo,
+      // ignore: non_constant_identifier_names
+      fecha_solicitud,
+      // ignore: non_constant_identifier_names
+      fecha_fin,
+      presupuesto,
+      descripcion,
+      criterio) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      // ignore: non_constant_identifier_names
+      int _id_cupon = (id_cupon != null) ? id_cupon : null;
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio.post('Solicitud', data: {
+          "id_servicio": id_servicio,
+          "id_tercero": id_tercero,
+          "id_proveedor": id_proveedor,
+          "id_tipo_solicitud": 2,
+          "id_cupon": _id_cupon,
+          "titulo": titulo,
+          "fecha_solicitud": DateTime.now().toString(),
+          "fecha_fin": fecha_fin,
+          "fecha_seleccion": fecha_solicitud,
+          "fecha_fin_seleccion": fecha_fin,
+          "fecha_ejecucion": fecha_solicitud,
+          "fecha_fin_ejecucion": fecha_fin,
           "presupuesto": presupuesto,
           "descripcion": descripcion,
           "criterio": criterio
@@ -424,14 +483,15 @@ class Apis {
   }
 
   Future<bool> createTrabajoRealizado(
-      @required int idProveedor,
-      @required int id,
-      @required int idCategoria,
-      @required String descripcion,
-      @required String nombreTrabajo,
-      @required String fechaInicio,
-      @required String fechaFin,
-      @required int estado) async {
+      int idProveedor,
+      int id,
+      int idCategoria,
+      String descripcion,
+      String nombreTrabajo,
+      String fechaInicio,
+      String fechaFin,
+      String empresa,
+      int estado) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -439,12 +499,13 @@ class Apis {
         final Response response = await _dio
             .put('proveedor/portafolio/' + idProveedor.toString(), data: {
           "portafolio": {
-            "id": id,
+            "id": 0,
             "id_categoria": idCategoria,
             "descripcion": descripcion,
             "nombre_trabajo": nombreTrabajo,
             "fecha_inicio": fechaInicio,
             "fecha_fin": fechaFin,
+            "empresa": empresa,
             "estado": estado
           }
         });
@@ -453,6 +514,8 @@ class Apis {
         } else {
           return true;
         }
+      } else {
+        return false;
       }
     } catch (e) {
       return false;

@@ -19,7 +19,7 @@ class CreateProcesoController extends GetxController {
   String titulo;
   String descripcion;
   String criterios;
-  int idCategoria;
+  int idCategoria = 1;
   int idServicio;
   int _selectedIndexCategoria = 1;
   int _selectedIndexServicio = 1;
@@ -45,12 +45,21 @@ class CreateProcesoController extends GetxController {
   Future<void> loadCategorias() async {
     final data = await _apirepo.getCategorias();
     _categorias = data.data;
+    await this.loadServicios();
     update(['categorias']);
   }
 
   Future<void> loadServicios() async {
     final data = await _apirepo.getServicios(this.idCategoria);
-    _servicios = data.data;
+
+    if (data != null) {
+      _servicios = data.data;
+      if (_servicios.length > 0) {
+        _selectedIndexServicio = _servicios[0].id;
+      }
+    } else {
+      _servicios = [];
+    }
     update(['servicios']);
   }
 
@@ -130,7 +139,20 @@ class CreateProcesoController extends GetxController {
   }
 
   void crearSolicitud() async {
-    bool res;
+    bool res = await _apirepo.crearSolicitud(
+        this.idServicio,
+        r.usuario.idTercero,
+        1,
+        this.titulo,
+        this._fechaIncioRecepcion,
+        this._fechaFinRecepcion,
+        this._fechaInicioSeleccion,
+        this._fechaFinSeleccion,
+        this._fechaIncioEjecucion,
+        this._fechaFinSeleccion,
+        this.presupuestos,
+        this.descripcion,
+        this.criterios);
     if (res) {
       Get.dialog(AlertDialog(
           title: Text("¡Proceso exitoso!"),

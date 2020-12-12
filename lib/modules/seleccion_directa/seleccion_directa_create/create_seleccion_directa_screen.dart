@@ -74,7 +74,11 @@ class _CreateSeleccionDirectaScreenState
                               child: new Text(value.nombre),
                             );
                           }).toList(),
-                          onChanged: (value) => _.onCategoriaChanged(value),
+                          onChanged: (value) => {
+                            setState(() {
+                              _.onCategoriaChanged(value);
+                            })
+                          },
                         )),
               )),
               //Drop para seleccionar servicio
@@ -87,7 +91,7 @@ class _CreateSeleccionDirectaScreenState
                   border: Border.all(
                       color: Colors.grey, style: BorderStyle.solid, width: 1.0),
                 ),
-                child: GetBuilder<CreateProcesoController>(
+                child: GetBuilder<CreateSeleccionDirectaController>(
                     id: 'servicios',
                     builder: (_) => DropdownButton(
                           hint: Text("Selecciones una servicio"),
@@ -103,7 +107,11 @@ class _CreateSeleccionDirectaScreenState
                               child: new Text(value.nombre),
                             );
                           }).toList(),
-                          onChanged: (value) => {_.onServicioChanged(value)},
+                          onChanged: (value) => {
+                            setState(() {
+                              _.onServicioChanged(value);
+                            })
+                          },
                         )),
               )),
               //DropDown para seleccionar la categoria
@@ -131,10 +139,10 @@ class _CreateSeleccionDirectaScreenState
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   sliver: SliverToBoxAdapter(
                       child: CustomField(
+                          type: TextInputType.number,
                           function: (value) => _.onPresupuestoChanged(value),
                           label: 'Presupuesto inicial',
-                          hint:
-                              'Ej: Desarrollo de aplicacion movil a la medida para inventario'))),
+                          hint: 'Ej: 389000.00'))),
               //Date picker Fecha de inicio de ejecucion:
               SliverToBoxAdapter(
                 child: Column(
@@ -170,9 +178,8 @@ class _CreateSeleccionDirectaScreenState
             ],
           ),
           bottomNavigationBar: ButtomBottomNav(
-              titleButton: "Subir proceso de selección",
-              instruction:
-                  "Abre el proceso de selección y recibe ofertas, elige un ganador",
+              titleButton: "Subir solicitud a proveedor",
+              instruction: "Solicite un servicio a un proveedor ",
               onTap: () => _.crearSolicitud(),
               icon: Icon(Icons.arrow_forward),
               color: Colors.black)),

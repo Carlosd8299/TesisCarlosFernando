@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
+import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
+import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/request_token.dart';
+import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:itsuit/routes/my_routes.dart';
@@ -10,8 +13,8 @@ class CreateSeleccionDirectaController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   RequestToken r;
   // variables del proceso
-  String fechaInicioEjecucion;
-  String fechafinEjecucion;
+  String fechaInicioEjecucion = DateTime.now().toString();
+  String fechafinEjecucion = DateTime.now().toString();
   String titulo;
   String descripcion;
   String criterios;
@@ -20,6 +23,9 @@ class CreateSeleccionDirectaController extends GetxController {
   int _selectedIndexCategoria = 1;
   int _selectedIndexServicio = 1;
   double presupuestos;
+  bool aplicaCupon;
+  int _idProveedor;
+  Cupon cupon;
   List<Categoria> _categorias = [];
   List<Servicio> _servicios = [];
 
@@ -34,12 +40,22 @@ class CreateSeleccionDirectaController extends GetxController {
   Future<void> loadCategorias() async {
     final data = await _apirepo.getCategorias();
     _categorias = data.data;
+    await this.loadServicios();
     update(['categorias']);
   }
 
   Future<void> loadServicios() async {
     final data = await _apirepo.getServicios(this.idCategoria);
-    _servicios = data.data;
+
+    if (data != null) {
+      _servicios = data.data;
+      if (_servicios.length > 0) {
+        _selectedIndexServicio = _servicios[0].id;
+        this.idServicio = _servicios[0].id;
+      }
+    } else {
+      _servicios = [];
+    }
     update(['servicios']);
   }
 
@@ -95,7 +111,17 @@ class CreateSeleccionDirectaController extends GetxController {
   }
 
   void crearSolicitud() async {
-    bool res;
+    bool res = await _apirepo.crearSolicitudDirecta(
+        this.idServicio,
+        (cupon != null) ? cupon.id : null,
+        r.usuario.idTercero,
+        this._idProveedor,
+        this.titulo,
+        this.fechaInicioEjecucion,
+        this.fechafinEjecucion,
+        this.presupuestos,
+        this.descripcion,
+        this.criterios);
 
     if (res) {
       Get.dialog(AlertDialog(
@@ -126,8 +152,16 @@ class CreateSeleccionDirectaController extends GetxController {
 
   @override
   void onInit() async {
-    this.r = Get.arguments as RequestToken;
+    _idProveedor = Get.arguments[0] as int;
+    aplicaCupon = Get.arguments[1] as bool;
+
+    this.r = await LocalAuth().getSession();
     await this.loadCategorias();
+
+    if (aplicaCupon) {
+      cupon = Get.arguments[2] as Cupon;
+    }
+
     super.onInit();
   }
 }

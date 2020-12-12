@@ -11,11 +11,11 @@ class ListHistoricoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ListHistoricoController>(
         builder: (_) =>
-            Switcher(ListDoneJobProveedor(), ListDoneJobEmpresa(), 2));
+            Switcher(ListHistoricoProveedor(), ListHistoricoEmpresa(), 2));
   }
 }
 
-class ListDoneJobProveedor extends StatelessWidget {
+class ListHistoricoProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListHistoricoController>(
@@ -24,8 +24,8 @@ class ListDoneJobProveedor extends StatelessWidget {
                 slivers: [
                   //AppBar
                   CustomAppBar(
-                    onTap: () => print(""),
-                    title: 'Mi Portafolio',
+                    onTap: () => Get.back(),
+                    title: 'Mi Historial',
                   ),
                   // Lista de copones
                   SliverPadding(
@@ -48,7 +48,7 @@ class ListDoneJobProveedor extends StatelessWidget {
   }
 }
 
-class ListDoneJobEmpresa extends StatelessWidget {
+class ListHistoricoEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListHistoricoController>(

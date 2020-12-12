@@ -116,7 +116,8 @@ class ProfileProveedor extends StatelessWidget {
             titleButton: "Solicitud directa",
             instruction:
                 "Solicitar servicio del proveedor dependiendo de los servicios que ofrece",
-            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE),
+            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE,
+                arguments: [_.getProveedor.id, false, null]),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

@@ -6,7 +6,7 @@ import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 
 class DetailsCuponController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
-  RequestToken _r;
+  RequestToken r;
   Cupon _cupon;
   int _tipoUser;
 

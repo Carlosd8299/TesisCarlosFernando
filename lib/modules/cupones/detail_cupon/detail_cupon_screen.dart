@@ -373,7 +373,8 @@ class DetailsCuponEmpresa extends StatelessWidget {
         bottomNavigationBar: ButtomBottomNav(
             titleButton: "Aplicar cupon",
             instruction: "Crear una solicitud directa para aplicar este cupon",
-            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE),
+            onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTACREATE,
+                arguments: [cupon.idProveedor, true, cupon]),
             icon: Icon(FontAwesomeIcons.shoePrints),
             color: Colors.black),
       ),
