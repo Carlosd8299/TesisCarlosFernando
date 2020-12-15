@@ -18,6 +18,7 @@ class SingleOferta extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(12.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.memory(
             base64Decode(srcImageProveedor),
@@ -25,17 +26,19 @@ class SingleOferta extends StatelessWidget {
             height: 50,
           ),
           SizedBox(
-            width: 30,
+            width: 10,
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 nombreProveedor,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              Text(
-                fechaSubidaOferta,
-              ),
+              Text(fechaSubidaOferta,
+                  style: TextStyle(
+                    fontSize: 14,
+                  )),
             ],
           )
         ],

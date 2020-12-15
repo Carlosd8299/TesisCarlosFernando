@@ -336,7 +336,7 @@ class HomeEmpresa extends StatelessWidget {
                                           .cantidad
                                           .toString() +
                                       " proveedores",
-                                  color: Constants.colorlist[28]);
+                                  color: Constants.colorlist[index]);
                             });
                       }),
                 ),

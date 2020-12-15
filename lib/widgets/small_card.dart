@@ -16,13 +16,19 @@ class SmallCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(12.0),
-      width: 150,
-      height: 110,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(title),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(5.0),
+            child: Text(title),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          ),
           Text(
             subtitle,
             style: Theme.of(context).textTheme.bodyText1,

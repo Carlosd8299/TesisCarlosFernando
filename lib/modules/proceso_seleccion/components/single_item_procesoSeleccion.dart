@@ -45,23 +45,21 @@ class SingleItemProcesoSeleccion extends StatelessWidget {
               SizedBox(width: 3),
               Text(procesoSeleccion.nombreEstado),
             ]),
-            Row(children: [
-              Text(
-                "Servicio: ",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(width: 3),
-              Text(procesoSeleccion.nombreServicio),
-            ]),
-            Row(children: [
-              Text(
-                "Categoría: ",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(width: 3),
-              // Text(procesoSeleccion.),
-            ]),
-            Text("Fecha de ejecución del servicio"),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Servicio asociado:",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 5),
+                Text(procesoSeleccion.nombreServicio),
+              ],
+            ),
+            Text(
+              "Fecha de ejecución del servicio:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             SizedBox(width: 5),
             Text(procesoSeleccion.fechaSolicitud.toString()),
           ],

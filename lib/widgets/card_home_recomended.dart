@@ -35,7 +35,7 @@ class CardRecomended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,9 +43,19 @@ class CardRecomended extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(this.empresa.trim()),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    this.empresa.trim(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                ),
                 Container(
                   width: 70,
                   height: 60,
@@ -77,7 +87,7 @@ class CardRecomended extends StatelessWidget {
                       itemCount: this.arrayCategorias.length,
                       itemBuilder: (context, index) {
                         String categoria = this.arrayCategorias[index];
-                        Color color = Constants.colorlist[0];
+                        Color color = Constants.colorlist[index];
                         return Container(
                           margin: const EdgeInsets.symmetric(
                               horizontal: 5.0, vertical: 10),
@@ -95,7 +105,7 @@ class CardRecomended extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 categoria.trim(),
-                                style: TextStyle(color: Constants.blacktitles),
+                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
@@ -129,7 +139,7 @@ class CardRecomended extends StatelessWidget {
                             padding: const EdgeInsets.all(6.0),
                             child: Text(
                               categoria,
-                              style: TextStyle(color: Constants.blacktitles),
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -145,7 +155,7 @@ class CardRecomended extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Constants.withe,
+          color: Constants.bluelight,
           boxShadow: [
             BoxShadow(
                 color: Colors.black38, blurRadius: 6, offset: Offset(1, 3))

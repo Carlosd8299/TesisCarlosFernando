@@ -25,18 +25,37 @@ class OwnProfileProveedor extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
       builder: (_) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size(0, 50),
+          child: AppBar(
+            elevation: 0,
+            actions: [
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                child: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.home,
+                      color: Colors.black,
+                    ),
+                    onPressed: () =>
+                        Get.toNamed(AppRoutes.HOME, arguments: _.getR)),
+              )
+            ],
+          ),
+        ),
         backgroundColor: Constants.bluelight,
         body: SingleChildScrollView(
           child: Column(
             children: [
               //Foto de perfil
-              SafeArea(
-                child: CircleAvatar(
-                  backgroundImage:
-                      MemoryImage(base64Decode(_.r.usuario.profileImage)),
-                  radius: 80,
-                ),
+              CircleAvatar(
+                backgroundImage:
+                    MemoryImage(base64Decode(_.r.usuario.profileImage)),
+                radius: 80,
               ),
+
               SizedBox(height: 20),
               //Comienza el contenedor blanco
               Container(
@@ -71,52 +90,52 @@ class OwnProfileProveedor extends StatelessWidget {
                                   _.getProveedor.cantidadDirecta.toString());
                         }),
                     //Aqui comienza el menu de botones
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              CardButtonProfile(
-                                  color: Constants.colorlist[0],
-                                  label: "Mi cuponera",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTCUPON,
-                                        arguments: [_.r, _.getProveedor]);
-                                  },
-                                  icon: Icons.receipt),
-                              CardButtonProfile(
-                                  color: Constants.colorlist[1],
-                                  label: "Mis procesos de seleccion",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTPROCESO,
-                                        arguments: _.r);
-                                  },
-                                  icon: Icons.low_priority)
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              CardButtonProfile(
-                                  color: Constants.colorlist[2],
-                                  label: "Mi Portafolio",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTDONEJOB,
-                                        arguments: [_.getProveedor, 1]);
-                                  },
-                                  icon: Icons.card_travel),
-                              CardButtonProfile(
-                                  color: Constants.colorlist[3],
-                                  label: "Historico de ItSuit",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTHISTORICO,
-                                        arguments: _.getProveedor);
-                                  },
-                                  icon: Icons.history)
-                            ],
-                          )
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[0],
+                                label: "Mi cuponera",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.LISTCUPON,
+                                      arguments: [_.r, _.getProveedor]);
+                                },
+                                icon: Icons.receipt),
+                            CardButtonProfile(
+                                color: Constants.colorlist[1],
+                                label: "Mis procesos de seleccion",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.LISTPROCESO,
+                                      arguments: _.r);
+                                },
+                                icon: Icons.low_priority)
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[2],
+                                label: "Mi Portafolio",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.LISTDONEJOB,
+                                      arguments: [_.getProveedor, 1]);
+                                },
+                                icon: Icons.card_travel),
+                            CardButtonProfile(
+                                color: Constants.colorlist[3],
+                                label: "Historico de ItSuit",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.LISTHISTORICO,
+                                      arguments: _.getProveedor);
+                                },
+                                icon: Icons.history)
+                          ],
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -142,6 +161,26 @@ class OwnProfileEmpresa extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<OwnProfileController>(
       builder: (_) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size(0, 50),
+          child: AppBar(
+            elevation: 0,
+            actions: [
+              Container(
+                padding: EdgeInsets.all(5),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                child: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.home,
+                      color: Colors.black,
+                    ),
+                    onPressed: () =>
+                        Get.toNamed(AppRoutes.HOME, arguments: _.getR)),
+              )
+            ],
+          ),
+        ),
         backgroundColor: Constants.bluelight,
         body: SingleChildScrollView(
           child: Column(
@@ -172,8 +211,8 @@ class OwnProfileEmpresa extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(height: 20),
                     GetBuilder<OwnProfileController>(
                         id: "cabeceraSolcitante",
                         builder: (_) {
@@ -186,34 +225,29 @@ class OwnProfileEmpresa extends StatelessWidget {
                               thirdTitle: _.getSolicitante.cantidadProveedor
                                   .toString());
                         }),
-                    FaIcon(FontAwesomeIcons.gamepad),
+                    SizedBox(height: 10),
                     //Aqui comienza el menu de botones
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              CardButtonProfile(
-                                  color: Constants.colorlist[0],
-                                  label: "Mis procesos de seleccion",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTPROCESO,
-                                        arguments: _.r);
-                                  },
-                                  icon: Icons.low_priority),
-                              CardButtonProfile(
-                                  color: Constants.colorlist[2],
-                                  label: "Solicitudes directas",
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.LISTOFERTAS,
-                                        arguments: _.r);
-                                  },
-                                  icon: Icons.send),
-                            ],
-                          )
-                        ],
-                      ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[0],
+                                label: "Mis procesos de seleccion",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.LISTPROCESO,
+                                      arguments: _.r);
+                                },
+                                icon: Icons.low_priority),
+                            CardButtonProfile(
+                                color: Constants.colorlist[2],
+                                label: "Solicitudes directas",
+                                onTap: () {},
+                                icon: Icons.send),
+                          ],
+                        )
+                      ],
                     ),
                   ],
                 ),
