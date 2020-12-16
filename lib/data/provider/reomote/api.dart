@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
@@ -26,6 +29,24 @@ class Apis {
       final Response response =
           await _dio.get('Solicitud/proveedor', queryParameters: {"id": id});
       return ProveedorAplicoOferta.fromJson(response.data);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<String> uploadImage(PickedFile image, int id) async {
+    try {
+      String fileName = image.path.split('/').last;
+      print(fileName);
+      FormData formData = FormData.fromMap({
+        "image": await MultipartFile.fromFile(image.path,
+            filename: fileName, contentType: new MediaType('image', 'jpeg')),
+      });
+
+      final Response response = await _dio.post('upload/save-image',
+          queryParameters: {"idUsuario": id}, data: formData);
+
+      return response.data['data']['imagen'];
     } catch (e) {
       return null;
     }
