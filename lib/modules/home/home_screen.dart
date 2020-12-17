@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
+import 'package:itsuit/data/models/SolicitudCategorias.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/modules/home/home_controller.dart';
 import 'package:itsuit/routes/my_routes.dart';
@@ -169,16 +170,17 @@ class HomeProveedor extends StatelessWidget {
                                   ? 0
                                   : _.getListCantSolicitudesCategoria.length,
                               itemBuilder: (context, index) {
-                                return SmallCard(
-                                    title: _
-                                        .getListCantSolicitudesCategoria[index]
-                                        .categoria,
-                                    subtitle:
-                                        _.getListCantSolicitudesCategoria[index]
-                                                .cantidad
-                                                .toString() +
+                                Datum data =
+                                    _.getListCantSolicitudesCategoria[index];
+                                return GestureDetector(
+                                    child: SmallCard(
+                                        title: data.categoria,
+                                        subtitle: data.cantidad.toString() +
                                             " solicitudes",
-                                    color: Constants.colorlist[28]);
+                                        color: Constants.colorlist[28]),
+                                    onTap: () => Get.toNamed(
+                                        AppRoutes.LISTPROCESO,
+                                        arguments: [_.r, data.id]));
                               });
                         })),
               ],

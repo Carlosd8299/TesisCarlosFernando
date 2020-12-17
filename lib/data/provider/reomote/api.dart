@@ -131,6 +131,23 @@ class Apis {
     }
   }
 
+  Future<ProcesosDeSeleccion> getListSolicitudesxCategoria(
+      int idCategoria) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response = await _dio
+            .get('Solicitud', queryParameters: {"id_categoria": idCategoria});
+        return ProcesosDeSeleccion.fromJson(response.data);
+      } else {
+        return throw Error();
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
 // ignore: non_constant_identifier_names
   Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero) async {
     try {

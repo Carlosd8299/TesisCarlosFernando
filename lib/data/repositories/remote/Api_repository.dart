@@ -34,6 +34,9 @@ class ApiRepository {
   Future<ProcesosDeSeleccion> getListSolicitudes() =>
       _apis.getListSolicitudes();
 
+  Future<ProcesosDeSeleccion> getListSolicitudesxCategoria(int idCategoria) =>
+      _apis.getListSolicitudesxCategoria(idCategoria);
+
   Future<Proveedores> getListProveedores([bool idUser]) =>
       _apis.getListProveedores(idUser);
 
