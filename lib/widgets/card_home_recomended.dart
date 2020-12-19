@@ -35,39 +35,42 @@ class CardRecomended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(5.0),
-                  child: Text(
-                    this.empresa.trim(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(5.0),
+                child: Text(
+                  this.empresa.trim(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Container(
-                  width: 70,
-                  height: 60,
-                  child: (profileImage == null)
-                      ? Image.network(
-                          "https://es.logodownload.org/wp-content/uploads/2018/10/coca-cola-logo-11-1024x335.png",
-                          fit: BoxFit.contain,
-                        )
-                      : Image.memory(base64Decode(profileImage)),
-                )
-              ],
-            ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              SizedBox(
+                width: 60,
+              ),
+              //const Spacer(),
+              Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                width: 70,
+                height: 70,
+                child: (profileImage == null)
+                    ? Image.network(
+                        "https://es.logodownload.org/wp-content/uploads/2018/10/coca-cola-logo-11-1024x335.png",
+                        fit: BoxFit.contain,
+                      )
+                    : Image.memory(base64Decode(profileImage)),
+              )
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -155,7 +158,7 @@ class CardRecomended extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Constants.bluelight,
+          color: Constants.bluecake,
           boxShadow: [
             BoxShadow(
                 color: Colors.black38, blurRadius: 6, offset: Offset(1, 3))

@@ -258,9 +258,9 @@ class ApiRepository {
       _apis.consultarCategoriasProveedor(idProveedor);
 
 // Agregar una categoria al proveedor
-  Future<bool> addCategoriasProveedor(@required int idProveedor,
-          @required int idcategoria, @required int estado) =>
-      _apis.addCategoriasProveedor(idProveedor, idcategoria, estado);
+  Future<bool> addCategoriasProveedor(
+          @required int idProveedor, @required int idcategoria) =>
+      _apis.addCategoriasProveedor(idProveedor, idcategoria, 1);
 
   Future<bool> createContraOferta(
     int idOferta,

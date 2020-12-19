@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:itsuit/modules/add_categories_proveedor/add_categories_proveedor_binding.dart';
+import 'package:itsuit/modules/add_categories_proveedor/add_categories_proveedor_screen.dart';
 import 'package:itsuit/modules/cupones/create_cupon/create_cupon_binding.dart';
 import 'package:itsuit/modules/cupones/create_cupon/create_cupon_screen.dart';
 import 'package:itsuit/modules/cupones/detail_cupon/detail_cupon_binding.dart';
@@ -32,6 +34,8 @@ import 'package:itsuit/modules/profile/profile_screen.dart';
 import 'package:itsuit/modules/screens.dart';
 import 'package:itsuit/modules/seleccion_directa/detail_seleccion_directa/detail_seleccion_directa_binding.dart';
 import 'package:itsuit/modules/seleccion_directa/detail_seleccion_directa/detail_seleccion_directa_screen.dart';
+import 'package:itsuit/modules/seleccion_directa/list_seleccion_directa/list_seleccion_directa_binding.dart';
+import 'package:itsuit/modules/seleccion_directa/list_seleccion_directa/list_seleccion_directa_screen.dart';
 import 'package:itsuit/modules/seleccion_directa/seleccion_directa_create/create_seleccion_directa_binding.dart';
 import 'package:itsuit/modules/seleccion_directa/seleccion_directa_create/create_seleccion_directa_screen.dart';
 import 'package:itsuit/modules/sign_up/sign_up_binding.dart';
@@ -108,8 +112,13 @@ class AppPages {
       binding: DetailsCuponBinding(),
     ),
 
-    //Portafolio - 3 rutas
+    //Portafolio - 4 rutas
     //
+    GetPage(
+      name: AppRoutes.ADDCATEGORIAPROVEEDOR,
+      page: () => AddCategoriasProveedorScreen(),
+      binding: AddCategoriesBinding(),
+    ),
     GetPage(
       name: AppRoutes.CREATEDONEJOB,
       page: () => CreateDoneJobScreen(),
@@ -130,7 +139,7 @@ class AppPages {
       page: () => ListHistoricoScreen(),
       binding: ListHistoricoBinding(),
     ),
-    //Seleccion Directa - 2 rutas
+    //Seleccion Directa - 3 rutas
     //
     GetPage(
         name: AppRoutes.SELECCIONDIRECTACREATE,
@@ -140,6 +149,10 @@ class AppPages {
         name: AppRoutes.SELECCIONDIRECTADETAIL,
         page: () => SeleccionDirectaDetailScreen(),
         binding: DetailSeleccionDirectaBinding()),
+    GetPage(
+        name: AppRoutes.SELECCIONDIRECTALIST,
+        page: () => ListSeleccionDirectaScreen(),
+        binding: ListSeleccionDirectaBinding()),
     // Proceso de seleccion - 7 rutas
     //
     GetPage(

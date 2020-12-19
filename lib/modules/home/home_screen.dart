@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
@@ -41,7 +42,6 @@ class HomeProveedor extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 70,
-                backgroundColor: Colors.black,
                 child: CircleAvatar(
                   radius: 65,
                   backgroundImage: MemoryImage(
