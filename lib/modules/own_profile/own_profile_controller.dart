@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/request_token.dart';
@@ -13,9 +16,19 @@ class OwnProfileController extends GetxController {
   Empresa _solicitante = Empresa();
   Proveedor get getProveedor => _proveedores;
   Empresa get getSolicitante => _solicitante;
+  String _image = "";
 
   get getR => r;
   get getIdTipo => idtipo;
+  String get getProfileImage => _image;
+
+  Future<void> changedProfileImage(PickedFile image) async {
+    String response = await _apirepo.uploadImage(image, r.usuario.id);
+    if (response != null) {
+      _image = response;
+      update(['profile']);
+    }
+  }
 
   Future<void> loadSolicitante() async {
     final data = await _apirepo.getListSolicitante();
@@ -43,6 +56,7 @@ class OwnProfileController extends GetxController {
     r = Get.arguments as RequestToken;
     idtipo = r.usuario.idTipoUsuario;
 
+    this._image = r.usuario.profileImage;
     if (this.idtipo == 2) {
       await this.loadSolicitante();
     } else {

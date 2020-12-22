@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/modules/own_profile/components/card_button_profile.dart';
 import 'package:itsuit/modules/own_profile/components/social_counter.dart';
 import 'package:itsuit/modules/own_profile/own_profile_controller.dart';
@@ -18,6 +19,48 @@ class OwnProfileScreen extends StatelessWidget {
           _.r.usuario.idTipoUsuario),
     );
   }
+}
+
+Future<void> _showSelectionDialog(
+    BuildContext context, OwnProfileController _) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: Text("¿De donde desea tomar la foto?"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text("Galeria"),
+                    onTap: () {
+                      _openImage(context, _, 2);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8.0)),
+                  GestureDetector(
+                    child: Text("Camara"),
+                    onTap: () {
+                      _openImage(context, _, 1);
+                    },
+                  )
+                ],
+              ),
+            ));
+      });
+}
+
+void _openImage(
+    BuildContext context, OwnProfileController _, int pSource) async {
+  var picture = await ImagePicker().getImage(
+      source: (pSource == 1) ? ImageSource.camera : ImageSource.gallery,
+      maxWidth: 80,
+      maxHeight: 80,
+      imageQuality: 85);
+  if (picture != null) {
+    _.changedProfileImage(picture);
+  }
+  Navigator.of(context).pop();
 }
 
 class OwnProfileProveedor extends StatelessWidget {
@@ -49,12 +92,19 @@ class OwnProfileProveedor extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              //Foto de perfil
-              CircleAvatar(
-                backgroundImage:
-                    MemoryImage(base64Decode(_.r.usuario.profileImage)),
-                radius: 80,
-              ),
+              GetBuilder<OwnProfileController>(
+                  id: 'profile',
+                  builder: (_) => GestureDetector(
+                        child: //Foto de perfil
+                            CircleAvatar(
+                          backgroundImage:
+                              MemoryImage(base64Decode(_.getProfileImage)),
+                          radius: 80,
+                        ),
+                        onTap: () {
+                          _showSelectionDialog(context, _);
+                        },
+                      )),
 
               SizedBox(height: 20),
               //Comienza el contenedor blanco
@@ -187,11 +237,19 @@ class OwnProfileEmpresa extends StatelessWidget {
             children: [
               //Foto de perfil
               SafeArea(
-                child: CircleAvatar(
-                  backgroundImage:
-                      MemoryImage(base64Decode(_.r.usuario.profileImage)),
-                  radius: 80,
-                ),
+                child: GetBuilder<OwnProfileController>(
+                    id: 'profile',
+                    builder: (_) => GestureDetector(
+                          child: //Foto de perfil
+                              CircleAvatar(
+                            backgroundImage:
+                                MemoryImage(base64Decode(_.getProfileImage)),
+                            radius: 80,
+                          ),
+                          onTap: () {
+                            _showSelectionDialog(context, _);
+                          },
+                        )),
               ),
               SizedBox(height: 20),
               //Comienza el contenedor blanco
@@ -237,7 +295,7 @@ class OwnProfileEmpresa extends StatelessWidget {
                                 label: "Mis procesos de seleccion",
                                 onTap: () {
                                   Get.toNamed(AppRoutes.LISTPROCESO,
-                                      arguments: _.r);
+                                      arguments: [_.r, null]);
                                 },
                                 icon: Icons.low_priority),
                             CardButtonProfile(

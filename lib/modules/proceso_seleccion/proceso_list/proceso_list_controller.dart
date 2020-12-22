@@ -6,7 +6,7 @@ import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 class ProcesoListController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   RequestToken r;
-
+  int idCategoria;
   List<ProcesoSeleccion> _listProcesosDeSeleccion = [];
 
   List<ProcesoSeleccion> get getListProcesosSeleccion =>
@@ -18,16 +18,22 @@ class ProcesoListController extends GetxController {
     update(['listaSolicitudes']);
   }
 
-  @override
-  void onInit() async {
-    r = Get.arguments as RequestToken;
-    this.loadSolcitudes();
-    super.onInit();
+  void loadSolicitudesCategoria() async {
+    final data = await _apirepo.getListSolicitudesxCategoria(this.idCategoria);
+    _listProcesosDeSeleccion = data.data;
+    update(['listaSolicitudes']);
   }
 
   @override
-  void onClose() {
-    print("onClose");
-    super.onClose();
+  void onInit() async {
+    r = Get.arguments[0] as RequestToken;
+    idCategoria = Get.arguments[1] as int;
+    if (idCategoria != null) {
+      this.loadSolicitudesCategoria();
+    } else {
+      this.loadSolcitudes();
+    }
+
+    super.onInit();
   }
 }

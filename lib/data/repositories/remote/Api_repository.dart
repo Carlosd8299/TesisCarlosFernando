@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
@@ -17,6 +18,8 @@ import 'package:itsuit/data/provider/reomote/api.dart';
 
 class ApiRepository {
   final Apis _apis = Get.find<Apis>();
+  Future<String> uploadImage(PickedFile image, int id) =>
+      _apis.uploadImage(image, id);
   Future<Ubicacion> getCiudades() => _apis.getListCiudades();
   Future<RegimenTributario> getRegimenes() => _apis.getListTributario();
   Future<ActividadEconomica> getActEco() => _apis.getListActEco();
@@ -30,6 +33,9 @@ class ApiRepository {
 
   Future<ProcesosDeSeleccion> getListSolicitudes() =>
       _apis.getListSolicitudes();
+
+  Future<ProcesosDeSeleccion> getListSolicitudesxCategoria(int idCategoria) =>
+      _apis.getListSolicitudesxCategoria(idCategoria);
 
   Future<Proveedores> getListProveedores([bool idUser]) =>
       _apis.getListProveedores(idUser);
