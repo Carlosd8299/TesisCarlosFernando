@@ -205,7 +205,7 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
             titleButton: "Aplicar",
             instruction:
                 "Empezar a participar en la puja, ofrecer alternativas, ofrecer un alcance, presupuesto y tiempos distintos",
-            onTap: () => Get.to(CreateOfertaScreen()),
+            onTap: () => Get.toNamed(AppRoutes.CREATEOFERTA),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),
