@@ -42,7 +42,7 @@ class _OfertaCreateScreenState extends State<OfertaCreateScreen> {
                 sliver: SliverToBoxAdapter(
                     child: CustomField(
                         type: TextInputType.name,
-                        function: (value) => _.onPresupuestoChanged(value),
+                        function: (value) => _.onTituloChanged(value),
                         label: 'Nombre de la propuesta',
                         hint: 'Ej: Propuesta de ejecución proyecto CGTI'))),
             //Texbox descripción de la propuesta
@@ -52,7 +52,7 @@ class _OfertaCreateScreenState extends State<OfertaCreateScreen> {
                     child: CustomField(
                         maxlines: 4,
                         type: TextInputType.text,
-                        function: (value) => _.onPresupuestoChanged(value),
+                        function: (value) => _.onDescChanged(value),
                         label: 'Descripción de la propuesta',
                         hint:
                             'Contenido de la propuesta de valor para el proceso de selección'))),
@@ -103,10 +103,10 @@ class _OfertaCreateScreenState extends State<OfertaCreateScreen> {
         bottomNavigationBar: ButtomBottomNav(
               titleButton: "Crear oferta",
               instruction: "Envíale tu propuesta a la empresa para participar de este proceso de seleecion",
-              onTap: () => _.crearSolicitud(),
+              onTap: () => _.crearOferta(),
               icon: Icon(Icons.arrow_forward),
               color: Colors.black)),
-      ),
-    );
+      
+  );
   }
 }
