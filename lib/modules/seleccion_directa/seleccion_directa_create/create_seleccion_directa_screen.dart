@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/label.dart';
-import 'package:itsuit/modules/proceso_seleccion/proceso_create/create_proceso_controller.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/widgets/widgets.dart';
 import 'create_seleccion_directa_controller.dart';
