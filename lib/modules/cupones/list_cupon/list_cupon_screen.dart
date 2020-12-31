@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/modules/cupones/list_cupon/list_cupon_controller.dart';
 import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/widgets/switcher.dart';
 import 'package:itsuit/widgets/widgets.dart';
-import '../../screens.dart';
 import 'components/single_cupon.dart';
 
 class ListCuponScreen extends StatelessWidget {

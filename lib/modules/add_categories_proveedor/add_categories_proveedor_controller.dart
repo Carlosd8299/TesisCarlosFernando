@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
-import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
-import 'package:flutter/material.dart';
 
 class AddCategoriesController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
@@ -24,7 +23,7 @@ class AddCategoriesController extends GetxController {
 // Obtener las categorias del end point
   Future<void> loadCategorias() async {
     final data = await _apirepo.getCategorias();
-    _categorias = data.data;
+    this._categorias = data.data;
     update(['categorias']);
   }
 
@@ -45,17 +44,44 @@ class AddCategoriesController extends GetxController {
   }
 
 // Obetner los servisios del en point dada una categoria
-  onCategoriaSubmited() {
+  void onCategoriaSubmited() async {
     if (_selectedIndexCategoria != 0) {
-      _apirepo.addCategoriasProveedor(
-          _r.usuario.idTercero, _selectedIndexCategoria);
+      bool permite = this.busqueda();
+      print(permite);
+      if (permite) {
+        bool resp = await _apirepo.addCategoriasProveedor(
+            _r.usuario.idTercero, _selectedIndexCategoria);
+        if (resp) {
+          update(['categorias_proveedor']);
+        }
+      } else {
+        Get.dialog(AlertDialog(
+            title: Text("Advertencia"),
+            content: Text(
+                "Debe seleccionar una categoría la cual no haya sido asignada"),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("¡OK!"))
+            ]));
+      }
     }
+  }
+
+  bool busqueda() {
+    Categoria objeto = this._categoriasProveedor.firstWhere(
+        (Categoria data) => data.id == _selectedIndexCategoria,
+        orElse: () => null);
+    print(objeto);
+    return (objeto != null) ? true : false;
   }
 
   @override
   void onInit() async {
     this._r = await LocalAuth().getSession();
-    this.loadCategorias();
+    await this.loadCategorias();
     this.loadCategoriasProveedor();
     super.onInit();
   }

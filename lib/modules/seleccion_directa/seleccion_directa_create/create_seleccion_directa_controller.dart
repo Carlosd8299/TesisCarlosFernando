@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Categorias.dart';
-import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/Servicios.dart';
 import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/request_token.dart';

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 
 import 'package:itsuit/routes/my_routes.dart';
 
 class SingleSeleccionDirectaItem extends StatelessWidget {
+  final ProcesoSeleccion datos;
+  final int tipoUsuario;
+  const SingleSeleccionDirectaItem(
+      {Key key, @required this.datos, @required this.tipoUsuario})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTADETAIL),
+      onTap: () => Get.toNamed(AppRoutes.SELECCIONDIRECTADETAIL,
+          arguments: [datos, this.tipoUsuario]),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -23,7 +30,7 @@ class SingleSeleccionDirectaItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Seleccion directa.titulo",
+              datos.titulo.trim(),
               style: TextStyle(
                   color: Colors.blue[900],
                   fontSize: 22,
@@ -35,7 +42,7 @@ class SingleSeleccionDirectaItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(width: 3),
-              Text("Seleccion directa.nombreEstado"),
+              Text(datos.nombreEstado.trim()),
             ]),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +52,7 @@ class SingleSeleccionDirectaItem extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 5),
-                Text("nombreServicio"),
+                Text(datos.nombreServicio),
               ],
             ),
             Text(
@@ -53,7 +60,7 @@ class SingleSeleccionDirectaItem extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(width: 5),
-            Text("colorcar fecha de ejecución del servicio"),
+            Text(datos.fechaSolicitud.toString()),
           ],
         ),
       ),

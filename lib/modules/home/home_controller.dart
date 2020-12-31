@@ -3,6 +3,7 @@ import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/request_token.dart';
+import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/local/local_auth_repository.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 import 'package:itsuit/routes/my_routes.dart';
@@ -78,7 +79,16 @@ class HomeController extends GetxController {
   get getIdTipo => idtipo;
   @override
   void onInit() async {
-    r = Get.arguments as RequestToken;
+    try {
+      r = Get.arguments as RequestToken;
+    } catch (err) {
+      r = null;
+    }
+
+    if (r == null) {
+      r = await LocalAuth().getSession();
+    }
+
     idtipo = r.usuario.idTipoUsuario;
     try {
       if (idtipo == 1) {

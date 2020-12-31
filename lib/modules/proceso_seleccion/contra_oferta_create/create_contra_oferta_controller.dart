@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
+import 'package:itsuit/routes/my_routes.dart';
 
 class CreateContraOfertaController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
@@ -28,6 +30,32 @@ class CreateContraOfertaController extends GetxController {
         (new DateFormat("yyyy-MM-dd").format(new DateTime.now())).toString(),
         plazo,
         descripcion);
+
+    if (response) {
+      Get.dialog(AlertDialog(
+          title: Text("¡Proceso exitoso!"),
+          content: Text("Se ha creado la contraoferta"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                  Get.offNamed(AppRoutes.LISTPROCESO, arguments: [r, null]);
+                },
+                child: Text("OK"))
+          ]));
+    } else {
+      Get.dialog(AlertDialog(
+          title: Text("¡Ha ocurrido un error!"),
+          content:
+              Text("Por favor verifique que toda la información esté completa"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("OK"))
+          ]));
+    }
   }
 
   @override

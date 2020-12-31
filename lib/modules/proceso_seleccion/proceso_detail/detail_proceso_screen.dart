@@ -7,8 +7,6 @@ import 'package:itsuit/data/models/ProveedorAplicoOferta.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/single_oferta_proveedor.dart';
 import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/widgets/widgets.dart';
-
-import '../../screens.dart';
 import 'detail_proceso_controller.dart';
 
 class DetailProcesoScreen extends StatelessWidget {
@@ -205,7 +203,8 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
             titleButton: "Aplicar",
             instruction:
                 "Empezar a participar en la puja, ofrecer alternativas, ofrecer un alcance, presupuesto y tiempos distintos",
-            onTap: () => Get.toNamed(AppRoutes.CREATEOFERTA),
+            onTap: () =>
+                Get.toNamed(AppRoutes.CREATEOFERTA, arguments: _.getProceso),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),

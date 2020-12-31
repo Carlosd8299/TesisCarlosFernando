@@ -35,4 +35,6 @@ class AppRoutes {
   static const LISTHISTORICO = "listHistorico";
   //
   static const ADDCATEGORIAPROVEEDOR = "addCategoriaProveedor";
+  //
+  static const LISTPROVEEDORES = "listProveedores";
 }

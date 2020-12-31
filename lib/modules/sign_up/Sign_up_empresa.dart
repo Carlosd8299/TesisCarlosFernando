@@ -5,6 +5,7 @@ import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/modules/sign_up/sign_up_controller.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class SignUpEmpresa extends StatelessWidget {
   List<DropdownMenuItem<int>> items2 = [
     DropdownMenuItem(

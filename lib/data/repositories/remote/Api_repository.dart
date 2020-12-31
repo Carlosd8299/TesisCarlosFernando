@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/data/models/Categorias.dart';
@@ -34,11 +33,15 @@ class ApiRepository {
   Future<ProcesosDeSeleccion> getListSolicitudes() =>
       _apis.getListSolicitudes();
 
+  Future<ProcesosDeSeleccion> getListSolicitudesDirectas(
+          int tipoUsuario, int idTercero) =>
+      _apis.getListSolicitudesDirectas(tipoUsuario, idTercero);
+
   Future<ProcesosDeSeleccion> getListSolicitudesxCategoria(int idCategoria) =>
       _apis.getListSolicitudesxCategoria(idCategoria);
 
-  Future<Proveedores> getListProveedores([bool idUser]) =>
-      _apis.getListProveedores(idUser);
+  Future<Proveedores> getListProveedores([bool idUser, int idCategoria]) =>
+      _apis.getListProveedores(idUser, idCategoria);
 
   Future<SolicitudCategorias> getListCantProveedorCategoria() =>
       _apis.getListCantProveedorCategoria();
@@ -55,7 +58,8 @@ class ApiRepository {
       _apis.getListOfertas(idSolicitud);
   Future<bool> cambioEstadoOferta(int idOferta, int estado) =>
       _apis.cambioEstadoOferta(idOferta, estado);
-
+  Future<bool> cambioEstadoSolicitud(int idSolicitud, int estado) =>
+      _apis.cambioEstadoSolicitud(idSolicitud, estado);
   Future<bool> crearSolicitud(
           // ignore: non_constant_identifier_names
           id_servicio,
@@ -135,24 +139,24 @@ class ApiRepository {
 
 //Obtener info un proveedor
 
-  Future<Proveedor> getProveedor(@required idProveedor) =>
+  Future<Proveedor> getProveedor(idProveedor) =>
       _apis.getProveedor(idProveedor);
   // Modificar un proveedor
 
   Future<bool> updateProveedor(
-    @required int idProveedor,
-    @required int idTipoDocumento,
-    @required int idRegimenTributario,
-    @required int idCiudad,
-    @required String dni,
-    @required String digito,
-    @required String nombreProveedor,
-    @required String fechaRegistro,
-    @required String email,
-    @required String telefono,
-    @required String celular,
-    @required String direccion,
-    @required int tiempoExperiencia,
+    int idProveedor,
+    int idTipoDocumento,
+    int idRegimenTributario,
+    int idCiudad,
+    String dni,
+    String digito,
+    String nombreProveedor,
+    String fechaRegistro,
+    String email,
+    String telefono,
+    String celular,
+    String direccion,
+    int tiempoExperiencia,
   ) =>
       _apis.updateProveedor(
           idProveedor,
@@ -174,13 +178,13 @@ class ApiRepository {
 //------------------------
 
 // consultar cupones del proveedor
-  Future<List<Cupon>> consultarCuponesProveedor(@required int idProveedor) =>
+  Future<List<Cupon>> consultarCuponesProveedor(int idProveedor) =>
       _apis.consultarTodosCuponesProveedor(idProveedor);
 
 // Consultar un cupon espeficio de un proveedor
   Future<Cupon> consultarSingleCupon(
-    @required int idProveedor,
-    @required int idCupon,
+    int idProveedor,
+    int idCupon,
   ) =>
       _apis.consultarCuponesEspecifico(idProveedor, idCupon);
 // Crear cupon
@@ -199,16 +203,16 @@ class ApiRepository {
 
   // Actualizar cupon
   Future<bool> actualizarCupon(
-    @required int idCupon,
-    @required int idProveedor,
-    @required int idServicio,
-    @required String fechaInicio,
-    @required String fechaFin,
-    @required String titulo,
-    @required String descripcion,
-    @required int precioNormal,
-    @required int precioDescuento,
-    @required int porcentajeDescuento,
+    int idCupon,
+    int idProveedor,
+    int idServicio,
+    String fechaInicio,
+    String fechaFin,
+    String titulo,
+    String descripcion,
+    int precioNormal,
+    int precioDescuento,
+    int porcentajeDescuento,
   ) =>
       _apis.updateCupon(
           idCupon,
@@ -223,12 +227,11 @@ class ApiRepository {
           porcentajeDescuento,
           1);
   //Desactivar cupon
-  Future<bool> desactivarCupon(@required int idCupon) =>
+  Future<bool> desactivarCupon(int idCupon) =>
       _apis.updateDesactivarCupon(idCupon);
 
   //Activar cupon
-  Future<bool> activarCupon(@required int idCupon) =>
-      _apis.updatActivarCupon(idCupon);
+  Future<bool> activarCupon(int idCupon) => _apis.updatActivarCupon(idCupon);
 
 //------------------------
 // Seccion de trabajo realizado y portafolio
@@ -259,13 +262,11 @@ class ApiRepository {
 //------------------------
 
 // Get categorias de un proveedor especifico
-  Future<List<Categoria>> consultarCategoriasProveedor(
-          @required int idProveedor) =>
+  Future<List<Categoria>> consultarCategoriasProveedor(int idProveedor) =>
       _apis.consultarCategoriasProveedor(idProveedor);
 
 // Agregar una categoria al proveedor
-  Future<bool> addCategoriasProveedor(
-          @required int idProveedor, @required int idcategoria) =>
+  Future<bool> addCategoriasProveedor(int idProveedor, int idcategoria) =>
       _apis.addCategoriasProveedor(idProveedor, idcategoria, 1);
 
   Future<bool> createContraOferta(
@@ -275,4 +276,9 @@ class ApiRepository {
     String descripcion,
   ) =>
       _apis.createContraOferta(idOferta, fecha, plazo, descripcion);
+
+  Future<bool> createOferta(int idSolicitud, int idTercero, String fecha,
+          String titulo, int plazo, String descripcion, double valor) =>
+      _apis.createOferta(
+          idSolicitud, idTercero, fecha, titulo, plazo, descripcion, valor);
 }

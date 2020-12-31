@@ -16,6 +16,7 @@ class _CreateDoneJobScreenState extends State<CreateDoneJobScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime selectedFechaInicio = DateTime.now();
+    // ignore: unused_local_variable
     DateTime selectedFechaFin = DateTime.now();
 
     _selectedDate(BuildContext context, function, DateTime fecha) async {

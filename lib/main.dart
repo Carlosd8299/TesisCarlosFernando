@@ -4,7 +4,6 @@ import 'package:itsuit/modules/screens.dart';
 import 'package:itsuit/routes/my_pages.dart';
 import 'package:itsuit/utils/constants.dart';
 import 'package:itsuit/utils/dependency_injection.dart';
-import 'modules/proceso_seleccion/components/single_item_contraOferta.dart';
 import 'modules/sign_up/sign_up_binding.dart';
 
 void main() {

@@ -20,7 +20,7 @@ class ListCuponController extends GetxController {
       _longitudLista = data.length;
       update(['listacupones']);
     } on HttpException catch (e) {
-      printError();
+      print(e.toString());
     }
   }
 

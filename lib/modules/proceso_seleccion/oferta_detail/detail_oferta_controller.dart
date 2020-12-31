@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
 import 'package:itsuit/data/models/request_token.dart';
@@ -25,7 +26,32 @@ class DetailOfertaController extends GetxController {
   Future<void> aprobarOferta() async {
     bool response =
         await _apirepo.cambioEstadoOferta(this.oferta.idRespuesta, 4);
-    Get.offNamed(AppRoutes.DETAILPROCESO);
+
+    if (response) {
+      Get.dialog(AlertDialog(
+          title: Text("¡Proceso exitoso!"),
+          content: Text("Se ha aprobado la oferta"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                  Get.offNamed(AppRoutes.DETAILPROCESO);
+                },
+                child: Text("OK"))
+          ]));
+    } else {
+      Get.dialog(AlertDialog(
+          title: Text("¡Ha ocurrido un error!"),
+          content: Text(
+              "No ha sido posible aprobar esta oferta, asegurese de no haber aprobado alguna anteriormente"),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("OK"))
+          ]));
+    }
     _botonActivado = false;
   }
 

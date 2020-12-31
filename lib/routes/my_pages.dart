@@ -11,6 +11,8 @@ import 'package:itsuit/modules/historico/list_historico/list_historico_binding.d
 import 'package:itsuit/modules/historico/list_historico/list_historico_screen.dart';
 import 'package:itsuit/modules/home/home_binding.dart';
 import 'package:itsuit/modules/home/home_screen.dart';
+import 'package:itsuit/modules/home/proveedor_list/proveedor_list_binding.dart';
+import 'package:itsuit/modules/home/proveedor_list/proveedor_list_screen.dart';
 import 'package:itsuit/modules/login/login_binding.dart';
 import 'package:itsuit/modules/on_boarding/on_boarding_binding.dart';
 import 'package:itsuit/modules/own_profile/own_profile_binding.dart';
@@ -187,5 +189,9 @@ class AppPages {
         name: AppRoutes.LISTPROCESO,
         page: () => ProcesoListScreen(),
         binding: ProcesoListBinding()),
+    GetPage(
+        name: AppRoutes.LISTPROVEEDORES,
+        page: () => ProveedorListScreen(),
+        binding: ProveedorListBinding()),
   ];
 }

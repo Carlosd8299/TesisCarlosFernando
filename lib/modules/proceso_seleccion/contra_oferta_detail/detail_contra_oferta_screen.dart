@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/modules/proceso_seleccion/components/colored_button.dart';
-import 'package:itsuit/modules/proceso_seleccion/components/label.dart';
 import 'package:itsuit/modules/proceso_seleccion/contra_oferta_detail/detail_contra_oferta_controller.dart';
 import 'package:itsuit/routes/my_routes.dart';
 import 'package:itsuit/utils/constants.dart';

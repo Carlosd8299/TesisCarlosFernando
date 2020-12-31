@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
@@ -331,14 +330,20 @@ class HomeEmpresa extends StatelessWidget {
                                 ? 0
                                 : _.getProveedorCategorias.length,
                             itemBuilder: (context, index) {
-                              return SmallCard(
-                                  title:
-                                      _.getProveedorCategorias[index].categoria,
-                                  subtitle: _.getProveedorCategorias[index]
-                                          .cantidad
-                                          .toString() +
-                                      " proveedores",
-                                  color: Constants.colorlist[index]);
+                              return GestureDetector(
+                                child: SmallCard(
+                                    title: _.getProveedorCategorias[index]
+                                        .categoria,
+                                    subtitle: _.getProveedorCategorias[index]
+                                            .cantidad
+                                            .toString() +
+                                        " proveedores",
+                                    color: Constants.colorlist[index]),
+                                onTap: () => Get.toNamed(
+                                    AppRoutes.LISTPROVEEDORES,
+                                    arguments:
+                                        _.getProveedorCategorias[index].id),
+                              );
                             });
                       }),
                 ),

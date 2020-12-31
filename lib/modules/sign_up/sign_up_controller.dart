@@ -25,37 +25,56 @@ class SignUpController extends GetxController {
       // ignore: non_constant_identifier_names
       _phone_empresa,
       // ignore: non_constant_identifier_names
-      _id_empresa,
-      // ignore: non_constant_identifier_names
       _year_registro_empresa,
+      // ignore: non_constant_identifier_names
+      _id_empresa,
       // ignore: non_constant_identifier_names
       _cell_empresa;
   //TYC
+  // ignore: non_constant_identifier_names
   bool _tyc_empresa = true;
   // Dropdown empresa
+  // ignore: non_constant_identifier_names
   int _tipo_documento_empresa = 1;
+  // ignore: non_constant_identifier_names
   int _selected_tributario_empresa = 1;
+  // ignore: non_constant_identifier_names
   int _selected_ciudad_empresa = 3;
+  // ignore: non_constant_identifier_names
   int _selected_act_eco_empresa = 1;
 
   // Campos de textto proveedor
+  // ignore: non_constant_identifier_names
   String _nombre_proveedor,
+      // ignore: non_constant_identifier_names
       _correo_proveedor,
+      // ignore: non_constant_identifier_names
       _direccion_proveedor,
+      // ignore: non_constant_identifier_names
       _password_proveedor,
+      // ignore: non_constant_identifier_names
       _confirm_password_proveedor,
+      // ignore: non_constant_identifier_names
       _phone_proveedor,
+      // ignore: non_constant_identifier_names
       _id_proveedor,
+      // ignore: non_constant_identifier_names
       _year_registro_proveedor,
+      // ignore: non_constant_identifier_names
       _cell_Proveedor;
 
   //bool confirmas TYC
+  // ignore: non_constant_identifier_names
   bool _tyc_proveedor = true;
 
   //Dropowns proveedor
+  // ignore: non_constant_identifier_names
   int _selected_tributario = 1;
+  // ignore: non_constant_identifier_names
   int _tipo_documento_proveedor = 1;
+  // ignore: non_constant_identifier_names
   int _selected_act_eco_proveedor = 1;
+  // ignore: non_constant_identifier_names
   int _selected_ciudad_proveedor = 1;
 // Experiencia del proveedor
   int _expProveedor;
@@ -78,7 +97,9 @@ class SignUpController extends GetxController {
   int get getTipoDocumentoEmpresa => this._tipo_documento_empresa;
   int get getRegimenTributarioEmpresa => this._selected_tributario_empresa;
   int get getActEconomicaEmpresa => this._selected_act_eco_empresa;
-
+  int get getSelectecCiudadEmpresa => this._selected_ciudad_empresa;
+  String get getYearRegistroProveedor => this._year_registro_proveedor;
+  String get getYearRegistroEmpresa => this._year_registro_empresa;
   @override
   void onReady() {
     super.onReady();

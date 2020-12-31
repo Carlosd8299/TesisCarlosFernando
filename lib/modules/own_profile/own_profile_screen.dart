@@ -123,7 +123,8 @@ class OwnProfileProveedor extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: Column(
+                child: SingleChildScrollView(
+                    child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //Aqui comienza la informacion social del proveedor
@@ -182,13 +183,25 @@ class OwnProfileProveedor extends StatelessWidget {
                                   Get.toNamed(AppRoutes.LISTHISTORICO,
                                       arguments: _.getProveedor);
                                 },
-                                icon: Icons.history)
+                                icon: Icons.history),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CardButtonProfile(
+                                color: Constants.colorlist[2],
+                                label: "Solicitudes directas",
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.SELECCIONDIRECTALIST);
+                                },
+                                icon: Icons.send),
                           ],
                         )
                       ],
                     ),
                   ],
-                ),
+                )),
               ),
             ],
           ),
@@ -198,7 +211,7 @@ class OwnProfileProveedor extends StatelessWidget {
             titleButton: "Completar mi perfil",
             instruction:
                 "Información de la compañía | Rellenar Portafolio | Asignación de categorias",
-            onTap: () => print("Hola"),
+            onTap: () => Get.toNamed(AppRoutes.ADDCATEGORIAPROVEEDOR),
             icon: Icon(Icons.arrow_forward),
             color: Colors.black),
       ),
@@ -301,7 +314,9 @@ class OwnProfileEmpresa extends StatelessWidget {
                             CardButtonProfile(
                                 color: Constants.colorlist[2],
                                 label: "Solicitudes directas",
-                                onTap: () {},
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.SELECCIONDIRECTALIST);
+                                },
                                 icon: Icons.send),
                           ],
                         )

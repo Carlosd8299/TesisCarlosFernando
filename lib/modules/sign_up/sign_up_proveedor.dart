@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
-import 'package:itsuit/data/models/ubicaciones.dart';
 import 'package:itsuit/modules/sign_up/sign_up_controller.dart';
 import 'package:itsuit/widgets/widgets.dart';
 
+// ignore: must_be_immutable
 class SignUpProveedor extends StatelessWidget {
   List<DropdownMenuItem<int>> items = [
     DropdownMenuItem(

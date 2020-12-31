@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:itsuit/data/models/Categorias.dart';
@@ -34,6 +32,26 @@ class Apis {
     }
   }
 
+  Future<ProcesosDeSeleccion> getListSolicitudesDirectas(
+      int tipoUsuario, int idTercero) async {
+    try {
+      RequestToken rq = await localAuth.getSession();
+      if (rq != null) {
+        final data = (tipoUsuario == 1)
+            ? {"id_proveedor": idTercero}
+            : {"id_solicitante": idTercero};
+        _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
+        final Response response =
+            await _dio.get('Solicitud/directa', queryParameters: data);
+        return ProcesosDeSeleccion.fromJson(response.data);
+      } else {
+        return throw Error();
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<String> uploadImage(PickedFile image, int id) async {
     try {
       String fileName = image.path.split('/').last;
@@ -58,6 +76,16 @@ class Apis {
       final Response response = await _dio.get('RegimenTributario');
       return RegimenTributario.fromJson(response.data);
     } catch (e) {}
+  }
+
+  Future<bool> cambioEstadoSolicitud(int idSolicitud, int estado) async {
+    try {
+      await _dio.put(
+          'solicitud/estado/${idSolicitud.toString()}/${estado.toString()}');
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   Future<bool> cambioEstadoOferta(int idOferta, int estado) async {
@@ -165,13 +193,15 @@ class Apis {
     }
   }
 
-  Future<Proveedores> getListProveedores([bool idUser]) async {
+  Future<Proveedores> getListProveedores([bool idUser, int idCategoria]) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio.get('proveedor',
-            queryParameters: {"idUsuario": (idUser != null) ? idUser : false});
+        final Response response = await _dio.get('proveedor', queryParameters: {
+          "idUsuario": (idUser != null) ? idUser : false,
+          "idCategoria": (idCategoria != null) ? idCategoria : null
+        });
         final Proveedores p = Proveedores.fromJson(response.data);
         return p;
       } else {
@@ -359,7 +389,7 @@ class Apis {
 
   //QueryParameters
   Future<List<Cupon>> consultarTodosCuponesProveedor(
-    @required int idProveedor,
+    int idProveedor,
   ) async {
     try {
       RequestToken rq = await localAuth.getSession();
@@ -380,8 +410,8 @@ class Apis {
 
 //queryParameters
   Future<Cupon> consultarCuponesEspecifico(
-    @required int idProveedor,
-    @required int idCupon,
+    int idProveedor,
+    int idCupon,
   ) async {
     try {
       RequestToken rq = await localAuth.getSession();
@@ -402,15 +432,15 @@ class Apis {
   }
 
   Future<bool> createCupon(
-    @required int idProveedor,
-    @required int idServicio,
-    @required String fechaInicio,
-    @required String fechaFin,
-    @required String titulo,
-    @required String descripcion,
-    @required double precioNormal,
-    @required int porcentajeDescuento,
-    @required int estado,
+    int idProveedor,
+    int idServicio,
+    String fechaInicio,
+    String fechaFin,
+    String titulo,
+    String descripcion,
+    double precioNormal,
+    int porcentajeDescuento,
+    int estado,
   ) async {
     try {
       final Response response = await _dio.post('proveedor/cupon', data: {
@@ -434,7 +464,7 @@ class Apis {
     }
   }
 
-  Future<bool> updateDesactivarCupon(@required int idCupon) async {
+  Future<bool> updateDesactivarCupon(int idCupon) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -456,7 +486,7 @@ class Apis {
     }
   }
 
-  Future<bool> updatActivarCupon(@required int idCupon) async {
+  Future<bool> updatActivarCupon(int idCupon) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -480,17 +510,17 @@ class Apis {
 
   //
   Future<bool> updateCupon(
-      @required int idCupon,
-      @required int idProveedor,
-      @required int idServicio,
-      @required String fechaInicio,
-      @required String fechaFin,
-      @required String titulo,
-      @required String descripcion,
-      @required int precioNormal,
-      @required int precioDescuento,
-      @required int porcentajeDescuento,
-      @required int estado) async {
+      int idCupon,
+      int idProveedor,
+      int idServicio,
+      String fechaInicio,
+      String fechaFin,
+      String titulo,
+      String descripcion,
+      int precioNormal,
+      int precioDescuento,
+      int porcentajeDescuento,
+      int estado) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -596,8 +626,7 @@ class Apis {
     }
   }
 
-  Future<List<Categoria>> consultarCategoriasProveedor(
-      @required int idProveedor) async {
+  Future<List<Categoria>> consultarCategoriasProveedor(int idProveedor) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -615,14 +644,14 @@ class Apis {
     }
   }
 
-  Future<bool> addCategoriasProveedor(@required int idProveedor,
-      @required int idcategoria, @required int estado) async {
+  Future<bool> addCategoriasProveedor(
+      int idProveedor, int idcategoria, int estado) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
         final Response response = await _dio
-            .put('proveedor/categorias' + idProveedor.toString(), data: {
+            .put('proveedor/categorias/' + idProveedor.toString(), data: {
           "categorias": {"id_categoria": idcategoria, "estado": estado}
         });
 
@@ -640,7 +669,7 @@ class Apis {
     }
   }
 
-  Future<Proveedor> getProveedor(@required idProveedor) async {
+  Future<Proveedor> getProveedor(idProveedor) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
@@ -658,19 +687,19 @@ class Apis {
   }
 
   Future<bool> updateProveedor(
-    @required int idProveedor,
-    @required int idTipoDocumento,
-    @required int idRegimenTributario,
-    @required int idCiudad,
-    @required String dni,
-    @required String digito,
-    @required String nombreProveedor,
-    @required String fechaRegistro,
-    @required String email,
-    @required String telefono,
-    @required String celular,
-    @required String direccion,
-    @required int tiempoExperiencia,
+    int idProveedor,
+    int idTipoDocumento,
+    int idRegimenTributario,
+    int idCiudad,
+    String dni,
+    String digito,
+    String nombreProveedor,
+    String fechaRegistro,
+    String email,
+    String telefono,
+    String celular,
+    String direccion,
+    int tiempoExperiencia,
   ) async {
     try {
       RequestToken rq = await localAuth.getSession();
@@ -715,6 +744,29 @@ class Apis {
         "fecha": fecha,
         "plazo": plazo,
         "descripcion": descripcion,
+        "estado": 1
+      });
+      if (response.statusCode != 200) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> createOferta(int idSolicitud, int idTercero, String fecha,
+      String titulo, int plazo, String descripcion, double valor) async {
+    try {
+      final Response response = await _dio.post('Solicitud/respuesta', data: {
+        "id_solicitud": idSolicitud,
+        "id_tercero": idTercero,
+        "fecha": fecha,
+        "titulo": titulo,
+        "descripcion": descripcion,
+        "periodo_propuesto": plazo,
+        "valor": valor,
         "estado": 1
       });
       if (response.statusCode != 200) {
