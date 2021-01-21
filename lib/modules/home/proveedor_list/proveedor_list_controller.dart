@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Proveedores.dart';
 import 'package:itsuit/data/models/request_token.dart';
-import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
 
 class ProveedorListController extends GetxController {

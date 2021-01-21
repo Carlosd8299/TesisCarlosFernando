@@ -31,8 +31,10 @@ class OwnProfileController extends GetxController {
   Future<void> loadSolicitante() async {
     final data = await _apirepo.getListSolicitante();
     if (data != null) {
-      _solicitante = data.data[0];
-      update(['cabeceraSolcitante']);
+      if (data.data.length > 0) {
+        _solicitante = data.data[0];
+        update(['cabeceraSolcitante']);
+      }
     } else {
       throw Error();
     }

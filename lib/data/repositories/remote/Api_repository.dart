@@ -9,6 +9,7 @@ import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
+import 'package:itsuit/data/models/contraOferta.dart';
 import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/trabajo_realizado.dart';
@@ -22,6 +23,9 @@ class ApiRepository {
   Future<Ubicacion> getCiudades() => _apis.getListCiudades();
   Future<RegimenTributario> getRegimenes() => _apis.getListTributario();
   Future<ActividadEconomica> getActEco() => _apis.getListActEco();
+
+  Future<bool> actualizarEstadoContraOferta(int id, int estado) =>
+      _apis.actualizarEstadoContraOferta(id, estado);
 
   //Consultar proveedores que han aplicado a una solicitud
   Future<ProveedorAplicoOferta> consultarProveedorSolicitud(int idSolicitud) =>
@@ -56,6 +60,10 @@ class ApiRepository {
 
   Future<Ofertas> getListOfertas(int idSolicitud) =>
       _apis.getListOfertas(idSolicitud);
+
+  Future<ContraOferta> getListContraOfertas(int idOferta) =>
+      _apis.getListContraOfertas(idOferta);
+
   Future<bool> cambioEstadoOferta(int idOferta, int estado) =>
       _apis.cambioEstadoOferta(idOferta, estado);
   Future<bool> cambioEstadoSolicitud(int idSolicitud, int estado) =>
@@ -131,8 +139,9 @@ class ApiRepository {
           descripcion,
           criterios);
 
-  Future<ProcesosDeSeleccion> getSolicitudes(int idTercero) =>
-      _apis.getSolicitudes(idTercero);
+  Future<ProcesosDeSeleccion> getSolicitudes(int idTercero,
+          [int idSolicitud]) =>
+      _apis.getSolicitudes(idTercero, idSolicitud);
 //------------------------
 // Seccion de proveedores
 //------------------------

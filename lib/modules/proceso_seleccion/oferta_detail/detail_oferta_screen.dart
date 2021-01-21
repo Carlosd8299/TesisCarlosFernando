@@ -157,7 +157,7 @@ class DetailOfertaScreenEmpresa extends StatelessWidget {
             icon: Icon(FontAwesomeIcons.gavel),
             titleButton: 'Ver contraofertas',
             instruction: 'Ver las contraofertas relacionadas a esta oferta',
-            onTap: () => Get.toNamed(AppRoutes.DETAILCONTRAOFERTA)),
+            onTap: () => controller.detailContraOferta()),
       ),
     );
   }

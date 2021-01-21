@@ -11,6 +11,7 @@ import 'package:itsuit/data/models/Solicitante.dart';
 import 'package:itsuit/data/models/SolicitudCategorias.dart';
 import 'package:itsuit/data/models/Proceso_Seleccion.dart';
 import 'package:itsuit/data/models/actividad_economica.dart';
+import 'package:itsuit/data/models/contraOferta.dart';
 import 'package:itsuit/data/models/cupon.dart';
 import 'package:itsuit/data/models/regimen_tributario.dart';
 import 'package:itsuit/data/models/request_token.dart';
@@ -22,6 +23,16 @@ class Apis {
   final Dio _dio = Get.find<Dio>();
   final LocalAuth localAuth = new LocalAuth();
 
+  Future<ContraOferta> getListContraOfertas(int idOferta) async {
+    try {
+      final Response response = await _dio.get('solicitud/contraoferta',
+          queryParameters: {"id_respuesta": idOferta});
+      return ContraOferta.fromJson(response.data);
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<ProveedorAplicoOferta> consultarProveedorSolicitud(int id) async {
     try {
       final Response response =
@@ -29,6 +40,16 @@ class Apis {
       return ProveedorAplicoOferta.fromJson(response.data);
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<bool> actualizarEstadoContraOferta(int id, int estado) async {
+    try {
+      await _dio.put(
+          'solicitud/contraoferta/estado/${id.toString()}/${estado.toString()}');
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
@@ -177,13 +198,21 @@ class Apis {
   }
 
 // ignore: non_constant_identifier_names
-  Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero) async {
+  Future<ProcesosDeSeleccion> getSolicitudes(int id_tercero,
+      [int idSolicitud]) async {
     try {
+      var queryParameters;
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
+        if (idSolicitud != null) {
+          queryParameters = {"id_tercero": id_tercero, "id": idSolicitud};
+        } else {
+          queryParameters = {"id_tercero": id_tercero};
+        }
+
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
-        final Response response = await _dio
-            .get('Solicitud', queryParameters: {"id_tercero": id_tercero});
+        final Response response =
+            await _dio.get('Solicitud', queryParameters: queryParameters);
         return ProcesosDeSeleccion.fromJson(response.data);
       } else {
         return throw Error();

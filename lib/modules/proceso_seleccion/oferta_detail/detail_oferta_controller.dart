@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itsuit/data/models/Ofertas.dart';
+import 'package:itsuit/data/models/contraOferta.dart';
 import 'package:itsuit/data/models/request_token.dart';
 import 'package:itsuit/data/provider/local/local_auth.dart';
 import 'package:itsuit/data/repositories/remote/Api_repository.dart';
@@ -11,6 +12,7 @@ class DetailOfertaController extends GetxController {
   RequestToken r;
   bool _botonActivado = true;
   Oferta oferta;
+  ContraOfertas contraOferta;
   int _idTipoUsurio;
   int get getTipoUsuario => _idTipoUsurio;
   bool get getbotnActivado => _botonActivado;
@@ -21,6 +23,32 @@ class DetailOfertaController extends GetxController {
     Get.offNamed(AppRoutes.DETAILPROCESO);
     _botonActivado = false;
     print(response);
+  }
+
+  Future<void> loadDetail() async {
+    ContraOferta response =
+        await _apirepo.getListContraOfertas(oferta.idRespuesta);
+    if (response.result.data.length > 0) {
+      this.contraOferta = response.result.data[0];
+    }
+  }
+
+  detailContraOferta() {
+    if (this.contraOferta != null) {
+      Get.toNamed(AppRoutes.DETAILCONTRAOFERTA, arguments: this.contraOferta);
+    } else {
+      Get.dialog(AlertDialog(
+          title: Text("¡No hay contraofertas!"),
+          content: Text(
+              "No se han registrado contraofertas aplicadas a esta oferta."),
+          actions: [
+            FlatButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text("OK"))
+          ]));
+    }
   }
 
   Future<void> aprobarOferta() async {
@@ -61,6 +89,7 @@ class DetailOfertaController extends GetxController {
     _idTipoUsurio = Get.arguments[1] as int;
     this.r = await LocalAuth().getSession();
     _botonActivado = (oferta.estado == 3 || oferta.estado == 4) ? false : true;
+    await loadDetail();
     super.onInit();
   }
 }

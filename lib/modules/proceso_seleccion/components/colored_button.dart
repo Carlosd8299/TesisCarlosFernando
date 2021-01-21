@@ -20,7 +20,7 @@ class RoundedIconButton extends StatelessWidget {
     return InkWell(
       onTap: function,
       child: Visibility(
-        visible: estado,
+        visible: (estado != null) ? estado : true,
         child: Container(
           decoration: BoxDecoration(
               color: color, borderRadius: BorderRadius.circular(20)),

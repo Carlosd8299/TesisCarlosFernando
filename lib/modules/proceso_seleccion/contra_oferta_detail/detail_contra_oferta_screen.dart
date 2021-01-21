@@ -26,30 +26,23 @@ class DetailContraOfertaProveedorScreen extends StatelessWidget {
       builder: (_) => Scaffold(
         body: CustomScrollView(
           slivers: [
-            CustomAppBar(
-                title: 'Contraoferta',
-                onTap: () => Get.to(DetailOfertaScreen())),
+            CustomAppBar(title: 'Contraoferta', onTap: () => {Get.back()}),
             SliverToBoxAdapter(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RoundedIconButton(
-                    function: () => print("Hello"),
+                    function: () => _.aprobarOferta(),
                     color: Constants.greenflatbutton,
                     label: 'Aceptar',
                     icon: (FontAwesomeIcons.check),
                   ),
                   RoundedIconButton(
-                    function: () => print("Hello"),
+                    function: () => _.rechazarOferta(),
                     color: Constants.redflatbutton,
                     label: 'Rechazar',
                     icon: (FontAwesomeIcons.times),
-                  ),
-                  RoundedIconButton(
-                      function: () => print("Hello"),
-                      color: Constants.blueflatbutton,
-                      label: 'Ver la oferta',
-                      icon: (FontAwesomeIcons.eye)),
+                  )
                 ],
               ),
             ),
@@ -60,12 +53,12 @@ class DetailContraOfertaProveedorScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Titulo de la oferta",
+                      "Contraoferta",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                      "",
                       textAlign: TextAlign.justify,
                     ),
                   ],
@@ -89,7 +82,7 @@ class DetailContraOfertaProveedorScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                      _.contraOferta.descripcion,
                       textAlign: TextAlign.justify,
                     ),
                   ],
@@ -99,49 +92,6 @@ class DetailContraOfertaProveedorScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Presupuesto ofertado",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Lorem ipsum dolor sit amet.",
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Fecha de ejecución de lo ofertado",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Lorem ipsum dolor sit amet.",
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -153,7 +103,9 @@ class DetailContraOfertaProveedorScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Observacion Emitida por el solicitante",
+                  "Cuenta con " +
+                      _.contraOferta.plazo.toString() +
+                      " dias par aceptar o rechazar esta contraoferta.",
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -174,7 +126,26 @@ class DetailContraOfertaEmpresaScreen extends StatelessWidget {
           slivers: [
             CustomAppBar(
                 title: 'Contraoferta',
-                onTap: () => Get.toNamed(AppRoutes.DETAILOFERTA)),
+                onTap: () => Get.to(DetailOfertaScreen())),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RoundedIconButton(
+                    function: () => _.aprobarOferta(),
+                    color: Constants.greenflatbutton,
+                    label: 'Aceptar',
+                    icon: (FontAwesomeIcons.check),
+                  ),
+                  RoundedIconButton(
+                    function: () => _.rechazarOferta(),
+                    color: Constants.redflatbutton,
+                    label: 'Rechazar',
+                    icon: (FontAwesomeIcons.times),
+                  )
+                ],
+              ),
+            ),
             SliverToBoxAdapter(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -182,12 +153,12 @@ class DetailContraOfertaEmpresaScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Titulo de la oferta",
+                      "Contraoferta",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                      "",
                       textAlign: TextAlign.justify,
                     ),
                   ],
@@ -211,7 +182,7 @@ class DetailContraOfertaEmpresaScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et.",
+                      _.contraOferta.descripcion,
                       textAlign: TextAlign.justify,
                     ),
                   ],
@@ -221,49 +192,6 @@ class DetailContraOfertaEmpresaScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Presupuesto ofertado",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Lorem ipsum dolor sit amet.",
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Fecha de ejecución de lo ofertado",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Lorem ipsum dolor sit amet.",
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -275,16 +203,9 @@ class DetailContraOfertaEmpresaScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Observacion Emitida por el solicitante",
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  "Observacion Emitida por el solicitantebservacion Emitida por el solicitantebservacion Emitida por el solicitantebservacion Emitida por el solicitante",
+                  "Cuenta con " +
+                      _.contraOferta.plazo.toString() +
+                      " dias par aceptar o rechazar esta contraoferta.",
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
