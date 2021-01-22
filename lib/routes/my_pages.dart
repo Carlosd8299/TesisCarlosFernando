@@ -137,10 +137,9 @@ class AppPages {
       binding: ListDoneJobBinding(),
     ),
     GetPage(
-      name: AppRoutes.LISTHISTORICO,
-      page: () => ListHistoricoScreen(),
-      binding: ListHistoricoBinding(),
-    ),
+        name: AppRoutes.LISTHISTORICO,
+        page: () => ListHistoricoScreen(),
+        binding: ListHistoricoBinding()),
     //Seleccion Directa - 3 rutas
     //
     GetPage(
