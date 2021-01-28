@@ -11,7 +11,7 @@ class CreateDoneJobController extends GetxController {
   final ApiRepository _apirepo = Get.find<ApiRepository>();
   RequestToken _r;
   String titulo;
-  String empresa;
+  String empresa = '';
   String descripcion;
   int tiempoEjecucion;
   DateTime fechaInicio = DateTime.now();
@@ -32,7 +32,16 @@ class CreateDoneJobController extends GetxController {
 
   Future<void> loadCategorias() async {
     final data = await _apirepo.getCategorias();
-    _categorias = data.data;
+
+    if (data != null) {
+      _categorias = data.data;
+      if (_categorias.length > 0) {
+        _selectedIndexCategoria = _categorias[0].id;
+      }
+    } else {
+      _categorias = [];
+    }
+
     await this.loadServicios();
     update(['categorias']);
   }
@@ -112,7 +121,7 @@ class CreateDoneJobController extends GetxController {
     if (res) {
       Get.dialog(AlertDialog(
           title: Text("¡Proceso exitoso!"),
-          content: Text("Se ha creado la solicitud"),
+          content: Text("Se ha registrado el trabajo realizado"),
           actions: [
             FlatButton(
                 onPressed: () {
