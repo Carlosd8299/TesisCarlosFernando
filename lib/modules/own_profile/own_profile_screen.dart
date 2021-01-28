@@ -110,7 +110,7 @@ class OwnProfileProveedor extends StatelessWidget {
               //Comienza el contenedor blanco
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10),
-                width: 400,
+                width: 800,
                 height: 450,
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -190,7 +190,7 @@ class OwnProfileProveedor extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CardButtonProfile(
-                                color: Constants.colorlist[2],
+                                color: Constants.colorlist[1],
                                 label: "Solicitudes directas",
                                 onTap: () {
                                   Get.toNamed(AppRoutes.SELECCIONDIRECTALIST);
