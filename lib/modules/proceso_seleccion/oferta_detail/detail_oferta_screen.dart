@@ -249,6 +249,12 @@ class DetailOfertaScreenProveedor extends StatelessWidget {
             )
           ],
         ),
+        bottomNavigationBar: ButtomBottomNav(
+            color: Colors.black,
+            icon: Icon(FontAwesomeIcons.gavel),
+            titleButton: 'Ver contraofertas',
+            instruction: 'Ver las contraofertas relacionadas a esta oferta',
+            onTap: () => controller.detailContraOferta()),
       ),
     );
   }

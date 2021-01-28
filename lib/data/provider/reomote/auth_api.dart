@@ -59,7 +59,7 @@ class AuthApi {
         "password": password,
         "estado": 1
       });
-      if (response.statusCode != 200) {
+      if (response.statusCode == 200) {
         x = true;
       }
       return x;

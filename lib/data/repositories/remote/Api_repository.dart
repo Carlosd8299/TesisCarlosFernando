@@ -58,8 +58,8 @@ class ApiRepository {
   Future<Servicios> getServicios(int idCategoria) =>
       _apis.getServicios(idCategoria);
 
-  Future<Ofertas> getListOfertas(int idSolicitud) =>
-      _apis.getListOfertas(idSolicitud);
+  Future<Ofertas> getListOfertas(int idSolicitud, [int idProveedor]) =>
+      _apis.getListOfertas(idSolicitud, idProveedor);
 
   Future<ContraOferta> getListContraOfertas(int idOferta) =>
       _apis.getListContraOfertas(idOferta);

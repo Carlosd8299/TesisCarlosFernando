@@ -14,7 +14,10 @@ class ProcesoListController extends GetxController {
 
   void loadSolcitudes() async {
     final data = await _apirepo.getSolicitudes(r.usuario.idTercero);
-    _listProcesosDeSeleccion = data.data;
+    if (data != null) {
+      _listProcesosDeSeleccion = data.data;
+    }
+
     update(['listaSolicitudes']);
   }
 
@@ -28,6 +31,7 @@ class ProcesoListController extends GetxController {
   void onInit() async {
     r = Get.arguments[0] as RequestToken;
     idCategoria = Get.arguments[1] as int;
+
     if (idCategoria != null) {
       this.loadSolicitudesCategoria();
     } else {

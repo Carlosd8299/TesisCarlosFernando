@@ -25,12 +25,9 @@ class ProveedorAplicoOferta {
 }
 
 class ProveedorOferta {
-  ProveedorOferta({
-    this.nombreProveedor,
-    this.fecha,
-    this.profileImage,
-  });
-
+  ProveedorOferta(
+      {this.nombreProveedor, this.fecha, this.profileImage, this.idTercero});
+  int idTercero;
   String nombreProveedor;
   String fecha;
   String profileImage;
@@ -40,11 +37,13 @@ class ProveedorOferta {
         nombreProveedor: json["nombre_tercero"],
         fecha: json["fecha"],
         profileImage: json["profileImage"],
+        idTercero: json["id_tercero"],
       );
 
   Map<String, dynamic> toJson() => {
         "nombre_tercero": nombreProveedor,
         "fecha": fecha,
         "profileImage": profileImage,
+        "id_tercero": idTercero
       };
 }

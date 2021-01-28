@@ -199,14 +199,19 @@ class DetailProcesoScreenProveedor extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: ButtomBottomNav(
-            titleButton: "Aplicar",
-            instruction:
-                "Empezar a participar en la puja, ofrecer alternativas, ofrecer un alcance, presupuesto y tiempos distintos",
-            onTap: () =>
-                Get.toNamed(AppRoutes.CREATEOFERTA, arguments: _.getProceso),
-            icon: Icon(Icons.arrow_forward),
-            color: Colors.black),
+        bottomNavigationBar: GetBuilder<DetailProcesoController>(
+            id: 'nav',
+            builder: (_) => ButtomBottomNav(
+                titleButton: (_.proveedorAplico) ? "Detalle" : "Aplicar",
+                instruction: (_.proveedorAplico)
+                    ? "Ver oferta realizada"
+                    : "Empezar a participar en la puja, ofrecer alternativas, ofrecer un alcance, presupuesto y tiempos distintos",
+                onTap: () => (_.proveedorAplico)
+                    ? Get.toNamed(AppRoutes.LISTOFERTAS, arguments: proceso)
+                    : Get.toNamed(AppRoutes.CREATEOFERTA,
+                        arguments: _.getProceso),
+                icon: Icon(Icons.arrow_forward),
+                color: Colors.black)),
       ),
     );
   }

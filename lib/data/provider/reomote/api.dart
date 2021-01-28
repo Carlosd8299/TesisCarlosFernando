@@ -291,10 +291,16 @@ class Apis {
     }
   }
 
-  Future<Ofertas> getListOfertas(int idSolicitud) async {
+  Future<Ofertas> getListOfertas(int idSolicitud, [int idProveedor]) async {
     try {
       RequestToken rq = await localAuth.getSession();
       if (rq != null) {
+        var data = {};
+        if (idProveedor != null) {
+          data = {"id_solicitud": idSolicitud, "id_tercero": idProveedor};
+        } else {
+          data = {"id_solicitud": idSolicitud};
+        }
         _dio.options.headers['authorization'] = "Bearer ${rq.getToken()}";
         final Response response = await _dio.get('Solicitud/respuesta',
             queryParameters: {"id_solicitud": idSolicitud});

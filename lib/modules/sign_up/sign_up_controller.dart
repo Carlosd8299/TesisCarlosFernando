@@ -256,7 +256,7 @@ class SignUpController extends GetxController {
     _actividades = data.data;
   }
 
-  void onProveedorSubmit() {
+  void onProveedorSubmit() async {
     if (_tyc_proveedor &&
         _id_proveedor != null &&
         _nombre_proveedor != null &&
@@ -269,7 +269,7 @@ class SignUpController extends GetxController {
         _password_proveedor != null) {
       if (_confirm_password_proveedor == _password_proveedor) {
         try {
-          _authRepository.signUpProveedor(
+          bool response = await _authRepository.signUpProveedor(
               idTipoDocumento: _tipo_documento_proveedor,
               idRegimenTributario: _selected_tributario,
               idActividadEconomica: _selected_act_eco_proveedor,
@@ -282,17 +282,21 @@ class SignUpController extends GetxController {
               direccion: _direccion_proveedor,
               tiempoExperiencia: _expProveedor,
               password: _password_proveedor);
-          Get.dialog(AlertDialog(
-              title: Text("Se ha creado el usuario"),
-              content: Text("Ahora puede iniciar sesion"),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: Text("ok"))
-              ]));
-          Get.offNamed(AppRoutes.LOGIN);
+          if (response) {
+            Get.dialog(AlertDialog(
+                title: Text("Se ha creado el usuario"),
+                content: Text("Ahora puede iniciar sesion"),
+                actions: [
+                  FlatButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text("ok"))
+                ]));
+            Get.offNamed(AppRoutes.LOGIN);
+          } else {
+            throw ("Tercero ya existe o datos invalidos");
+          }
         } catch (e) {
           Get.dialog(AlertDialog(
               title: Text("Se ha producido un error"),

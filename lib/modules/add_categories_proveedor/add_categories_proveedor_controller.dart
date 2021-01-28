@@ -74,7 +74,6 @@ class AddCategoriesController extends GetxController {
     Categoria objeto = this._categoriasProveedor.firstWhere(
         (Categoria data) => data.id == _selectedIndexCategoria,
         orElse: () => null);
-    print(objeto);
     return (objeto != null) ? true : false;
   }
 

@@ -24,7 +24,7 @@ class ListOfertaScreen extends StatelessWidget {
                               SliverChildBuilderDelegate((context, index) {
                             Oferta oferta = controller.getlistOfertas[index];
                             return SingleItemOferta(
-                              isProveedor: false,
+                              isProveedor: controller.isProveedor,
                               oferta: oferta,
                             );
                           }, childCount: controller.getlistOfertas.length),

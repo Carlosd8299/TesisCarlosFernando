@@ -28,8 +28,8 @@ class AuthRepository {
     @required String direccion,
     @required int tiempoExperiencia,
     @required String password,
-  }) {
-    _api.signUpProveedor(
+  }) async {
+    bool response = await _api.signUpProveedor(
         idTipoDocumento: idTipoDocumento,
         idRegimenTributario: idRegimenTributario,
         idActividadEconomica: idActividadEconomica,
@@ -44,6 +44,7 @@ class AuthRepository {
         direccion: direccion,
         tiempoExperiencia: tiempoExperiencia,
         password: password);
+    return response;
   }
 
   Future<void> signUpEmpresa({

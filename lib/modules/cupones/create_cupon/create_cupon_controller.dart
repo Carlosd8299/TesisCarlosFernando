@@ -54,7 +54,15 @@ class CreateCuponController extends GetxController {
 // Obetner los servisios del en point dada una categoria
   loadServicios() async {
     final data = await _apirepo.getServicios(this.idCategoria);
-    _servicios = data.data;
+
+    if (data != null) {
+      _servicios = data.data;
+      if (_servicios.length > 0) {
+        _selectedIndexServicio = _servicios[0].id;
+      }
+    } else {
+      _servicios = [];
+    }
     update(['servicios']);
   }
 
@@ -86,6 +94,7 @@ class CreateCuponController extends GetxController {
         this._descripCupon != null &&
         this._precioCupon != null &&
         this._porcentajeCupon != null) {
+      print(this._porcentajeCupon.toString());
       bool res = await _apirepo.createCupon(
           this._r.usuario.idTercero,
           idServicio,

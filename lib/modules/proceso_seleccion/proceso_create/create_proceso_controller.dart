@@ -139,24 +139,11 @@ class CreateProcesoController extends GetxController {
   }
 
   void crearSolicitud() async {
-    bool res = await _apirepo.crearSolicitud(
-        this.idServicio,
-        r.usuario.idTercero,
-        1,
-        this.titulo,
-        this._fechaIncioRecepcion,
-        this._fechaFinRecepcion,
-        this._fechaInicioSeleccion,
-        this._fechaFinSeleccion,
-        this._fechaIncioEjecucion,
-        this._fechaFinSeleccion,
-        this.presupuestos,
-        this.descripcion,
-        this.criterios);
-    if (res) {
+    if (this.idServicio == null) {
       Get.dialog(AlertDialog(
-          title: Text("¡Proceso exitoso!"),
-          content: Text("Se ha creado la solicitud"),
+          title: Text("¡Validación!"),
+          content: Text(
+              "No ha selecionado correctamente el servicio al que pertenece la solicitud"),
           actions: [
             FlatButton(
                 onPressed: () {
@@ -166,17 +153,45 @@ class CreateProcesoController extends GetxController {
                 child: Text("OK"))
           ]));
     } else {
-      Get.dialog(AlertDialog(
-          title: Text("¡Ha ocurrido un error!"),
-          content:
-              Text("Por favor verifique que toda la información esté completa"),
-          actions: [
-            FlatButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text("OK"))
-          ]));
+      bool res = await _apirepo.crearSolicitud(
+          this.idServicio,
+          r.usuario.idTercero,
+          1,
+          this.titulo,
+          this._fechaIncioRecepcion,
+          this._fechaFinRecepcion,
+          this._fechaInicioSeleccion,
+          this._fechaFinSeleccion,
+          this._fechaIncioEjecucion,
+          this._fechaFinSeleccion,
+          this.presupuestos,
+          this.descripcion,
+          this.criterios);
+      if (res) {
+        Get.dialog(AlertDialog(
+            title: Text("¡Proceso exitoso!"),
+            content: Text("Se ha creado la solicitud"),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Get.back();
+                    Get.offNamed(AppRoutes.OWNPROFILE, arguments: r);
+                  },
+                  child: Text("OK"))
+            ]));
+      } else {
+        Get.dialog(AlertDialog(
+            title: Text("¡Ha ocurrido un error!"),
+            content: Text(
+                "Por favor verifique que toda la información esté completa"),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("OK"))
+            ]));
+      }
     }
   }
 

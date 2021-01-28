@@ -160,7 +160,7 @@ class OwnProfileProveedor extends StatelessWidget {
                                 label: "Mis procesos de seleccion",
                                 onTap: () {
                                   Get.toNamed(AppRoutes.LISTPROCESO,
-                                      arguments: _.r);
+                                      arguments: [_.r, null]);
                                 },
                                 icon: Icons.low_priority)
                           ],
